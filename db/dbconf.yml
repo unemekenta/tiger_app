@@ -1,0 +1,7 @@
+development:
+    driver: postgres
+    open: host=localhost port=5432 user=postgres dbname=tiger_db password=postgres sslmode=disable
+
+test:
+    driver: postgres
+    open: host=db port=5432 user=pony_user dbname=pony_db password=pony_password sslmode=disable
