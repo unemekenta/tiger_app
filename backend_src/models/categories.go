@@ -9,5 +9,4 @@ type Categories struct {
 	Name       string `json:"name"`
 	CreatedAt  time.Time
 	UpdateAt   time.Time
-	DeletedAt  time.Time `gorm:"index"`
 }

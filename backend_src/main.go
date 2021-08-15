@@ -17,5 +17,6 @@ func initRouting(e *echo.Echo) {
 	e.GET("/categories", handlers.GetCategories)
 
 	// 　todo認証
-	// e.POST("/login", handlers.Login)
+	e.POST("/signup", handlers.UserSignup)
+	e.POST("/login", handlers.UserLogin)
 }
