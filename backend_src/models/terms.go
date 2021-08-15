@@ -9,5 +9,4 @@ type Terms struct {
 	Content   string `json:"content"`
 	CreatedAt time.Time
 	UpdateAt  time.Time
-	DeletedAt time.Time `gorm:"index"`
 }

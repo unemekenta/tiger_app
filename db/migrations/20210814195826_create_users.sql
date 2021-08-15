@@ -2,7 +2,7 @@
 -- +goose Up
 -- SQL in section 'Up' is executed when this migration is applied
 CREATE TABLE users (
-    id SERIAL NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     email VARCHAR(256) UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
     password VARCHAR(2000) NOT NULL,

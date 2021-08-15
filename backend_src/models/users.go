@@ -10,8 +10,7 @@ type Users struct {
 	Email     string `json:"e-mail"`
 	Name      string `json:"name"`
 	Password  string `json:"content"`
-	role_id   int    `json:"role"`
+	RoleId    int    `json:"role"`
 	CreatedAt time.Time
-	UpdateAt  time.Time
-	DeletedAt time.Time `gorm:"index"`
+	UpdatedAt time.Time
 }
