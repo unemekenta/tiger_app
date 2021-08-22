@@ -14,6 +14,7 @@ let router = new Router({
       path: '/',
       name: 'TopList',
       component: TopList,
+      meta: { requiredAuth: true }
     },
     {
       path: '/signup',
