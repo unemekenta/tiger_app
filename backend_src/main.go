@@ -21,7 +21,7 @@ func initRouting(e *echo.Echo) {
 	e.POST("/api/signup", handlers.UserSignup)
 	e.POST("/api/login", handlers.UserLogin)
 
-	e.GET("/api/mypage", handlers.GetMypage)
-	// auth := e.Group("/auth")
-	// auth.Use(middleware.JWTWithConfig(handler.Config)) // /auth下はJWTの認証が必要
+	a := e.Group("/auth")
+	a.Use(middleware.JWT([]byte("secret"))) // /auth下はJWTの認証が必要
+	a.GET("/api/mypage", handlers.GetMypage)
 }

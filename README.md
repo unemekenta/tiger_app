@@ -3,11 +3,11 @@
 # 概要：Overview
 
 ## frontend
-### vuejs
+### Vue.js
 ### Library
 - vue-cli
 ## backend
-###  go
+### go
 ### Library
 - echo
 - godotenv
@@ -15,7 +15,7 @@
 - bcrypt
 
 ## DB
-postgres
+### postgres
 
 # デモ：Demo
 # 使い方：Usage
