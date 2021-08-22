@@ -1,12 +1,27 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"tiger_app/backend_src/models"
+	"time"
 
 	"github.com/labstack/echo"
 	"golang.org/x/crypto/bcrypt"
 )
+
+// todo mypage
+func GetMypage(c echo.Context) error {
+	cookie, err := c.Cookie("username")
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	fmt.Println(cookie.Name)
+	fmt.Println(cookie.Value)
+	fmt.Println("hi")
+	return c.JSON(http.StatusAccepted, "mypage")
+}
 
 func UserSignup(c echo.Context) error {
 	user := new(models.Users)
@@ -30,10 +45,11 @@ func UserSignup(c echo.Context) error {
 	user.Password = hashedPassword
 	user.RoleId = role_id
 
-	if err := Db.Create(&user); err != nil {
-		return c.JSON(http.StatusBadRequest, err)
+	res := Db.Create(&user)
+	if res.Error != nil {
+		return res.Error
 	} else {
-		return c.JSON(http.StatusAccepted, "Welcome! "+user.Name)
+		return c.JSON(http.StatusOK, "Welcome! "+user.Name)
 	}
 }
 
@@ -54,8 +70,15 @@ func UserLogin(c echo.Context) error {
 	byteFormPassword := []byte(formPassword)
 
 	if err := bcrypt.CompareHashAndPassword(byteDbPassword, byteFormPassword); err != nil {
-		return c.JSON(http.StatusBadRequest, "BadRequest")
+		return err
 	} else {
-		return c.JSON(http.StatusAccepted, "Hi! "+user.Name)
+		cookie := new(http.Cookie)
+		cookie.Name = "username"
+		cookie.Value = string(byteDbPassword)
+		cookie.Expires = time.Now().Add(24 * time.Hour)
+		cookie.Path = "/"
+		fmt.Println(cookie)
+		c.SetCookie(cookie)
+		return c.JSON(http.StatusOK, "Hi! "+user.Name)
 	}
 }
