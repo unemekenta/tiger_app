@@ -27,7 +27,10 @@ export default {
       params.append('password', this.formPassword)
       await axios.post('http://localhost:8000/api/login', params)
       .then((response) => {
-        alert(response.data)
+        this.$cookies.config('1d', '', '', true);
+        this.$cookies.set('jwt', response.data.token);
+        console.log(this.$cookies.get('jwt'))
+        alert('ログインしました。')
         this.$router.push('/')
       })
       .catch(error => {

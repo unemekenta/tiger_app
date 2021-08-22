@@ -22,6 +22,8 @@ func initRouting(e *echo.Echo) {
 	e.POST("/api/login", handlers.UserLogin)
 
 	a := e.Group("/auth")
-	a.Use(middleware.JWT([]byte("secret"))) // /auth下はJWTの認証が必要
-	a.GET("/api/mypage", handlers.GetMypage)
+	a.Use(middleware.JWT([]byte("secret")))
+	// /auth下はJWTの認証が必要
+	// curlで接続する場合は curl http://localhost:8000/auth/api/mypage -H "Authorization: Bearer {login時に発行されるtoken}"
+	a.POST("/api/authCheck", handlers.GetAuthCheck)
 }

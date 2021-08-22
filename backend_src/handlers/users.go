@@ -11,7 +11,7 @@ import (
 )
 
 // todo mypage
-func GetMypage(c echo.Context) error {
+func GetAuthCheck(c echo.Context) error {
 	return c.JSON(http.StatusAccepted, "mypage")
 }
 
@@ -76,6 +76,7 @@ func UserLogin(c echo.Context) error {
 		if err != nil {
 			return err
 		}
+
 		return c.JSON(http.StatusOK, map[string]string{
 			"token": t,
 		})

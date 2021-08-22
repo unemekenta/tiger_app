@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import TopList from '@/components/TopList'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
-// import MyPage from '@/components/MyPage'
+import MyPage from '@/components/MyPage'
 // import Edit from '@/components/Edit'
 
 Vue.use(Router)
@@ -26,12 +26,12 @@ let router = new Router({
       name: 'Signin',
       component: Signin
     },
-    // {
-    //   path: '/mypage',
-    //   name: 'MyPage',
-    //   component: MyPage,
-    //   meta: { requiresAuth: true }
-    // },
+    {
+      path: '/mypage',
+      name: 'MyPage',
+      component: MyPage,
+      meta: { requiresAuth: true }
+    },
     // {
     //   path: '/edit',
     //   name: 'Edit',

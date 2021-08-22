@@ -6,6 +6,7 @@
 ### Vue.js
 ### Library
 - vue-cli
+- vue-cookie
 ## backend
 ### go
 ### Library
@@ -13,6 +14,7 @@
 - godotenv
 - gorm
 - bcrypt
+- jwt-go
 
 ## DB
 ### postgres
