@@ -9,14 +9,14 @@ import (
 )
 
 func GetCategories(c echo.Context) error {
-	var categories = new(models.Categories)
+	var categories []models.Categories
 	Db := models.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
 
-	Db.Order("id").Find(categories)
+	Db.Order("id").Find(&categories)
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusAccepted, categories)
+	return c.JSON(http.StatusOK, categories)
 }

@@ -1,0 +1,65 @@
+html {
+  font-size: 16px;
+}
+
+p {
+  margin: 0;
+}
+
+h1, h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
+
+button {
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.signUpPage-form-name {
+  display: block;
+  margin: 0.4rem auto;
+  height: 1.7rem;
+  width: 20.0rem;
+  text-align: center;
+}
+
+.signUpPage-form-email {
+  display: block;
+  margin: 0.4rem auto;
+  height: 1.7rem;
+  width: 20.0rem;
+  text-align: center;
+}
+
+.signUpPage-form-password {
+  display: block;
+  margin: 0.4rem auto;
+  height: 1.7rem;
+  width: 20.0rem;
+  text-align: center;
+}
+
+.signUpPage-form-button {
+  width: 20.0rem;
+  background-color: #e2e2e2;
+  color: #111111;
+}
+
+.signUpPage-form-button:hover {
+  background-color: #42b983;
+  color: #ffffff;
+}
