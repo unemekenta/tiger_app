@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 	"tiger_app/backend_src/models"
 	"time"
 
@@ -10,7 +11,27 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// todo mypage
+func GetUser(c echo.Context) error {
+	user := new(models.Users)
+	Db := models.OpenDBConn()
+	db, err := Db.DB()
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	user_id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return err
+	}
+
+	Db.Where("id = ?", user_id).First(&user)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, user)
+}
+
 func GetAuthCheck(c echo.Context) error {
 	return c.JSON(http.StatusAccepted, "mypage")
 }
@@ -68,6 +89,7 @@ func UserLogin(c echo.Context) error {
 		token := jwt.New(jwt.SigningMethodHS256)
 		claims := token.Claims.(jwt.MapClaims)
 		claims["admin"] = true
+		claims["id"] = user.ID
 		claims["name"] = formEmail
 		claims["iat"] = time.Now()
 		claims["exp"] = time.Now().Add(time.Hour * 24).Unix()

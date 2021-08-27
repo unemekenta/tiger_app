@@ -26,4 +26,6 @@ func initRouting(e *echo.Echo) {
 	// /auth下はJWTの認証が必要
 	// curlで接続する場合は curl http://localhost:8000/auth/api/mypage -H "Authorization: Bearer {login時に発行されるtoken}"
 	a.POST("/api/authCheck", handlers.GetAuthCheck)
+
+	a.GET("/api/user/:id", handlers.GetUser)
 }
