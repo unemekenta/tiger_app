@@ -3,19 +3,21 @@
 # 概要：Overview
 
 ## frontend
-### vuejs
+### Vue.js
 ### Library
 - vue-cli
+- vue-cookie
 ## backend
-###  go
+### go
 ### Library
 - echo
 - godotenv
 - gorm
 - bcrypt
+- jwt-go
 
 ## DB
-postgres
+### postgres
 
 # デモ：Demo
 # 使い方：Usage
