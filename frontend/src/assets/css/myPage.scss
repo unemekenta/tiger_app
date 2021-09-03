@@ -1,56 +1,11 @@
-html {
-  font-size: 16px;
-}
-
-p {
-  margin: 0;
-}
-
-h1, h2 {
-  font-weight: normal;
-  margin: 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
-button {
-  margin: 10px 0;
-  padding: 10px;
-  border: none;
-}
-
 .top {
-  padding-bottom: 5.0rem;
+  padding: 5.0rem 0;
   line-height: 1.5rem;
   background-color: #E4E4E4;
 }
 
-button.header-logoutBtn {
-  background-color: #42b983;
-  color: #ffffff;
-  margin-left: auto;
-  margin-right: 2.0rem;
-  padding: 0.4rem 1.0rem;
-}
-
-button.header-editBtn {
-  background-color: #42b983;
-  color: #ffffff;
-  margin-left: auto;
-  margin-right: 0;
-  padding: 0.4rem 1.0rem;
+.user {
+  margin: 3rem 0;
 }
 
 .user-icon {
@@ -60,26 +15,26 @@ button.header-editBtn {
 .main {
   display: flex;
   padding: 0 1.0rem;
-  max-width: 1200px;
+  max-width: 120rem;
   margin: 0 auto;
 }
 
 .main-myMessage {
-  margin: auto;
+  margin: 0 auto;
   padding: 0;
   background-color: #ffffff;
   width: 100%;
 }
 
 .main-myMessage-title {
-  padding: 15px 20px;
+  padding: 1.5rem 2rem;
   text-align: left;
-  border-bottom: solid 1px #E4E4E4;
+  border-bottom: solid 0.1rem #E4E4E4;
   font-weight: bold;
 }
 
 .main-myMessage-contents {
-  padding: 15px 20px;
+  padding: 1.5rem 2rem;
   border-bottom: solid 1px #E4E4E4;
 }
 
@@ -95,18 +50,18 @@ img.main-myMessage-contents-top-userIcon {
 
 .main-myMessage-contents-top-deleteBtn {
   position: absolute;
-  font-size: 16px;
+  font-size: 1.6rem;
   right: 0;
-  top: 10px;
+  top: 1rem;
   background-color: transparent;
   cursor: pointer;
 }
 
 p.main-myMessage-contents-txt {
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold;
   text-align: left;
-  margin: 10px 0;
+  margin: 1rem 0;
 }
 
 .main-myMessage-contents-category {
@@ -116,29 +71,61 @@ p.main-myMessage-contents-txt {
 
 .main-myMessage-contents-category li {
   border: solid 1px #E4E4E4;
-  margin: 0 5px 0 0;
-  padding: 5px 10px;
+  margin: 0 0.5rem 0 0;
+  padding: 0.5rem 1rem;
   background-color: #cccccc;
   color: #ffffff;
 }
 
 p.main-myMessage-contents-time {
-  font-size: 12px;
-  margin: 10px 0;
+  font-size: 1.2rem;
+  margin: 1rem 0;
   color: #cccccc;
   text-align: left;
 }
 
-.main-menu02 {
-  width: 300px;
-  margin-left: 20px;
+.menu02 {
+  width: 30rem;
+  margin-left: 2rem;
   background-color: #ffffff;
   text-align: left;
 }
 
+.menu02-content-head {
+  padding: 0.5rem 1rem;
+  border-bottom: solid 0.1rem #E4E4E4;
+  font-weight: bold;
+}
+
+.menu02-content-items {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+.menu02-content-items-item {
+  background-color: #42b983;
+  padding: 0.8rem 1rem;
+  border: solid 1px #E4E4E4;
+  font-weight: bold;
+  margin: 1rem 0.8rem;
+  color: #ffffff;
+}
+
+.menu02-content-items-item:hover {
+  opacity: 0.3;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu02-content-items-item a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 .messageForm {
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   background-color: #42b983;
   width: 100%;
 }

@@ -16,6 +16,11 @@ func main() {
 
 func initRouting(e *echo.Echo) {
 	e.GET("/api/terms", handlers.GetTerms)
+	e.GET("/api/terms/:id", handlers.GetTerm)
+
+	e.GET("/api/websites", handlers.GetWebsites)
+	e.GET("/api/websites/:id", handlers.GetWebsite)
+
 	e.GET("/api/categories", handlers.GetCategories)
 
 	e.POST("/api/signup", handlers.UserSignup)

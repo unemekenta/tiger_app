@@ -1,0 +1,71 @@
+
+.weblist {
+  width: 100%;
+  padding: 0;
+  background-color: #ffffff;
+
+  &-title {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: solid 1px #E4E4E4;
+    font-weight: bold;
+  }
+
+  &-contents {
+    padding: 15px 20px;
+    border-bottom: solid 1px #E4E4E4;
+    &:hover{
+      box-shadow: 0.3rem 0.3rem 0 #111111;
+      transition: 0.5s;
+    }
+
+    &-icon {
+      display: flex;
+      img {
+        width: 30px;
+        height: 30px;
+        margin: auto 0;
+      }
+
+      &-name {
+        text-align: left;
+        line-height: 3.0rem;
+        margin: 0 1.0rem;
+        color: #111111;
+      }
+    }
+
+    &-txt {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: left;
+      margin: 10px 0;
+    }
+
+    &-btm {
+      display: flex;
+      justify-content: space-between;
+
+      &-left {
+        &-category {
+          display: flex;
+          justify-content: left;
+          > li {
+            border: solid 1px #E4E4E4;
+            margin: 0 5px 0 0;
+            padding: 5px 10px;
+            background-color: #cccccc;
+            color: #ffffff;
+          }
+        }
+
+        &-time {
+          font-size: 12px;
+          margin: 10px 0;
+          color: #cccccc;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

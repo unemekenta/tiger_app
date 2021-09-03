@@ -41,6 +41,5 @@ export default {
 }
 </script>
 
-<style scoped>
-@import "../assets/css/signUp.scss";
+<style scoped lang="scss" src="../assets/css/signUp.scss">
 </style>

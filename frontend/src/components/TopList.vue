@@ -5,45 +5,40 @@
       .header
         p HOME
       .main
-        .main-menu01
-          .menu-menu01-content
-            .menu-menu01-content-head
-              | カテゴリ
-            .menu-menu01-content-item(v-for="(allCatrgory, key) in this.allCategories" :key="key")
-              li {{allCatrgory.name}}
+        menu01(:allCategories="allCategories")
 
         .main-allMessage
-            h2.main-allMessage-title コメント一覧
+            h2.main-allMessage-title 一覧
             .main-allMessage-contents(v-for="(term, key) in this.allTerms" :key="key")
-              .wrapper
+              router-link( :to="{name:'Detail', params: {id:`${term.id}`}}").wrapper
                 .main-allMessage-contents-userIcon
                   img(src="../../src/assets/images/logo.png")
                   p.main-allMessage-contents-userIcon-name
-                    | username
+                    | 運営会社
                 p.main-allMessage-contents-txt 
                   | {{term.name}}
                 .main-allMessage-contents-category
                   li カテゴリ
+                  li カテゴリ
+                  li カテゴリ
                 p.main-allMessage-contents-time 
                   | {{createDate(term.CreatedAt)}}
-        .main-menu02
-          .menu-menu02-content
-            .menu-menu02-content-head
-              | メニュー
-            .menu-menu02-content-items
-              .menu-menu02-content-items-item
-                router-link( to="/" ) HOME
-              .menu-menu02-content-items-item
-                router-link( to="/mypage" ) マイページ
-              .menu-menu02-content-items-item(@click="signOut") ログアウト
+
+        menu02
 
 </template>
 
 <script>
 import axios from 'axios'
+import Menu01 from '/src/organisms/Menu01.vue'
+import Menu02 from '/src/organisms/Menu02.vue'
 
 export default {
   name: 'TopList',
+  components: {
+    Menu01,
+    Menu02,
+  },
   data () {
     return {
       allTerms: [],
@@ -77,7 +72,5 @@ export default {
 }
 </script>
 
-<!-- Add 'scoped' attribute to limit CSS to this component only -->
-<style scoped>
-  @import "../assets/css/topList.scss";
+<style scoped lang="scss" src="../assets/css/topList.scss">
 </style>
