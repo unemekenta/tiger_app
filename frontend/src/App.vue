@@ -23,6 +23,46 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #5EAA47;
 }
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+h1, h2 {
+  font-weight: normal;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #5EAA47;
+  text-decoration: none;
+}
+
+button {
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+}
+
 </style>
