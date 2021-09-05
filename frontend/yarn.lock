@@ -8800,6 +8800,13 @@
     "vue-hot-reload-api" "^2.3.0"
     "vue-style-loader" "^4.1.0"
 
+"vue-paginate@^3.6.0":
+  "integrity" "sha512-WEAI7K0JgGYF2svHnBEz7pzOBNtHRJTIdgD2iHb0AJDHztpgGJZEsqgjSmxd4cqXyyGXkXGRdLsnGN/pZImkiQ=="
+  "resolved" "https://registry.npmjs.org/vue-paginate/-/vue-paginate-3.6.0.tgz"
+  "version" "3.6.0"
+  dependencies:
+    "vue" "2.3.3"
+
 "vue-router@^3.2.0":
   "integrity" "sha512-807gn82hTnjCYGrnF3eNmIw/dk7/GE4B5h69BlyCK9KHASwSloD1Sjcn06zg9fVG4fYH2DrsNBZkpLtb25WtaQ=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.5.2.tgz"
@@ -8830,6 +8837,16 @@
   "integrity" "sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
+
+"vue@2.3.3":
+  "integrity" "sha1-0eqo/eUkBzWkVj508sf+rZy7Bkw="
+  "resolved" "https://registry.npmjs.org/vue/-/vue-2.3.3.tgz"
+  "version" "2.3.3"
+
+"vuejs-paginate@^2.1.0":
+  "integrity" "sha512-gnwyXlmCiDOu9MLWxN5UJ4PGijKGNOMpHG8ujsrynCzTJljn/rp7Jq0WiDGDAMi5/u0AHuYIHhced+tUW4jblA=="
+  "resolved" "https://registry.npmjs.org/vuejs-paginate/-/vuejs-paginate-2.1.0.tgz"
+  "version" "2.1.0"
 
 "vuex@^3.4.0":
   "integrity" "sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw=="
