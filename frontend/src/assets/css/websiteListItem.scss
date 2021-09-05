@@ -15,15 +15,16 @@
     padding: 15px 20px;
     border-bottom: solid 1px #E4E4E4;
     &:hover{
-      box-shadow: 0.3rem 0.3rem 0 #111111;
-      transition: 0.5s;
+      box-shadow: 0.3rem 0.3rem 0 #E4E4E4;
+      transform: translateX(-0.2rem) translateY(-0.2rem);
+      transition: 0.3s;
     }
 
     &-icon {
       display: flex;
       img {
-        width: 30px;
-        height: 30px;
+        width: 3.0rem;
+        height: 3.0rem;
         margin: auto 0;
       }
 

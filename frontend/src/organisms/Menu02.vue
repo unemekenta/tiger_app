@@ -7,6 +7,8 @@
       .menu02-content-items-item
         router-link( to="/" ) HOME
       .menu02-content-items-item
+        router-link( to="/website_list" ) webサイト一覧
+      .menu02-content-items-item
         router-link( to="/mypage" ) マイページ
       .menu02-content-items-item(@click="signOut") ログアウト
 
