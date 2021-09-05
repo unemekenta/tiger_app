@@ -1,26 +1,32 @@
-.signInPage-form-email {
-  display: block;
-  margin: 0.4rem auto;
-  height: 1.7rem;
-  width: 20.0rem;
-  text-align: center;
-}
+.signInPage {
+  &-form {
+    &-email {
+      display: block;
+      margin: 1.0rem auto;
+      height: 2.7rem;
+      width: 20.0rem;
+      text-align: center;
+    }
 
-.signInPage-form-password {
-  display: block;
-  margin: 0.4rem auto;
-  height: 1.7rem;
-  width: 20.0rem;
-  text-align: center;
-}
+    &-password {
+      display: block;
+      margin: 1.0rem auto;
+      height: 2.7rem;
+      width: 20.0rem;
+      text-align: center;
+    }
 
-.signInPage-form-button {
-  width: 20.0rem;
-  background-color: #e2e2e2;
-  color: #111111;
-}
-
-.signInPage-form-button:hover {
-  background-color: #42b983;
-  color: #ffffff;
+    &-button {
+      width: 20.0rem;
+      background-color: $color-green;
+      color: $color-white;
+      font-weight: bold;
+      &:hover {
+        background-color: $color-white;
+        color: $color-green;
+        border: solid $color-green 0.1rem;
+        transition: 0.3s;
+      }
+    }
+  }
 }

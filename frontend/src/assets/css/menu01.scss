@@ -1,17 +1,19 @@
 .menu01 {
-  background-color: #ffffff;
+  background-color: $color-white;
   width: 38rem;
   margin-right: 2rem;
   text-align: left;
-}
 
-.menu01-content-head {
-  padding: 0.5rem 1rem;
-  border-bottom: solid 0.1rem #E4E4E4;
-  font-weight: bold;
-}
+  &-content {
+    &-head {
+      padding: 0.5rem 1rem;
+      border-bottom: solid 0.1rem $color-gray;
+      font-weight: bold;
+    }
 
-.menu01-content-item {
-  margin: 1.0rem 0;
-  padding: 0.5rem 1rem;
+    &-item {
+      margin: 1.0rem 0;
+      padding: 0.5rem 1rem;
+    }
+  }
 }

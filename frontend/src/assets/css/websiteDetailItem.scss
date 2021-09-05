@@ -2,20 +2,20 @@
 .weblist {
   width: 100%;
   padding: 0;
-  background-color: #ffffff;
+  background-color: $color-white;
 
   &-title {
     padding: 15px 20px;
     text-align: left;
-    border-bottom: solid 1px #E4E4E4;
+    border-bottom: solid 1px $color-gray;
     font-weight: bold;
   }
 
   &-contents {
     padding: 15px 20px;
-    border-bottom: solid 1px #E4E4E4;
+    border-bottom: solid 1px $color-gray;
     &:hover{
-      box-shadow: 0.3rem 0.3rem 0 #111111;
+      box-shadow: 0.3rem 0.3rem 0 $color-brack;
       transition: 0.5s;
     }
 
@@ -31,7 +31,7 @@
         text-align: left;
         line-height: 3.0rem;
         margin: 0 1.0rem;
-        color: #111111;
+        color: $color-brack;
       }
     }
 
@@ -51,18 +51,18 @@
           display: flex;
           justify-content: left;
           > li {
-            border: solid 1px #E4E4E4;
+            border: solid 1px $color-gray;
             margin: 0 5px 0 0;
             padding: 5px 10px;
-            background-color: #cccccc;
-            color: #ffffff;
+            background-color: $color-gray;
+            color: $color-white;
           }
         }
 
         &-time {
           font-size: 12px;
           margin: 10px 0;
-          color: #cccccc;
+          color: $color-gray;
           text-align: left;
         }
       }
