@@ -1,10 +1,10 @@
 ul.pagination {
   font-size: 1.6rem;
   > li {
-    background-color: #5EAA47;
+    background-color: $color-green;
     border-radius: 0.3rem;
     > a {
-      color: #ffffff;
+      color: $color-white;
       font-weight: bold;
       display: block;
       width: 3rem;
@@ -14,17 +14,17 @@ ul.pagination {
   }
 
   > .active {
-    background-color: #ffffff;
-    border: #5EAA47 solid 0.1rem;
+    background-color: $color-white;
+    border: $color-green solid 0.1rem;
     > a {
-      color: #5EAA47;
+      color: $color-green;
     }
   }
 
   > .disabled {
-    background-color: #E4E4E4;
+    background-color: $color-gray;
     > a {
-      color: #ffffff;
+      color: $color-white;
     }
   }
 }

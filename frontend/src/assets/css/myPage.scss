@@ -1,7 +1,7 @@
 .top {
   padding: 5.0rem 0;
   line-height: 1.5rem;
-  background-color: #E4E4E4;
+  background-color: $color-gray;
 }
 
 .user {
@@ -22,20 +22,20 @@
 .main-myMessage {
   margin: 0 auto;
   padding: 0;
-  background-color: #ffffff;
+  background-color: $color-white;
   width: 100%;
 }
 
 .main-myMessage-title {
   padding: 1.5rem 2rem;
   text-align: left;
-  border-bottom: solid 0.1rem #E4E4E4;
+  border-bottom: solid 0.1rem $color-gray;
   font-weight: bold;
 }
 
 .main-myMessage-contents {
   padding: 1.5rem 2rem;
-  border-bottom: solid 1px #E4E4E4;
+  border-bottom: solid 1px $color-gray;
 }
 
 .main-myMessage-contents-top {
@@ -70,84 +70,16 @@ p.main-myMessage-contents-txt {
 }
 
 .main-myMessage-contents-category li {
-  border: solid 1px #E4E4E4;
+  border: solid 1px $color-gray;
   margin: 0 0.5rem 0 0;
   padding: 0.5rem 1rem;
-  background-color: #cccccc;
-  color: #ffffff;
+  background-color: $color-gray;
+  color: $color-white;
 }
 
 p.main-myMessage-contents-time {
   font-size: 1.2rem;
   margin: 1rem 0;
-  color: #cccccc;
+  color: $color-gray;
   text-align: left;
-}
-
-.menu02 {
-  width: 30rem;
-  margin-left: 2rem;
-  background-color: #ffffff;
-  text-align: left;
-}
-
-.menu02-content-head {
-  padding: 0.5rem 1rem;
-  border-bottom: solid 0.1rem #E4E4E4;
-  font-weight: bold;
-}
-
-.menu02-content-items {
-  display: flex;
-  flex-direction: column;
-  color: #ffffff;
-}
-
-.menu02-content-items-item {
-  background-color: #42b983;
-  padding: 0.8rem 1rem;
-  border: solid 1px #E4E4E4;
-  font-weight: bold;
-  margin: 1rem 0.8rem;
-  color: #ffffff;
-}
-
-.menu02-content-items-item:hover {
-  opacity: 0.3;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.menu02-content-items-item a {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.messageForm {
-  position: fixed;
-  bottom: 0;
-  background-color: #42b983;
-  width: 100%;
-}
-
-.messageForm-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1.0rem;
-}
-
-.messageForm-form-input {
-  height: 4.0rem;
-  width: 50.0rem;
-  background-color: #ffffff;
-  border: 0.1rem solid #42b983;
-  resize: none;
-}
-
-.messageForm-form-btn {
-  margin: 0 1.0rem;
-  border: solid 0.1rem #ffffff;
-  background-color: #42b983;
-  color: #ffffff;
 }

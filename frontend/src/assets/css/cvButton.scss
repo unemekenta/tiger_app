@@ -2,14 +2,14 @@ button.cvbutton {
   width: 13rem;
   padding: 1rem auto;
   cursor: pointer;
-  background-color: #5EAA47;
-  color: #ffffff;
+  background-color: $color-green;
+  color: $color-white;
   font-weight: bold;
-  box-shadow: 0.5rem 0.5rem 0 #111111;
+  box-shadow: 0.5rem 0.5rem 0 $color-brack;
   border-radius: 0.3rem;
   &:hover {
     transition: 0.3s;
-    box-shadow: 1rem 1rem 0 #111111;
+    box-shadow: 1rem 1rem 0 $color-brack;
     width: 15rem;
     font-size: 1.6rem;
   }
