@@ -13,7 +13,7 @@ INSERT INTO websites (id, name, url, company_name) VALUES (9, 'VICTORY（ビク�
 INSERT INTO websites (id, name, url, company_name) VALUES (10, 'REALSPORTS（リアルスポーツ）', 'https://real-sports.jp/', '株式会社 REAL SPORTS');
 INSERT INTO websites (id, name, url, company_name) VALUES (11, 'BASKETBALLKING（バスケットボールキング）', 'https://basketballking.jp/', '株式会社フロムワン');
 INSERT INTO websites (id, name, url, company_name) VALUES (12, 'cinra（シンラ）', 'https://www.cinra.net/', '株式会社cinra');
-INSERT INTO websites (id, name, url, company_name) VALUES (13, 'GQ', 'https://www.gqjapan.jp/', '合同会社コンデナスト・ジャパ');
+INSERT INTO websites (id, name, url, company_name) VALUES (13, 'GQ', 'https://www.gqjapan.jp/', '合同会社コンデナスト・ジャパン');
 INSERT INTO websites (id, name, url, company_name) VALUES (14, 'TASCLAP（タスクラップ）', 'https://mens.tasclap.jp/', '株式会社カカクコム');
 INSERT INTO websites (id, name, url, company_name) VALUES (15, 'Smartlog（スマートログ）', 'https://smartlog.jp/', '株式会社Smartlog');
 INSERT INTO websites (id, name, url, company_name) VALUES (16, 'modelpress（モデルプレス）', 'https://mdpr.jp/', '株式会社ネットネイティブ');
