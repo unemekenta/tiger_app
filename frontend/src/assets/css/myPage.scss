@@ -1,15 +1,25 @@
 .top {
   padding: 5.0rem 0;
   line-height: 1.5rem;
-  background-color: $color-gray;
+  background-color: $color-bg;
 }
 
 .user {
-  margin: 3rem 0;
-}
+  margin: 0 auto 1rem auto;
+  padding: 5rem 0;
+  opacity: 0.9;
+  max-width: 120rem;
+  background-color: $color-green2;
+  color: $color-white;
 
-.user-icon {
-  width: 2.0rem;
+  &-icon {
+    width: 3.0rem;
+  }
+
+  &-name {
+    margin: 1rem auto 0 auto;
+    font-size: 1.8rem;
+  }
 }
 
 .main {
@@ -17,69 +27,30 @@
   padding: 0 1.0rem;
   max-width: 120rem;
   margin: 0 auto;
-}
 
-.main-myMessage {
-  margin: 0 auto;
-  padding: 0;
-  background-color: $color-white;
-  width: 100%;
-}
+  &-mypage {
+    margin: 0 auto;
+    padding: 0;
+    background-color: $color-white;
+    width: 100%;
 
-.main-myMessage-title {
-  padding: 1.5rem 2rem;
-  text-align: left;
-  border-bottom: solid 0.1rem $color-gray;
-  font-weight: bold;
-}
+    &-title {
+      padding: 1.5rem 2rem;
+      text-align: left;
+      border-bottom: solid 0.1rem $color-bg;
+      font-weight: bold;
+    }
 
-.main-myMessage-contents {
-  padding: 1.5rem 2rem;
-  border-bottom: solid 1px $color-gray;
-}
-
-.main-myMessage-contents-top {
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-img.main-myMessage-contents-top-userIcon {
-  width: 2.0rem;
-}
-
-.main-myMessage-contents-top-deleteBtn {
-  position: absolute;
-  font-size: 1.6rem;
-  right: 0;
-  top: 1rem;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-p.main-myMessage-contents-txt {
-  font-size: 1.8rem;
-  font-weight: bold;
-  text-align: left;
-  margin: 1rem 0;
-}
-
-.main-myMessage-contents-category {
-  display: flex;
-  justify-content: left;
-}
-
-.main-myMessage-contents-category li {
-  border: solid 1px $color-gray;
-  margin: 0 0.5rem 0 0;
-  padding: 0.5rem 1rem;
-  background-color: $color-gray;
-  color: $color-white;
-}
-
-p.main-myMessage-contents-time {
-  font-size: 1.2rem;
-  margin: 1rem 0;
-  color: $color-gray;
-  text-align: left;
+    &-contents {
+      padding: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      &-item {
+        margin: 0.8rem;
+        width: calc(33% - 1.6rem);
+        height: 20rem;
+        border: solid $color-bg 0.1rem;
+      }
+    }
+  }
 }
