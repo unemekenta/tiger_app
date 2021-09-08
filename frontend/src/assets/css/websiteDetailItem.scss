@@ -7,13 +7,13 @@
   &-title {
     padding: 15px 20px;
     text-align: left;
-    border-bottom: solid 1px $color-gray;
+    border-bottom: solid 1px $color-bg;
     font-weight: bold;
   }
 
   &-contents {
     padding: 15px 20px;
-    border-bottom: solid 1px $color-gray;
+    border-bottom: solid 1px $color-bg;
     &:hover{
       box-shadow: 0.3rem 0.3rem 0 $color-brack;
       transition: 0.5s;
@@ -51,10 +51,10 @@
           display: flex;
           justify-content: left;
           > li {
-            border: solid 1px $color-gray;
+            border: solid 1px $color-bg;
             margin: 0 5px 0 0;
             padding: 5px 10px;
-            background-color: $color-gray;
+            background-color: $color-bg;
             color: $color-white;
           }
         }
@@ -62,7 +62,7 @@
         &-time {
           font-size: 12px;
           margin: 10px 0;
-          color: $color-gray;
+          color: $color-bg;
           text-align: left;
         }
       }

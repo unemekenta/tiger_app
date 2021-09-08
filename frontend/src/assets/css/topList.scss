@@ -1,29 +1,47 @@
 .allWrapper{
-  background-color: $color-gray;
-  padding: 10px 0;
+  background-image: url("../images/top-bg.png");
+  height: 100vh;
+  width: 100%;
 }
 
 .l-container {
   max-width: 1200px;
   margin: 0 auto;
-}
+  padding: 25vh 0 0 0;
 
-.top {
-  margin-bottom: 5.0rem;
-  line-height: 1.5rem;
-}
+  > .top-fv {
+    > h1 {
+      font-size: 5rem;
+      font-weight: bold;
+    }
 
-.header {
-  display: flex;
-  justify-content: right;
-  padding: 3.0rem 2.0rem;
-}
+    > .top-fv-button {
+      width: 20rem;
+      background-color: $color-green;
+      padding: 0.8rem 1rem;
+      border: solid 0.1rem $color-bg;
+      margin: 1rem auto;
+      > a {
+        color: $color-white;
+        font-weight: bold;
+      }
+      &:hover {
+        opacity: 0.3;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+    }
+  }
 
-.user-icon {
-  width: 2.0rem;
-}
+  > .top-list {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15vh;
 
-.main {
-  display: flex;
-  padding: 0 1.0rem;
+    .top-list-features, .top-list-categories {
+      width: calc(50% - 2rem);
+      background-color: $color-white;
+      border: solid 0.1rem $color-green2;
+    }
+  }
 }

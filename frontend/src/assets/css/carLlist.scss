@@ -1,0 +1,20 @@
+.card-box {
+  display: flex;
+  overflow-x: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+
+  > li {
+    min-width: 40%;
+    margin: 0 1.0rem;
+    border: solid 0.1rem $color-green2;
+    > img {
+      width: 100%;
+    }
+
+    > .card-box-txt {
+      padding: 1rem;
+    }
+  }
+}

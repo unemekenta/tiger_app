@@ -7,24 +7,23 @@
   &-title {
     padding: 15px 20px;
     text-align: left;
-    border-bottom: solid 1px $color-gray;
+    border-bottom: solid 1px $color-bg;
     font-weight: bold;
   }
 
   &-contents {
     padding: 15px 20px;
-    border-bottom: solid 1px $color-gray;
+    border-bottom: solid 1px $color-bg;
     &:hover{
-      box-shadow: 0.3rem 0.3rem 0 $color-gray;
+      box-shadow: 0.3rem 0.3rem 0 $color-bg;
       transform: translateX(-0.2rem) translateY(-0.2rem);
       transition: 0.3s;
     }
 
     &-icon {
       display: flex;
-      img {
+      svg {
         width: 3.0rem;
-        height: 3.0rem;
         margin: auto 0;
       }
 
@@ -43,6 +42,13 @@
       margin: 10px 0;
     }
 
+    &-img {
+      width: 30rem;
+      > img {
+        width: 100%;
+      }
+    }
+
     &-btm {
       display: flex;
       justify-content: space-between;
@@ -52,10 +58,9 @@
           display: flex;
           justify-content: left;
           > li {
-            border: solid 1px $color-gray;
             margin: 0 5px 0 0;
             padding: 5px 10px;
-            background-color: $color-gray;
+            background-color: $color-green2;
             color: $color-white;
           }
         }
@@ -63,10 +68,11 @@
         &-time {
           font-size: 12px;
           margin: 10px 0;
-          color: $color-gray;
+          color: $color-green2;
           text-align: left;
         }
       }
+
     }
   }
 }
