@@ -5,7 +5,7 @@
   .weblist-contents(v-for="(item, key) in this.slicedList" :key="key")
     router-link( :to="{name:'WebsiteDetail', params: {id:`${item.id}`}}").wrapper
       .weblist-contents-icon
-        img(src="../../src/assets/images/logo.png")
+        fa-icon(icon="building")
         p.weblist-contents-icon-name
           | {{item.company_name}}
       p.weblist-contents-txt
