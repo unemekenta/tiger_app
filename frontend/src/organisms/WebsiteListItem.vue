@@ -13,9 +13,7 @@
       .weblist-contents-btm
         .weblist-contents-btm-left
           .weblist-contents-btm-left-category
-            li カテゴリ
-            li カテゴリ
-            li カテゴリ
+            category-tag(:websiteID="item.id")
           p.weblist-contents-btm-left-time 
             | {{createDate(item.CreatedAt)}}
         .weblist-contents-btm-right
@@ -27,12 +25,14 @@
 <script>
 import CvButton from '/src/atoms/CvButton.vue'
 import Pager from '/src/atoms/Pager.vue'
+import CategoryTag from '/src/atoms/CategoryTag.vue'
 
 export default {
   name: 'WebsiteListItem',
   components: {
     CvButton,
     Pager,
+    CategoryTag,
   },
   props: {
     allLists: Array,
