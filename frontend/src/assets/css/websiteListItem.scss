@@ -42,13 +42,6 @@
       margin: 10px 0;
     }
 
-    &-img {
-      width: 30rem;
-      > img {
-        width: 100%;
-      }
-    }
-
     &-btm {
       display: flex;
       justify-content: space-between;
@@ -57,12 +50,6 @@
         &-category {
           display: flex;
           justify-content: left;
-          > li {
-            margin: 0 5px 0 0;
-            padding: 5px 10px;
-            background-color: $color-green2;
-            color: $color-white;
-          }
         }
 
         &-time {
