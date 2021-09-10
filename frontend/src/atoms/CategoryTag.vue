@@ -28,11 +28,15 @@ export default {
   methods: {
     async getCategory () {
       const website_id = this.websiteID;
-      let resCategory = await axios.get('http://localhost:8000/api/categories_website/' + website_id);
-      console.log('http://localhost:8000/api/categories_website/' + website_id);
-      const category = resCategory.data.name;
-      console.log(category);
-      this.category = category;
+      await axios.get('http://localhost:8000/api/categories_website/' + website_id)
+      .then(res => {
+        const category = res.data.name;
+        this.category = category;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
     },
   },
 }

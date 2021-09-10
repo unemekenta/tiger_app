@@ -40,12 +40,24 @@ export default {
       this.$router.push('/signin');
     },
     async getWebsiteDetail () {
-      let resWebsiteDetail = await axios.get('http://localhost:8000/api/websites/' + this.$route.params.id);
-      this.websiteDetail = resWebsiteDetail.data;
+      await axios.get('http://localhost:8000/api/websites/' + this.$route.params.id)
+      .then(res => {
+        this.websiteDetail = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
     },
     async getAllCategories () {
-      let resAllCategories = await axios.get('http://localhost:8000/api/categories');
-      this.allCategories = resAllCategories.data;
+      await axios.get('http://localhost:8000/api/categories')
+      .then(res => {
+        this.allCategories = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
     },
   },
 }
