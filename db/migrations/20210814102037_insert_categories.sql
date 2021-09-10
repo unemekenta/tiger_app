@@ -14,7 +14,7 @@ INSERT INTO categories (id, ancestor_id, name) VALUES (10, NULL, 'ファッシ�
 INSERT INTO categories (id, ancestor_id, name) VALUES (11, NULL, '美容');
 INSERT INTO categories (id, ancestor_id, name) VALUES (12, NULL, '音楽');
 INSERT INTO categories (id, ancestor_id, name) VALUES (13, NULL, '旅行');
-INSERT INTO categories (id, ancestor_id, name) VALUES (14, NULL, 'フィットネス');
+INSERT INTO categories (id, ancestor_id, name) VALUES (14, NULL, 'ヘルスケア・フィットネス');
 INSERT INTO categories (id, ancestor_id, name) VALUES (15, NULL, 'ビジネス');
 INSERT INTO categories (id, ancestor_id, name) VALUES (16, 15, 'ビジネス総合');
 INSERT INTO categories (id, ancestor_id, name) VALUES (17, 15, '金融');
@@ -44,8 +44,11 @@ INSERT INTO categories (id, ancestor_id, name) VALUES (40, NULL, 'エンタメ')
 INSERT INTO categories (id, ancestor_id, name) VALUES (41, 40, 'アニメ・映画');
 INSERT INTO categories (id, ancestor_id, name) VALUES (42, 40, 'ゲーム');
 INSERT INTO categories (id, ancestor_id, name) VALUES (43, 40, 'マンガ');
+INSERT INTO categories (id, ancestor_id, name) VALUES (44, NULL, 'アート');
+INSERT INTO categories (id, ancestor_id, name) VALUES (45, NULL, 'メンズ');
+INSERT INTO categories (id, ancestor_id, name) VALUES (46, NULL, 'レディース');
 
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
-DELETE from categories WHERE id BETWEEN 1 AND 38;
+DELETE from categories WHERE id BETWEEN 1 AND 46;
 SELECT setval('categories_id_seq', 1, false);

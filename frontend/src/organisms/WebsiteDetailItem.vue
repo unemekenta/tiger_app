@@ -1,35 +1,35 @@
 <template lang="pug">
-.weblist
-  h2.weblist-title
+.webdetail
+  h2.webdetail-title
     | website
-  .weblist-contents
-    router-link( :to="{name:'WebsiteDetail', params: {id:`${detailObject.id}`}}").wrapper
-      .weblist-contents-icon
-        img(src="../../src/assets/images/logo.png")
-        p.weblist-contents-icon-name
+  .webdetail-contents
+    .wrapper
+      .webdetail-contents-icon
+        fa-icon(icon="building")
+        p.webdetail-contents-icon-name
           | {{detailObject.company_name}}
-      p.weblist-contents-txt
+      p.webdetail-contents-txt
         | {{detailObject.name}}
-      .weblist-contents-btm
-        .weblist-contents-btm-left
-          .weblist-contents-btm-left-category
-            li カテゴリ
-            li カテゴリ
-            li カテゴリ
-          p.weblist-contents-btm-left-time
+      .webdetail-contents-btm
+        .webdetail-contents-btm-left
+          .webdetail-contents-btm-left-category
+            category-tag(:websiteID="detailObject.id")
+          p.webdetail-contents-btm-left-time
             | {{createDate(detailObject.CreatedAt)}}
-        .weblist-contents-btm-right
+        .webdetail-contents-btm-right
           cv-button(label="公式サイトへ" :url="detailObject.url")
 
 </template>
 
 <script>
 import CvButton from '/src/atoms/CvButton.vue'
+import CategoryTag from '/src/atoms/CategoryTag.vue'
 
 export default {
   name: 'WebsiteDetailItem',
   components: {
     CvButton,
+    CategoryTag,
   },
   props: {
     detailObject: Object,

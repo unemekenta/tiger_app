@@ -1,5 +1,5 @@
 
-.weblist {
+.webdetail {
   width: 100%;
   padding: 0;
   background-color: $color-white;
@@ -14,17 +14,13 @@
   &-contents {
     padding: 15px 20px;
     border-bottom: solid 1px $color-bg;
-    &:hover{
-      box-shadow: 0.3rem 0.3rem 0 $color-brack;
-      transition: 0.5s;
-    }
 
     &-icon {
       display: flex;
-      img {
-        width: 30px;
-        height: 30px;
+      svg {
+        width: 3.0rem;
         margin: auto 0;
+        color: $color-green;
       }
 
       &-name {
@@ -50,19 +46,12 @@
         &-category {
           display: flex;
           justify-content: left;
-          > li {
-            border: solid 1px $color-bg;
-            margin: 0 5px 0 0;
-            padding: 5px 10px;
-            background-color: $color-bg;
-            color: $color-white;
-          }
         }
 
         &-time {
           font-size: 12px;
           margin: 10px 0;
-          color: $color-bg;
+          color: $color-green2;
           text-align: left;
         }
       }
