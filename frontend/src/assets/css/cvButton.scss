@@ -9,9 +9,8 @@ button.cvbutton {
   border-radius: 0.3rem;
   &:hover {
     transition: 0.3s;
+    transform: translateX(-0.5rem) translateY(-0.5rem);
     box-shadow: 1rem 1rem 0 $color-brack;
-    width: 15rem;
-    font-size: 1.6rem;
   }
   > svg {
     margin-left: 1rem;
