@@ -4,7 +4,8 @@
       .menu01-content-head
         | カテゴリ
       .menu01-content-item(v-for="(allCatrgory, key) in this.allCategories" :key="key")
-        li {{allCatrgory.name}}
+        li(@click="reset(allCatrgory.id)")
+          | {{allCatrgory.name}}
 
 </template>
 
@@ -14,6 +15,11 @@ export default {
   name: 'Menu01',
   props: {
     allCategories: Array,
+  },
+  methods: {
+    reset (id) {
+      this.$router.push({name: 'WebsiteListByCategory', params: {category_id: id}})
+    }
   }
 }
 </script>

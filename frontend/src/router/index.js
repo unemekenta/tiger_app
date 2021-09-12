@@ -6,6 +6,7 @@ import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
 import MyPage from '@/components/MyPage'
 import WebsiteDetail from '@/components/WebsiteDetail'
+import WebsiteListByCategory from '@/components/WebsiteListByCategory'
 // import Edit from '@/components/Edit'
 
 Vue.use(Router)
@@ -42,6 +43,11 @@ let router = new Router({
       path: '/website_list',
       name: 'WebsiteList',
       component: WebsiteList
+    },
+    {
+      path: '/website_list/:category_id',
+      name: 'WebsiteListByCategory',
+      component: WebsiteListByCategory
     }
     // {
     //   path: '/edit',
