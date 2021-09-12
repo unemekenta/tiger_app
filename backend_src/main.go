@@ -20,6 +20,7 @@ func initRouting(e *echo.Echo) {
 
 	e.GET("/api/websites", handlers.GetWebsites)
 	e.GET("/api/websites/:id", handlers.GetWebsite)
+	e.GET("/api/websites_category/:id", handlers.GetWebsitesByCategory)
 
 	e.GET("/api/categories", handlers.GetCategories)
 
