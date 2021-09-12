@@ -1,5 +1,5 @@
 <template lang="pug">
-button.cvbutton(type="button" @click.prevent.self="jumpTo(url)") 
+button.cvbutton(type="button" @click.prevent.self="jumpTo(url)")
   | {{this.label}}
   fa-icon(icon="angle-double-right")
 
@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     jumpTo (url) {
-      location.href= url;
+      window.open(url, '_blank')
     },
   },
 }
