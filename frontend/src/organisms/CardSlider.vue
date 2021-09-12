@@ -4,7 +4,7 @@
       img(src="../assets/images/top-bg.png")
       .card-box-txt
         p title
-        p あああ
+        p comming soon
 
 </template>
 

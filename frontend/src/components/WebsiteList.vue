@@ -2,6 +2,8 @@
 .allWrapper
   .l-container
     .top
+      .image
+        img(src="../assets/images/list-top-fv.png")
       .header
         p HOME
       .main

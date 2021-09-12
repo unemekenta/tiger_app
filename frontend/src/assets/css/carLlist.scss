@@ -4,17 +4,27 @@
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+  height: 30rem;
 
   > li {
     min-width: 40%;
-    margin: 0 1.0rem;
-    border: solid 0.1rem $color-green2;
+    margin: 1.0rem 1.0rem 4.5rem 1.0rem;
+    padding: 1.0rem;
+    background-color: $color-green2;
+    border-radius: 0.3rem;
+
     > img {
       width: 100%;
     }
 
     > .card-box-txt {
       padding: 1rem;
+
+      > p {
+        &:nth-child(1) {
+          font-weight: bold;
+        }
+      }
     }
   }
 }

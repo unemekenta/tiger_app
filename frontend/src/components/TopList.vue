@@ -2,40 +2,58 @@
 .allWrapper
   .l-container
     .top-fv
-      h1 Find your Media
-      .top-fv-button
-        router-link( to="/website_list" ) 一覧ページへ
+      img(src="../assets/images/top-fv.png")
+      .top-fv-txt
+        h1 Web Media Database
+        p webメディアの情報を蓄積する・見つける
+        .top-fv-button
+          router-link( to="/website_list" ) 一覧ページへ
     .top-list
       .top-list-features
         h3 新着
         card-slider(:itemList="this.cardItems")
       .top-list-categories
         h3 カテゴリから探す
-        card-slider(:itemList="this.cardItems")
+        tag-slider(:itemList="this.allCategories")
 
 
 </template>
 
 <script>
+import axios from 'axios'
 import CardSlider from '/src/organisms/CardSlider.vue'
+import TagSlider from '/src/organisms/TagSlider.vue'
 
 export default {
   name: 'TopList',
   components: {
     CardSlider,
+    TagSlider,
   },
   data () {
     return {
       // items準備
-      cardItems:['aa', 'bb', 'cc'],
+      cardItems:['aa', 'bb', 'cc', 'aa', 'bb', 'cc'],
+      allCategories: [],
     }
   },
   created () {
+    this.getAllCategories();
   },
   methods: {
     signOut () {
       window.$cookies.remove('jwt');
       this.$router.push('/signin');
+    },
+    async getAllCategories () {
+      await axios.get('http://localhost:8000/api/categories')
+      .then(res => {
+        this.allCategories = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
     },
   },
 }
