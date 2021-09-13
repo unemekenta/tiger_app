@@ -59,14 +59,12 @@ export default {
     },
     async getUser () {
       let user_id = VueJwtDecode.decode(window.$cookies.get('jwt')).id;
-      console.log(window.$cookies.get('jwt'));
       await axios.get('http://localhost:8000/auth/api/user/'+ user_id,
       {
         headers: {'Authorization': 'Bearer ' + window.$cookies.get('jwt')}
       })
         .then((res) => {
           this.userName = res.data.name;
-          console.log(res);
         })
         .catch(error => {
           alert(error)
