@@ -36,8 +36,7 @@ router.beforeEach(async (to, from, next) => {
         next()
       })
       .catch(error => {
-        alert(error)
-        console.log(window.$cookies.get('jwt'))
+        alert('ログインしてください', error)
         next({
           path: '/signin'
         })
