@@ -51,7 +51,6 @@ export default {
     async getAllWebsites () {
       await axios.get('http://localhost:8000/api/websites_category/' + this.$route.params.category_id)
       .then(res => {
-        console.log(res.data, typeof(res.data))
         this.allWebsites = res.data;
       })
       .catch(error => {

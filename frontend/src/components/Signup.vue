@@ -34,7 +34,7 @@ export default {
         this.$router.push('/')
       })
       .catch(error => {
-        alert(error)
+        alert('アカウントを作成できませんでした', error)
       });
     }
   }
