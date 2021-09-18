@@ -2,7 +2,7 @@
   paginate(
     v-model="currentPage"
     :page-count="maxPage"
-    :page-range="3"
+    :page-range="2"
     :margin-pages="2"
     :click-handler="clickCallback"
     :prev-text="'<'"

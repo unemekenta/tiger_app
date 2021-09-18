@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       // items準備
-      cardItems:['aa', 'bb', 'cc', 'aa', 'bb', 'cc'],
+      cardItems:['aa', 'bb', 'cc'],
       allCategories: [],
     }
   },

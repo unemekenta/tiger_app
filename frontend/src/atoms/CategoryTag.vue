@@ -1,5 +1,5 @@
 <template lang="pug">
-  li.category-tag
+  li.category-tag(v-if="category")
     | {{category}}
 
 </template>
