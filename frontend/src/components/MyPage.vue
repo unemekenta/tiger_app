@@ -1,22 +1,26 @@
 <template lang="pug">
-.top
-  .user
-    img.user-icon(src="../../src/assets/images/logo.png")
-    .user-name 
-      b {{userName}} 
-      |さんのページ
-  .main
-    menu01(:allCategories="allCategories")
-    .main-mypage
-      h2.main-mypage-title マイクリップ
-      .main-mypage-contents
-        .main-mypage-contents-item
-        .main-mypage-contents-item
-        .main-mypage-contents-item
-        .main-mypage-contents-item
-        .main-mypage-contents-item
-        .main-mypage-contents-item
-    menu02
+.allWrapper
+  header-nav(:allCategories="allCategories")
+  .l-container
+    .top
+      .user
+        //- img.user-icon(src="../../src/assets/images/logo.png")
+        .user-name 
+          b {{userName}} 
+          |さんのページ
+      .main
+        menu01(:allCategories="allCategories").is-only-pc
+        .main-mypage
+          h2.main-mypage-title マイクリップ
+          .main-mypage-contents
+           p 準備中..
+            //- .main-mypage-contents-item
+            //- .main-mypage-contents-item
+            //- .main-mypage-contents-item
+            //- .main-mypage-contents-item
+            //- .main-mypage-contents-item
+            //- .main-mypage-contents-item
+        menu02.is-only-pc
 
 </template>
 
@@ -24,6 +28,7 @@
 import VueJwtDecode from 'vue-jwt-decode'
 import Menu01 from '/src/organisms/Menu01.vue'
 import Menu02 from '/src/organisms/Menu02.vue'
+import HeaderNav from '/src/molecules/HeaderNav.vue'
 import axios from 'axios'
 
 export default {
@@ -31,6 +36,7 @@ export default {
   components: {
     Menu01,
     Menu02,
+    HeaderNav,
   },
   data () {
     return {

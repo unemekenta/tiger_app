@@ -57,3 +57,22 @@ button {
   padding: 10px;
   border: none;
 }
+
+.is-only-sp {
+  display: none;
+  @include tb {
+    display: block;
+  }
+}
+
+.is-only-pc {
+  @include tb {
+    display: none !important;
+  }
+}
+
+.is-hidden {
+  visibility: hidden;
+  transition: 0.3s;
+  opacity: 0;
+}

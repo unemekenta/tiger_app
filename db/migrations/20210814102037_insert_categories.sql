@@ -47,8 +47,10 @@ INSERT INTO categories (id, ancestor_id, name) VALUES (43, 40, 'マンガ');
 INSERT INTO categories (id, ancestor_id, name) VALUES (44, NULL, 'アート');
 INSERT INTO categories (id, ancestor_id, name) VALUES (45, NULL, 'メンズ');
 INSERT INTO categories (id, ancestor_id, name) VALUES (46, NULL, 'レディース');
+INSERT INTO categories (id, ancestor_id, name) VALUES (47, 15, '人材・HR');
+INSERT INTO categories (id, ancestor_id, name) VALUES (48, 27, 'お金');
 
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
-DELETE from categories WHERE id BETWEEN 1 AND 46;
+DELETE from categories WHERE id BETWEEN 1 AND 48;
 SELECT setval('categories_id_seq', 1, false);

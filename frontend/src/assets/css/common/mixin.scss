@@ -2,4 +2,26 @@ $color-green: #5EAA47;
 $color-green2: #0EE3A6;
 $color-white: #FFFFFF;
 $color-brack: #111111;
-$color-bg: #EDF8F6
+$color-bg: #EDF8F6;
+
+$sm: 400px !default;
+$md: 768px !default;
+$lg: 1000px !default;
+
+@mixin sp() {
+  @media (max-width: $sm) {
+    @content;
+  }
+}
+
+@mixin tb() {
+  @media (max-width: $md) {
+    @content;
+  }
+}
+
+@mixin pc() {
+  @media (max-width: $lg) {
+    @content;
+  }
+}

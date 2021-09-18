@@ -1,17 +1,18 @@
 <template lang="pug">
 .allWrapper
+  header-nav(:allCategories="allCategories")
   .l-container
     .top
       .header
         p HOME
       .main(v-if="allWebsites")
-        menu01(:allCategories="allCategories")
+        menu01(:allCategories="allCategories").is-only-pc
         website-list-item(:allLists="allWebsites")
-        menu02
+        menu02.is-only-pc
       .main(v-else)
-        menu01(:allCategories="allCategories")
+        menu01(:allCategories="allCategories").is-only-pc
         website-list-item(:allLists="[]")
-        menu02
+        menu02.is-only-pc
 
 </template>
 
@@ -20,6 +21,7 @@ import axios from 'axios'
 import Menu01 from '/src/organisms/Menu01.vue'
 import Menu02 from '/src/organisms/Menu02.vue'
 import WebsiteListItem from '/src/organisms/WebsiteListItem.vue'
+import HeaderNav from '/src/molecules/HeaderNav.vue'
 
 export default {
   name: 'WebsiteList',
@@ -27,6 +29,7 @@ export default {
     Menu01,
     Menu02,
     WebsiteListItem,
+    HeaderNav,
   },
   data () {
     return {
