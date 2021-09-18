@@ -6,11 +6,21 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 0 10rem 0;
+  margin: 0 auto;
+  @include tb {
+    padding: 0 1rem 10rem 1rem;
+  }
 
   > .top-fv {
     display: flex;
+    @include tb {
+      flex-direction: column;
+    }
     > img {
       width: 60rem;
+      @include tb {
+        width: 100%;
+      }
     }
 
     > .top-fv-txt {
@@ -48,11 +58,18 @@
     display: flex;
     justify-content: space-around;
     margin-top: 1rem;
+    @include tb {
+      flex-direction: column;
+    }
 
     .top-list-features, .top-list-categories {
       width: calc(50% - 2rem);
       background-color: $color-white;
       border: solid 0.1rem $color-green2;
+      @include tb {
+        width: calc(100% - 1rem);
+        margin: 1rem 0;
+      }
     }
   }
 }

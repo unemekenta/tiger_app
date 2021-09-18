@@ -3,4 +3,7 @@ li.category-tag {
   padding: 5px 10px;
   background-color: $color-green2;
   color: $color-white;
+  @include tb {
+    font-size: 1.2rem;
+  }
 }

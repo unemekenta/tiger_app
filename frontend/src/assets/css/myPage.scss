@@ -1,12 +1,22 @@
+.allWrapper{
+  background-color: $color-bg;
+}
+
+.l-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 0;
+}
+
 .top {
-  padding: 5.0rem 0;
   line-height: 1.5rem;
   background-color: $color-bg;
 }
 
 .user {
   margin: 0 auto 1rem auto;
-  padding: 5rem 0;
+  width: calc(100% - 2rem);
+  padding: 2rem 0;
   opacity: 0.9;
   max-width: 120rem;
   background-color: $color-green2;

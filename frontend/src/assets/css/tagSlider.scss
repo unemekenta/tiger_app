@@ -9,7 +9,6 @@
   height: 30rem;
 
   > li {
-    width: calc(40% - 2rem);
     margin: 1.0rem;
     background-color: $color-green2;
     cursor: pointer;
@@ -17,6 +16,11 @@
     > .card-box-txt {
       padding: 1rem;
       font-weight: bold;
+      >p {
+        @include tb {
+          font-size: 1.0rem;
+        }
+      }
     }
     &:hover {
       width: calc(40% - 2.2rem);
