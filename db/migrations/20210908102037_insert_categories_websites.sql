@@ -35,5 +35,5 @@ INSERT INTO categories_websites (category_id, website_id) VALUES (33, 31);
 
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
-DELETE from categories WHERE id BETWEEN 1 AND 33;
-SELECT setval('categories_id_seq', 1, false);
+DELETE from categories_websites WHERE id BETWEEN 1 AND 33;
+SELECT setval('categories_websites_id_seq', 1, false);
