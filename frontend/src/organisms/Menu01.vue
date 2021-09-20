@@ -4,22 +4,24 @@
       .menu01-content-head
         | カテゴリ
       .menu01-content-item(v-for="(allCatrgory, key) in this.allCategories" :key="key")
-        li(@click="reset(allCatrgory.id)")
+        li
           | {{allCatrgory.name}}
+        sub-category(:ancestorID = "allCatrgory.id")
 
 </template>
 
 <script>
+import SubCategory from '/src/atoms/SubCategory.vue'
 
 export default {
   name: 'Menu01',
+  components: {
+    SubCategory,
+  },
   props: {
     allCategories: Array,
   },
   methods: {
-    reset (id) {
-      this.$router.push({name: 'WebsiteListByCategory', params: {category_id: id}})
-    }
   }
 }
 </script>

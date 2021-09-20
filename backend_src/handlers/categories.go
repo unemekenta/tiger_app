@@ -15,7 +15,25 @@ func GetCategories(c echo.Context) error {
 	db, err := Db.DB()
 	defer db.Close()
 
-	Db.Order("id").Find(&categories)
+	Db.Order("name").Where("ancestor_id IS NULL").Find(&categories)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, categories)
+}
+
+func GetCategoriesByAncestor(c echo.Context) error {
+	var categories []models.Categories
+	Db := models.OpenDBConn()
+	db, err := Db.DB()
+	defer db.Close()
+
+	ancestor_id, err := strconv.Atoi(c.Param("ancestor_id"))
+	if err != nil {
+		return err
+	}
+
+	Db.Order("name").Where("ancestor_id = ?", ancestor_id).Find(&categories)
 	if err != nil {
 		return err
 	}
