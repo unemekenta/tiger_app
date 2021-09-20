@@ -34,6 +34,12 @@
       >.header-nav-item {
         margin: 0 2rem;
         font-weight: bold;
+
+        >.header-nav-item-title {
+          color: $color-green;
+          cursor: pointer;
+        }
+
       }
     }
 
@@ -77,8 +83,7 @@
       >.header-nav-item-categories {
         >li {
           margin-top: 1rem;
-          color: $color-green;
-          font-weight: normal;
+          font-weight: bold;
         }
       }
     }

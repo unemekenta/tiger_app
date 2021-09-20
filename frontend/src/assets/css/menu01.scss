@@ -14,10 +14,8 @@
     &-item {
       margin: 1.0rem 0;
       padding: 0.5rem 1rem;
-      color: $color-green;
-      &:hover {
-        cursor: pointer;
-        opacity: 0.5;
+      >li {
+        font-weight: bold;
       }
     }
   }
