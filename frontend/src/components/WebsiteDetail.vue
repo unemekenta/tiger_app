@@ -1,13 +1,14 @@
 <template lang="pug">
 .allWrapper
+  header-nav(:allCategories="allCategories")
   .l-container
     .top
       .header
         p DETAIL
       .main
-        menu01(:allCategories="allCategories")
+        menu01(:allCategories="allCategories").is-only-pc
         website-detail-item(:detailObject="websiteDetail")
-        menu02
+        menu02.is-only-pc
 
 </template>
 
@@ -16,6 +17,7 @@ import axios from 'axios'
 import Menu01 from '/src/organisms/Menu01.vue'
 import Menu02 from '/src/organisms/Menu02.vue'
 import WebsiteDetailItem from '/src/organisms/WebsiteDetailItem.vue'
+import HeaderNav from '/src/molecules/HeaderNav.vue'
 
 export default {
   name: 'WebsiteDetail',
@@ -23,6 +25,7 @@ export default {
     Menu01,
     Menu02,
     WebsiteDetailItem,
+    HeaderNav,
   },
   data () {
     return {
