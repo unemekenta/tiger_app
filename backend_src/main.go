@@ -22,6 +22,8 @@ func initRouting(e *echo.Echo) {
 	e.GET("/api/websites/:id", handlers.GetWebsite)
 	e.GET("/api/websites_category/:id", handlers.GetWebsitesByCategory)
 
+	e.GET("/api/website_content/:website_id", handlers.GetContentByWebsite)
+
 	e.GET("/api/categories", handlers.GetCategories)
 	e.GET("/api/categories_by_ancestor/:ancestor_id", handlers.GetCategoriesByAncestor)
 
