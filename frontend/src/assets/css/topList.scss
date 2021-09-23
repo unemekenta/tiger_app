@@ -55,19 +55,13 @@
   }
 
   > .top-list {
-    display: flex;
-    justify-content: space-around;
     margin-top: 1rem;
-    @include tb {
-      flex-direction: column;
-    }
 
     .top-list-features, .top-list-categories {
-      width: calc(50% - 2rem);
+      width: 100%;
       background-color: $color-white;
       border: solid 0.1rem $color-green2;
       @include tb {
-        width: calc(100% - 1rem);
         margin: 1rem 0;
       }
     }
