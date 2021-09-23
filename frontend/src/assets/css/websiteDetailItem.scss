@@ -5,14 +5,14 @@
   background-color: $color-white;
 
   &-title {
-    padding: 15px 20px;
+    padding: 1.5rem 2rem;
     text-align: left;
     border-bottom: solid 1px $color-bg;
     font-weight: bold;
   }
 
   &-contents {
-    padding: 15px 20px;
+    padding: 1.5rem 2rem;
     border-bottom: solid 1px $color-bg;
 
     &-icon {
@@ -32,10 +32,10 @@
     }
 
     &-txt {
-      font-size: 18px;
+      font-size: 1.8rem;
       font-weight: bold;
       text-align: left;
-      margin: 10px 0;
+      margin: 1rem 0;
     }
 
     &-btm {
@@ -49,11 +49,28 @@
         }
 
         &-time {
-          font-size: 12px;
-          margin: 10px 0;
+          font-size: 1.2rem;
+          margin: 1rem 0;
           color: $color-green2;
           text-align: left;
         }
+      }
+    }
+  }
+
+  &-info {
+    text-align: left;
+    padding: 1.5rem 2rem;
+    > h3 {
+      margin: 3rem 0;
+      font-weight: bold;
+    }
+    > a {
+      display: inline-block;
+      margin: 4rem 0;
+      > p {
+        font-size: 1.4rem;
+        line-height: 1.8em;
       }
     }
   }

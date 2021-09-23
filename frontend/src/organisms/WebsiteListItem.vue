@@ -1,7 +1,7 @@
 <template lang="pug">
 .weblist
   h2.weblist-title 
-    | website
+    | メディア一覧
   .weblist-contents(v-for="(item, key) in this.slicedList" :key="key")
     router-link( :to="{name:'WebsiteDetail', params: {id:`${item.id}`}}").wrapper
       .weblist-contents-icon

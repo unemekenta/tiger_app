@@ -9,9 +9,9 @@
         .top-fv-button
           router-link( to="/website_list" ) 一覧ページへ
     .top-list
-      .top-list-features
-        h3 新着
-        card-slider(:itemList="this.cardItems")
+      //- .top-list-features
+      //-   h3 新着
+      //-   card-slider(:itemList="this.cardItems")
       .top-list-categories
         h3 カテゴリから探す
         tag-slider(:itemList="this.allCategories")

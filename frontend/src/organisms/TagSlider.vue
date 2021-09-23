@@ -1,15 +1,20 @@
 <template lang="pug">
-  ul.card-box
-    li(v-for="item in this.itemList" @click="reset(item.id)")
+  .card-box
+    .card-box-inner(v-for="item in this.itemList")
       .card-box-txt
         p {{item.name}}
+      sub-category(:ancestorID = "item.id")
 
 </template>
 
 <script>
+import SubCategory from '/src/atoms/SubCategory.vue'
 
 export default {
   name: 'TagSlider',
+  components: {
+    SubCategory,
+  },
   props: {
     itemList: Array,
   },

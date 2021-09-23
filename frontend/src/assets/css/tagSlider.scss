@@ -6,28 +6,21 @@
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   width: 100%;
-  height: 30rem;
+  height: 60rem;
+  text-align: left;
 
-  > li {
+  > .card-box-inner {
     margin: 1.0rem;
-    background-color: $color-green2;
+    padding: 1rem;
     cursor: pointer;
     border-radius: 0.3rem;
+    border: solid 0.3rem $color-bg;
     > .card-box-txt {
-      padding: 1rem;
       font-weight: bold;
       >p {
         @include tb {
           font-size: 1.0rem;
         }
-      }
-    }
-    &:hover {
-      width: calc(40% - 2.2rem);
-      transition: 0.3s;
-      background-color: $color-white;
-      > .card-box-txt {
-        color: $color-green2;
       }
     }
   }
