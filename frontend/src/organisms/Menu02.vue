@@ -7,7 +7,7 @@
       .menu02-content-items-item
         router-link( to="/" ) HOME
       .menu02-content-items-item
-        router-link( to="/website_list" ) webサイト一覧
+        router-link( to="/website_list" ) メディア一覧
       .menu02-content-items-item
         router-link( to="/mypage" ) マイページ
       .menu02-content-items-item(@click="signOut") ログアウト
@@ -16,7 +16,7 @@
       .menu02-content-items-item
         router-link( to="/" ) HOME
       .menu02-content-items-item
-        router-link( to="/website_list" ) webサイト一覧
+        router-link( to="/website_list" ) メディア一覧
       .menu02-content-items-item
         router-link( to="/signin" ) ログイン
 

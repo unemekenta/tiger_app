@@ -8,7 +8,7 @@
       .header-nav-item
         router-link( to="/" ) HOME
       .header-nav-item
-        router-link( to="/website_list" ) webサイト一覧
+        router-link( to="/website_list" ) メディア一覧
       .header-nav-item
         router-link( to="/mypage" ) マイページ
       .header-nav-item
@@ -25,7 +25,7 @@
       .header-nav-item
         router-link( to="/" ) HOME
       .header-nav-item
-        router-link( to="/website_list" ) webサイト一覧
+        router-link( to="/website_list" ) メディア一覧
       .header-nav-item
         router-link( to="/signin" ) ログイン
     .header-nav-button.is-only-sp(@click="onClick()")
@@ -37,7 +37,7 @@
       .header-nav-item
         router-link( to="/" ) HOME
       .header-nav-item
-        router-link( to="/website_list" ) webサイト一覧
+        router-link( to="/website_list" ) メディア一覧
       .header-nav-item
         router-link( to="/mypage" ) マイページ
       .header-nav-item
@@ -52,7 +52,7 @@
       .header-nav-item
         router-link( to="/" ) HOME
       .header-nav-item
-        router-link( to="/website_list" ) webサイト一覧
+        router-link( to="/website_list" ) メディア一覧
       .header-nav-item
         router-link( to="/signin" ) ログイン
       .header-nav-item

@@ -1,7 +1,7 @@
 <template lang="pug">
 .webdetail
   h2.webdetail-title
-    | website
+    | 詳細情報
   .webdetail-contents
     .wrapper
       .webdetail-contents-icon
@@ -15,9 +15,15 @@
           .webdetail-contents-btm-left-category
             category-tag(:websiteID="detailObject.id")
           p.webdetail-contents-btm-left-time
-            | {{createDate(detailObject.CreatedAt)}}
+            //- | {{createDate(detailObject.CreatedAt)}}
         .webdetail-contents-btm-right
           cv-button(label="公式サイトへ" :url="detailObject.url")
+  
+  .webdetail-info(v-if="detailObjectContent")
+    h3 {{detailObjectContent.title}}
+    p {{detailObjectContent.contents}}
+    a(href="`${detailObject.url}`")
+      p 参考・引用：<br>公式サイト {{detailObject.url}}
 
 </template>
 
@@ -33,6 +39,7 @@ export default {
   },
   props: {
     detailObject: Object,
+    detailObjectContent: Object,
   },
   methods: {
     createDate (createdAt) {

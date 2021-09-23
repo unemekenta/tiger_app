@@ -7,7 +7,7 @@
         p DETAIL
       .main
         menu01(:allCategories="allCategories").is-only-pc
-        website-detail-item(:detailObject="websiteDetail")
+        website-detail-item(:detailObject="websiteDetail" :detailObjectContent="websiteDetailContent")
         menu02.is-only-pc
 
 </template>
@@ -30,11 +30,13 @@ export default {
   data () {
     return {
       websiteDetail: {},
+      websiteDetailContent: {},
       allCategories: [],
     }
   },
   created () {
     this.getWebsiteDetail();
+    this.getWebsiteDetailContent();
     this.getAllCategories();
   },
   methods: {
@@ -46,6 +48,16 @@ export default {
       await axios.get('http://localhost:8000/api/websites/' + this.$route.params.id)
       .then(res => {
         this.websiteDetail = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
+    },
+    async getWebsiteDetailContent () {
+      await axios.get('http://localhost:8000/api/website_content/' + this.$route.params.id)
+      .then(res => {
+        this.websiteDetailContent = res.data;
       })
       .catch(error => {
         console.log(error);
