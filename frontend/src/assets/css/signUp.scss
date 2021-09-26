@@ -1,5 +1,14 @@
-.signUpPage {
+.signup-page {
+  background-color: $color-bg;
+  
+  >h2 {
+    padding-top: 8rem;
+  }
+
   &-form {
+    max-width: 1200px;
+    margin: 5rem auto;
+    text-align: center;
     &-name {
       display: block;
       margin: 1.0rem auto;
@@ -29,12 +38,38 @@
       background-color: $color-green;
       color: $color-white;
       font-weight: bold;
+      border: solid $color-green 0.1rem;
       &:hover {
         background-color: $color-white;
+        cursor: pointer;
         color: $color-green;
-        border: solid $color-green 0.1rem;
         transition: 0.3s;
       }
     }
+
+    &-agree {
+      margin: 2.0rem auto;
+      &-btn {
+        >input {
+          vertical-align: text-top;
+          margin: 0 1rem;
+          height: 2.0rem;
+          width: 2.0rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        >label {
+          cursor: pointer;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  &-to-signin {
+    margin: 5rem;
   }
 }
