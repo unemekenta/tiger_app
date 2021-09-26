@@ -1,5 +1,8 @@
 migrate:
 	miga --config ./db/miga.local.yml all up
 
-start-frontend:
-	cd frontend; yarn serve
+frontend-dev:
+	cd frontend; yarn dev-build
+
+start-local:
+	cd frontend; yarn local-serve
