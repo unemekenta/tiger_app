@@ -15,6 +15,7 @@
       .top-list-categories
         h3 カテゴリから探す
         tag-slider(:itemList="this.allCategories")
+  footer-nav
 
 
 </template>
@@ -23,12 +24,14 @@
 import axios from 'axios'
 import CardSlider from '/src/organisms/CardSlider.vue'
 import TagSlider from '/src/organisms/TagSlider.vue'
+import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
   name: 'TopList',
   components: {
     CardSlider,
     TagSlider,
+    FooterNav,
   },
   data () {
     return {
