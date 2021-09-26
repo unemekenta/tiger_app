@@ -1,0 +1,41 @@
+.page {
+  width: 100%;
+  padding: 0;
+  background-color: $color-white;
+  &-title {
+    padding: 1.5rem 2rem;
+    text-align: left;
+    border-bottom: solid 1px $color-bg;
+    font-weight: bold;
+  }
+
+  &-contents {
+    padding: 1.5rem 2rem;
+    border-bottom: solid 0.1rem $color-bg;
+    text-align: left;
+  }
+
+  h3 {
+    margin: 5rem auto 2rem 0;
+  }
+
+  p {
+    font-size: 1.6rem;
+    line-height: 2.0em;
+  }
+
+  ul {
+    margin-left: 1.0rem;
+    >li {
+      font-size: 1.6rem;
+      line-height: 2.0em;
+      display: list-item;
+      list-style: disc;
+    }
+  }
+}
+
+/* state */
+.text-aline-right {
+  text-align: right;
+}

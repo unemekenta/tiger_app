@@ -9,6 +9,7 @@
         menu01(:allCategories="allCategories").is-only-pc
         website-detail-item(:detailObject="websiteDetail" :detailObjectContent="websiteDetailContent")
         menu02.is-only-pc
+  footer-nav
 
 </template>
 
@@ -18,6 +19,7 @@ import Menu01 from '/src/organisms/Menu01.vue'
 import Menu02 from '/src/organisms/Menu02.vue'
 import WebsiteDetailItem from '/src/organisms/WebsiteDetailItem.vue'
 import HeaderNav from '/src/molecules/HeaderNav.vue'
+import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
   name: 'WebsiteDetail',
@@ -26,6 +28,7 @@ export default {
     Menu02,
     WebsiteDetailItem,
     HeaderNav,
+    FooterNav,
   },
   data () {
     return {

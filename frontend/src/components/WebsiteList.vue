@@ -6,11 +6,12 @@
       .image
         img(src="../assets/images/list-top-fv.png")
       .header
-        p HOME
+        p Top List
       .main
         menu01(:allCategories="allCategories").is-only-pc
         website-list-item(:allLists="allWebsites")
         menu02.is-only-pc
+  footer-nav
 
 </template>
 
@@ -20,6 +21,7 @@ import Menu01 from '/src/organisms/Menu01.vue'
 import Menu02 from '/src/organisms/Menu02.vue'
 import WebsiteListItem from '/src/organisms/WebsiteListItem.vue'
 import HeaderNav from '/src/molecules/HeaderNav.vue'
+import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
   name: 'WebsiteList',
@@ -28,6 +30,7 @@ export default {
     Menu02,
     WebsiteListItem,
     HeaderNav,
+    FooterNav,
   },
   data () {
     return {

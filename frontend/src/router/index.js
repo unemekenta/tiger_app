@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import TopList from '@/components/TopList'
+import PrivacyPolicy from '@/components/PrivacyPolicy'
+import TermsOfService from '@/components/TermsOfService'
 import WebsiteList from '@/components/WebsiteList'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
@@ -16,6 +18,16 @@ let router = new Router({
       path: '/',
       name: 'TopList',
       component: TopList
+    },
+    {
+      path: '/privacy_policy',
+      name: 'PrivacyPolicy',
+      component: PrivacyPolicy
+    },
+    {
+      path: '/terms_of_service',
+      name: 'TermsOfService',
+      component: TermsOfService
     },
     {
       path: '/signup',
@@ -48,7 +60,14 @@ let router = new Router({
       name: 'WebsiteListByCategory',
       component: WebsiteListByCategory
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+       return savedPosition
+    } else {
+       return { x: 0, y: 0 }
+    }
+  }
 })
 
 export default router

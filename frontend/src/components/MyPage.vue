@@ -21,15 +21,17 @@
             //- .main-mypage-contents-item
             //- .main-mypage-contents-item
         menu02.is-only-pc
+  footer-nav
 
 </template>
 
 <script>
+import axios from 'axios'
 import VueJwtDecode from 'vue-jwt-decode'
 import Menu01 from '/src/organisms/Menu01.vue'
 import Menu02 from '/src/organisms/Menu02.vue'
 import HeaderNav from '/src/molecules/HeaderNav.vue'
-import axios from 'axios'
+import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
   name: 'MyPage',
@@ -37,6 +39,7 @@ export default {
     Menu01,
     Menu02,
     HeaderNav,
+    FooterNav,
   },
   data () {
     return {

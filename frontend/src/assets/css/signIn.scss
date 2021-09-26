@@ -1,5 +1,13 @@
-.signInPage {
+.signin-page {
+  background-color: $color-bg;
+
+  >h2 {
+    padding-top: 8rem;
+  }
+
   &-form {
+    max-width: 1200px;
+    margin: 5rem auto;
     &-email {
       display: block;
       margin: 1.0rem auto;
@@ -21,12 +29,17 @@
       background-color: $color-green;
       color: $color-white;
       font-weight: bold;
+      border: solid $color-green 0.1rem;
       &:hover {
         background-color: $color-white;
         color: $color-green;
-        border: solid $color-green 0.1rem;
+        cursor: pointer;
         transition: 0.3s;
       }
     }
+  }
+
+  &-to-signin {
+    margin: 5rem;
   }
 }

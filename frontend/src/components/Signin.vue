@@ -1,24 +1,38 @@
 <template lang="pug">
-  .signInPage
+  .signin-page
+    header-nav(:allCategories="allCategories")
     h2 Sign in
-    .signInPage-form
-      input.signInPage-form-email(type="email" placeholder="Email" v-model="formEmail")
-      input.signInPage-form-password(type="password" placeholder="Password" v-model="formPassword")
-      button.signInPage-form-button(@click="signIn") ログイン
+    .signin-page-form
+      input.signin-page-form-email(type="email" placeholder="Email" v-model="formEmail")
+      input.signin-page-form-password(type="password" placeholder="Password" v-model="formPassword")
+      button.signin-page-form-button(@click="signIn") ログイン
+
+    .signin-page-to-signin
       p アカウントをまだお持ちでない方はこちら
       router-link(to="/signup") アカウントを作成する
+
+    footer-nav
 </template>
 
 <script>
 import axios from 'axios'
+import HeaderNav from '/src/molecules/HeaderNav.vue'
+import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
   name: 'Signin',
+  components: {
+    HeaderNav,
+    FooterNav,
+  },
   data: function () {
     return {
       formEmail: '',
       formPassword: ''
     }
+  },
+  created () {
+    this.getAllCategories();
   },
   methods: {
     async signIn () {
@@ -35,7 +49,17 @@ export default {
       .catch(error => {
         alert(error)
       });
-    }
+    },
+    async getAllCategories () {
+      await axios.get('http://localhost:8000/api/categories')
+      .then(res => {
+        this.allCategories = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
+    },
   }
 }
 </script>

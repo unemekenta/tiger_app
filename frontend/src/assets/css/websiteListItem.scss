@@ -5,15 +5,15 @@
   background-color: $color-white;
 
   &-title {
-    padding: 15px 20px;
+    padding: 1.5rem 2rem;
     text-align: left;
-    border-bottom: solid 1px $color-bg;
+    border-bottom: solid 0.1rem $color-bg;
     font-weight: bold;
   }
 
   &-contents {
-    padding: 15px 20px;
-    border-bottom: solid 1px $color-bg;
+    padding: 1.5rem 2rem;
+    border-bottom: solid 0.1rem $color-bg;
     &:hover{
       box-shadow: 0.3rem 0.3rem 0 $color-bg;
       transform: translateX(-0.2rem) translateY(-0.2rem);
