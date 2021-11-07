@@ -34,6 +34,7 @@
 
   #headerNavMenu.header-nav.is-hidden(v-if="signedIn")
     .header-nav-inner
+      search-box
       .header-nav-item
         router-link( to="/" ) HOME
       .header-nav-item
@@ -49,6 +50,7 @@
             | {{allCatrgory.name}}
   #headerNavMenu.header-nav.is-hidden(v-else)
     .header-nav-inner
+      search-box
       .header-nav-item
         router-link( to="/" ) HOME
       .header-nav-item
@@ -67,11 +69,13 @@
 <script>
 import axios from 'axios'
 import SubCategory from '/src/atoms/SubCategory.vue'
+import SearchBox from '/src/atoms/SearchBox.vue'
 
 export default {
   name: 'HeaderNav',
   components: {
     SubCategory,
+    SearchBox,
   },
   data () {
     return {

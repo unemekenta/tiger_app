@@ -4,6 +4,7 @@
     .menu02-content-head
       | メニュー
     .menu02-content-items(v-if="signedIn")
+      search-box
       .menu02-content-items-item
         router-link( to="/" ) HOME
       .menu02-content-items-item
@@ -13,6 +14,7 @@
       .menu02-content-items-item(@click="signOut") ログアウト
     
     .menu02-content-items(v-else)
+      search-box
       .menu02-content-items-item
         router-link( to="/" ) HOME
       .menu02-content-items-item
@@ -24,16 +26,20 @@
 
 <script>
 import axios from 'axios'
+import SearchBox from '/src/atoms/SearchBox.vue'
 
 export default {
   name: 'Menu02',
-  created () {
-    this.loginCheck();
+  components: {
+    SearchBox
   },
   data () {
     return {
       signedIn: false,
     }
+  },
+  created () {
+    this.loginCheck();
   },
   methods: {
     signOut () {
