@@ -4,5 +4,8 @@ migrate:
 frontend-dev:
 	cd frontend; yarn dev-build
 
-start-local:
+frontend-local:
 	cd frontend; yarn local-serve
+
+serve:
+	cd backend_src; go run main.go

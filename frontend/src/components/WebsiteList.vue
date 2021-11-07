@@ -36,26 +36,50 @@ export default {
     return {
       allWebsites: [],
       allCategories: [],
+      serchQuery: this.$route.query.q,
     }
   },
   created () {
-    this.getAllWebsites();
+    this.getWebsites();
     this.getAllCategories();
+  },
+  async beforeRouteUpdate (to, from, next) {
+    // URL の クエリが変わったときに 関数を実行してデータを更新する
+    next();
+    this.serchQuery = this.$route.query.q;
+    this.getWebsites()
   },
   methods: {
     signOut () {
       window.$cookies.remove('jwt');
       this.$router.push('/signin');
     },
-    async getAllWebsites () {
+    async getWebsites () {
+      if (this.serchQuery == null) {
+        this.getAllWebsites();
+      } else {
+        this.getSearchedWebsites();
+      }
+    },
+    async getAllWebsites() {
       await axios.get('http://localhost:8000/api/websites')
-      .then(res => {
-        this.allWebsites = res.data;
-      })
-      .catch(error => {
-        console.log(error);
-        return;
-      });
+        .then(res => {
+          this.allWebsites = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+          return;
+        });
+    },
+    async getSearchedWebsites() {
+      await axios.get('http://localhost:8000/api/websites/search?q=' + this.serchQuery)
+        .then(res => {
+          this.allWebsites = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+          return;
+        });
     },
     async getAllCategories () {
       await axios.get('http://localhost:8000/api/categories')

@@ -73,3 +73,18 @@ func GetWebsite(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, website)
 }
+
+func SearchWebsite(c echo.Context) error {
+	var websites []models.Websites
+	Db := models.OpenDBConn()
+	db, err := Db.DB()
+	defer db.Close()
+
+	serch_query := c.QueryParam("q")
+
+	Db.Where("name ILIKE ?", "%"+serch_query+"%").Find(&websites)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, websites)
+}
