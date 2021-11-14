@@ -1,0 +1,25 @@
+version: '3' # composeファイルのバーション指定
+services:
+  app:
+    build: . # ビルドに使用するDockerfileがあるディレクトリ指定
+    tty: true # コンテナの起動永続化。Bashが入力待ち状態になるよう指定（nginxやmysqlのようにポートを開いて待受けするシステムの場合は指定不要）
+    volumes:
+      - .:/go/src/tiger_app # マウントディレクトリ(全体)指定
+    environment:
+      - "GOPATH=/go"
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    env_file:
+      - .env
+  postgres:
+    build: ./postgres
+    volumes: # マウントの設定 ... ホスト側ディレクトリ:コンテナ側ディレクトリ
+      - ./db/sh:/docker-entrypoint-initdb.d # この中の.sh、.sqlファイルは自動実行される
+      - ./db/data:/data # db.dumpを配置する
+      - ./db/storage:/var/lib/postgresql/data # データベースデータを永続化する
+    ports:
+      - ${PSQL_HOST_PORT}:${PSQL_PORT}
+    environment:
+      POSTGRES_USER: ${PSQL_USER}
+      POSTGRES_PASSWORD: ${PSQL_PASS}
+      POSTGRES_DB: ${PSQL_DBNAME}
