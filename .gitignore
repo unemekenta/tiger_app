@@ -3,4 +3,4 @@
 # direnv関連
 .envrc
 
-.yml
+dbconf.yml
