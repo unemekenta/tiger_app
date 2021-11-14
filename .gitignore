@@ -3,4 +3,8 @@
 # direnv関連
 .envrc
 
+#DB系でいらないもの
 dbconf.yml
+./db/data/
+./db/sh/
+./db/storage/
