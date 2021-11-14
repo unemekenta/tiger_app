@@ -1,2 +1,6 @@
 # dotenv関連
 .env
+# direnv関連
+.envrc
+
+.yml
