@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"tiger_app/backend_src/models"
+	"backend/models"
 
 	"github.com/labstack/echo"
 )

@@ -1,2 +1,13 @@
 # dotenv関連
 .env
+# direnv関連
+.envrc
+
+#DB系でいらないもの
+dbconf.yml
+backend/db/data/
+backend/db/sh/
+backend/db/storage/
+db/data/
+db/sh/
+db/storage/
