@@ -1,14 +1,14 @@
 version: '3' # composeファイルのバーション指定
 services:
   backend:
-    build: . # ビルドに使用するDockerfileがあるディレクトリ指定
+    build: ./backend # ビルドに使用するDockerfileがあるディレクトリ指定
     tty: true # コンテナの起動永続化。Bashが入力待ち状態になるよう指定（nginxやmysqlのようにポートを開いて待受けするシステムの場合は指定不要）
     volumes:
       - type: bind
-        source: "."
-        target: "/go/src/tiger_app" # マウントディレクトリ(全体)指定
+        source: "./"
+        target: "/go/src/tiger_app/" # マウントディレクトリ指定
     environment:
-      - "GOPATH=/go"
+      - "GOPATH=/go/"
     ports:
       - "${API_PORT}:${API_PORT}"
     env_file:

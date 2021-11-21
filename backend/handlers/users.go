@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 	"strconv"
-	"tiger_app/backend_src/models"
+	"backend/models"
 	"time"
 
 	jwt "github.com/form3tech-oss/jwt-go"

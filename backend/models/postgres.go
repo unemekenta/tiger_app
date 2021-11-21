@@ -17,7 +17,6 @@ func OpenDBConn() *gorm.DB {
 	}
 	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", os.Getenv("PSQL_CONTAINER_HOST"), os.Getenv("PSQL_PORT"), os.Getenv("PSQL_USER"), os.Getenv("PSQL_DBNAME"), os.Getenv("PSQL_PASS"))
 
-	log.Print(dsn)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database.")

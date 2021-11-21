@@ -19,5 +19,5 @@ frontend-dev:
 frontend-local:
 	cd frontend; yarn local-serve
 
-serve:
-	cd backend_src; go run main.go
+air:
+	cd backend; air -c .air.toml

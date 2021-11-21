@@ -1,7 +1,7 @@
 package main
 
 import (
-	"tiger_app/backend_src/handlers"
+	"backend/handlers"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

@@ -5,6 +5,9 @@
 
 #DB系でいらないもの
 dbconf.yml
-/db/data/
-/db/sh/
-/db/storage/
+backend/db/data/
+backend/db/sh/
+backend/db/storage/
+db/data/
+db/sh/
+db/storage/

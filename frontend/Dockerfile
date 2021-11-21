@@ -6,4 +6,4 @@ RUN apk --update add --no-cache && \
     npm install -g npm && \
     npm install -g @vue/cli
 
-CMD ["/bin/ash"]
+CMD ["yarn local-serve"]
