@@ -21,4 +21,4 @@ RUN go mod tidy && \
     go get -u github.com/cosmtrek/air && \
     go get bitbucket.org/liamstask/goose/cmd/goose
 
-CMD ["air -c .air.toml"]
+CMD ["air", "-c", ".air.toml"]

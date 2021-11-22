@@ -23,7 +23,7 @@ services:
     volumes:
       - type: bind
         source: "."
-        target: "/go/src/tiger_app" # マウントディレクトリ(全体)指定
+        target: "/go/src/tiger_app/" # マウントディレクトリ(全体)指定
 
   postgres:
     build: ./postgres
