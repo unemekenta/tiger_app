@@ -11,6 +11,3 @@ backend/db/storage/
 db/data/
 db/sh/
 db/storage/
-
-# heroku関連
-heroku.yml
