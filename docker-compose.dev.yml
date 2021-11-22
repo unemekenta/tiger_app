@@ -1,0 +1,19 @@
+version: '3' # composeファイルのバーション指定
+services:
+  backend:
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    env_file:
+      - .env.dev
+
+  frontend:
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+
+  postgres:
+    ports:
+      - ${PSQL_HOST_PORT}:${PSQL_PORT}
+    environment:
+      POSTGRES_USER: ${PSQL_USER}
+      POSTGRES_PASSWORD: ${PSQL_PASS}
+      POSTGRES_DB: ${PSQL_DBNAME}

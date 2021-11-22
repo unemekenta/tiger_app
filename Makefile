@@ -1,5 +1,8 @@
-docker-up:
-	docker-compose up --build
+docker-local-up:
+	docker-compose -f docker-compose.yml -f docker-compose.local.yml up --build
+
+docker-dev-up:
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 
 docker-api:
 	docker-compose exec backend /bin/ash

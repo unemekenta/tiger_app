@@ -9,15 +9,9 @@ services:
         target: "/go/src/tiger_app/" # マウントディレクトリ指定
     environment:
       - "GOPATH=/go/"
-    ports:
-      - "${API_PORT}:${API_PORT}"
-    env_file:
-      - .env
 
   frontend:
     build: ./frontend
-    ports:
-      - ${FRONTEND_PORT}:${FRONTEND_PORT}
     stdin_open: true
     tty: true
     volumes:
@@ -31,9 +25,3 @@ services:
       - ./db/sh:/docker-entrypoint-initdb.d # この中の.sh、.sqlファイルは自動実行される
       - ./db/data:/data # db.dumpを配置する
       - ./db/storage:/var/lib/postgresql/data # データベースデータを永続化する
-    ports:
-      - ${PSQL_HOST_PORT}:${PSQL_PORT}
-    environment:
-      POSTGRES_USER: ${PSQL_USER}
-      POSTGRES_PASSWORD: ${PSQL_PASS}
-      POSTGRES_DB: ${PSQL_DBNAME}
