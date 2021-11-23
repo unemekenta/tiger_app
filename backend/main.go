@@ -2,6 +2,7 @@ package main
 
 import (
 	"backend/handlers"
+	"os"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -11,7 +12,13 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.CORS())
 	initRouting(e)
-	e.Logger.Fatal(e.Start(":8000"))
+
+	// heroku用
+	port := os.Getenv("PORT")
+	if len(port) == 0 {
+		port = os.Getenv("API_PORT")
+	}
+	e.Logger.Fatal(e.Start(":" + port))
 }
 
 func initRouting(e *echo.Echo) {

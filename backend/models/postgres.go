@@ -15,7 +15,7 @@ func OpenDBConn() *gorm.DB {
 	if err != nil {
 		log.Fatal("envファイルの読み込みに失敗しました。 \n", err)
 	}
-	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", os.Getenv("PSQL_CONTAINER_HOST"), os.Getenv("PSQL_PORT"), os.Getenv("PSQL_USER"), os.Getenv("PSQL_DBNAME"), os.Getenv("PSQL_PASS"))
+	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s", os.Getenv("PSQL_CONTAINER_HOST"), os.Getenv("PSQL_PORT"), os.Getenv("PSQL_USER"), os.Getenv("PSQL_DBNAME"), os.Getenv("PSQL_PASS"), os.Getenv("PSQL_SSLMODE"))
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
