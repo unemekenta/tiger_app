@@ -49,7 +49,7 @@ export default {
     async loginCheck () {
       var data =''
       if (window.$cookies.isKey('jwt')) {
-        await axios.post('http://localhost:8000/auth/api/authCheck', data,
+        await axios.post(process.env.VUE_APP_API_BASE_URL + '/auth/api/authCheck', data,
         {
           headers: {'Authorization': 'Bearer ' + window.$cookies.get('jwt')}
         })

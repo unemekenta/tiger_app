@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "local-serve": "vue-cli-service serve --mode local",
-    "dev-serve": "vue-cli-service serve --mode development",
+    "development-serve": "vue-cli-service serve --mode development",
     "prod-serve": "vue-cli-service serve --mode production",
-    "dev-build": "vue-cli-service build --mode development",
+    "local-build": "vue-cli-service build --mode local",
+    "development-build": "vue-cli-service build --mode development",
     "prod-build": "vue-cli-service build --mode production"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
     "node-sass": "^4.14.1",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",

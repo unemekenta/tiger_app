@@ -7,7 +7,8 @@
         h1 Web Media Database
         p webメディアの情報を蓄積する・見つける
         .top-fv-button
-          router-link( to="/website_list" ) 一覧ページへ
+          router-link( to="/website_list" ontouchstart="")
+            p 一覧ページへ
     .top-list
       //- .top-list-features
       //-   h3 新着
@@ -49,7 +50,7 @@ export default {
       this.$router.push('/signin');
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })

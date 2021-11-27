@@ -28,7 +28,7 @@ router.beforeEach(async (to, from, next) => {
   var data =''
   if (requiresAuth) {
     // todo サインインの有無判断
-    await axios.post('http://localhost:8000/auth/api/authCheck', data,
+    await axios.post(process.env.VUE_APP_API_BASE_URL + '/auth/api/authCheck', data,
     {
       headers: {'Authorization': 'Bearer ' + window.$cookies.get('jwt')}
     })

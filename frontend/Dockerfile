@@ -6,4 +6,8 @@ RUN apk --update add --no-cache && \
     npm install -g npm && \
     npm install -g @vue/cli
 
-CMD ["yarn", "local-serve"]
+COPY . .
+
+RUN npm run ${MODE}-build
+
+CMD yarn ${MODE}-serve

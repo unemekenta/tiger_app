@@ -48,7 +48,7 @@ export default {
       this.$router.push('/signin');
     },
     async getWebsiteDetail () {
-      await axios.get('http://localhost:8000/api/websites/' + this.$route.params.id)
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites/' + this.$route.params.id)
       .then(res => {
         this.websiteDetail = res.data;
       })
@@ -58,7 +58,7 @@ export default {
       });
     },
     async getWebsiteDetailContent () {
-      await axios.get('http://localhost:8000/api/website_content/' + this.$route.params.id)
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/website_content/' + this.$route.params.id)
       .then(res => {
         this.websiteDetailContent = res.data;
       })
@@ -68,7 +68,7 @@ export default {
       });
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })

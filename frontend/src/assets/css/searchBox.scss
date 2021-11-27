@@ -10,15 +10,17 @@ form {
   >input {
     width: 80%;
     height: 3rem;
+    font-size: 1.6rem;
     @include tb {
       max-width: 21rem;
     }
   }
 
   >button {
-    width: 20%;
-    margin: 0;
+    width: 18%;
+    margin: 0 0 0 auto;
     height: 3rem;
+    color: $color-brack;
     background-color: $color-bg;
     cursor: pointer;
     @include tb {

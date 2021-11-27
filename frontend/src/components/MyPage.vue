@@ -57,7 +57,7 @@ export default {
       this.$router.push('/signin');
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })
@@ -68,7 +68,7 @@ export default {
     },
     async getUser () {
       let user_id = VueJwtDecode.decode(window.$cookies.get('jwt')).id;
-      await axios.get('http://localhost:8000/auth/api/user/'+ user_id,
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/auth/api/user/'+ user_id,
       {
         headers: {'Authorization': 'Bearer ' + window.$cookies.get('jwt')}
       })

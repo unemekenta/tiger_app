@@ -54,7 +54,7 @@ export default {
       params.append('email', this.formEmail)
       params.append('password', this.formPassword)
       if (this.agree && this.formName && this.formEmail && this.formPassword) {
-        await axios.post('http://localhost:8000/api/signup', params)
+        await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/signup', params)
           .then((response) => {
             alert('アカウントを作成しました.', response)
             this.$router.push('/')
@@ -67,7 +67,7 @@ export default {
       }
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })

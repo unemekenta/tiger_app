@@ -44,7 +44,7 @@ export default {
       this.$router.push('/signin');
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })

@@ -10,6 +10,8 @@ ENV GO111MODULE=on
 RUN apk --update add --no-cache \
   alpine-sdk
 
+COPY . .
+
 #ローカルのgo.modとgo.sumと.air.tomlをコピー
 COPY ./go.mod .
 COPY ./go.sum .

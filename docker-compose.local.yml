@@ -9,6 +9,11 @@ services:
   frontend:
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    env_file:
+      - .env.local
+    environment:
+      - MODE=local
+
 
   postgres:
     ports:
