@@ -22,7 +22,7 @@
   .webdetail-info(v-if="detailObjectContent")
     h3 {{detailObjectContent.title}}
     p {{detailObjectContent.contents}}
-    a(href="`${detailObject.url}`")
+    .webdetail-info-quotation
       p 参考・引用：<br>公式サイト {{detailObject.url}}
 
 </template>

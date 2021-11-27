@@ -34,20 +34,26 @@
       }
       > .top-fv-button {
         width: 20rem;
-        background-color: $color-green;
-        padding: 0.8rem 1rem;
-        border: solid 0.1rem $color-bg;
         margin: 1rem auto;
         > a {
           color: $color-white;
           font-weight: bold;
-        }
-        &:hover {
-          background-color: $color-white;
-          cursor: pointer;
-          transition: 0.3s;
-          > a {
-            color: $color-green;
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: $color-green;
+          border: solid 0.1rem $color-bg;
+          &:hover {
+            background-color: $color-white;
+            cursor: pointer;
+            transition: 0.3s;
+            > p {
+              color: $color-green;
+            }
+          }
+          > p {
+            display: block;
+            margin: 0.8rem 1rem;
           }
         }
       }
