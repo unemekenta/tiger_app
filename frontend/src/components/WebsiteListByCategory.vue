@@ -55,7 +55,7 @@ export default {
       this.$router.push('/signin');
     },
     async getAllWebsites () {
-      await axios.get('http://localhost:8000/api/websites_category/' + this.$route.params.category_id)
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites_category/' + this.$route.params.category_id)
       .then(res => {
         this.allWebsites = res.data;
       })
@@ -65,7 +65,7 @@ export default {
       });
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })

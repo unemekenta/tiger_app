@@ -62,7 +62,7 @@ export default {
       }
     },
     async getAllWebsites() {
-      await axios.get('http://localhost:8000/api/websites')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites')
         .then(res => {
           this.allWebsites = res.data;
         })
@@ -72,7 +72,7 @@ export default {
         });
     },
     async getSearchedWebsites() {
-      await axios.get('http://localhost:8000/api/websites/search?q=' + this.serchQuery)
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites/search?q=' + this.serchQuery)
         .then(res => {
           this.allWebsites = res.data;
         })
@@ -82,7 +82,7 @@ export default {
         });
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })

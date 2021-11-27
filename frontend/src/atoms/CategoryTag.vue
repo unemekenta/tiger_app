@@ -28,7 +28,7 @@ export default {
   methods: {
     async getCategory () {
       const website_id = this.websiteID;
-      await axios.get('http://localhost:8000/api/categories_website/' + website_id)
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories_website/' + website_id)
       .then(res => {
         const category = res.data.name;
         this.category = category;

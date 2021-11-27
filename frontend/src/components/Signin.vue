@@ -39,7 +39,7 @@ export default {
       var params = new URLSearchParams()
       params.append('email', this.formEmail)
       params.append('password', this.formPassword)
-      await axios.post('http://localhost:8000/api/login', params)
+      await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/login', params)
       .then(async(response) => {
         this.$cookies.config('1d', '', '', true);
         await this.$cookies.set('jwt', response.data.token);
@@ -51,7 +51,7 @@ export default {
       });
     },
     async getAllCategories () {
-      await axios.get('http://localhost:8000/api/categories')
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
       })

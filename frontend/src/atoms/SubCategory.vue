@@ -27,7 +27,7 @@ export default {
       this.$router.push({name: 'WebsiteListByCategory', params: {category_id: id}})
     },
     async getAllSubCatrgories () {
-      await axios.get('http://localhost:8000/api/categories_by_ancestor/' + this.ancestorID)
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories_by_ancestor/' + this.ancestorID)
       .then(res => {
         this.allSubCatrgories = res.data;
       })
