@@ -36,11 +36,17 @@
     .header-nav-inner
       search-box
       .header-nav-item
-        router-link( to="/" ) HOME
+        router-link( to="/" ) 
+          p HOME
+          fa-icon(icon="chevron-right")
       .header-nav-item
-        router-link( to="/website_list" ) メディア一覧
+        router-link( to="/website_list" )
+          p メディア一覧
+          fa-icon(icon="chevron-right")
       .header-nav-item
-        router-link( to="/mypage" ) マイページ
+        router-link( to="/mypage" )
+          p マイページ
+          fa-icon(icon="chevron-right")
       .header-nav-item
         p.header-nav-item-title(@click="signOut") ログアウト
       .header-nav-item
@@ -48,15 +54,22 @@
         .header-nav-item-categories(v-for="(allCatrgory, key) in this.allCategories" :key="key")
           li(@click="reset(allCatrgory.id)")
             | {{allCatrgory.name}}
+          sub-category(:ancestorID = "allCatrgory.id")
   #headerNavMenu.header-nav.is-hidden(v-else)
     .header-nav-inner
       search-box
       .header-nav-item
-        router-link( to="/" ) HOME
+        router-link( to="/" )
+          p HOME
+          fa-icon(icon="chevron-right")
       .header-nav-item
-        router-link( to="/website_list" ) メディア一覧
+        router-link( to="/website_list" )
+          p メディア一覧
+          fa-icon(icon="chevron-right")
       .header-nav-item
-        router-link( to="/signin" ) ログイン
+        router-link( to="/signin" )
+          p ログイン
+          fa-icon(icon="chevron-right")
       .header-nav-item
         p カテゴリから探す
         .header-nav-item-categories(v-for="(allCatrgory, key) in this.allCategories" :key="key")
@@ -93,6 +106,8 @@ export default {
     onClick() {
       var manu = document.getElementById("headerNavMenu");
       manu.classList.toggle("is-hidden");
+      var background = document.getElementById("container");
+      background.classList.toggle("is-bgBlack");
       this.iconContent =! this.iconContent
     },
     signOut () {

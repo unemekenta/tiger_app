@@ -1,7 +1,7 @@
 <template lang="pug">
 .allWrapper
   header-nav(:allCategories="allCategories")
-  .l-container
+  .l-container#container
     .top
       .user
         //- img.user-icon(src="../../src/assets/images/logo.png")

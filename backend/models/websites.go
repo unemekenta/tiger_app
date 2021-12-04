@@ -8,6 +8,7 @@ type Websites struct {
 	Name        string `json:"name"`
 	Url         string `json:"url"`
 	CompanyName string `json:"company_name"`
+	Image       string `json:"image"`
 	CreatedAt   time.Time
 	UpdateAt    time.Time
 }

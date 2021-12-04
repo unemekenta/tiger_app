@@ -74,8 +74,22 @@ INSERT INTO categories_websites (category_id, website_id) VALUES (24, 70);
 INSERT INTO categories_websites (category_id, website_id) VALUES (24, 71);
 INSERT INTO categories_websites (category_id, website_id) VALUES (24, 72);
 INSERT INTO categories_websites (category_id, website_id) VALUES (24, 73);
+INSERT INTO categories_websites (category_id, website_id) VALUES (18, 74);
+INSERT INTO categories_websites (category_id, website_id) VALUES (18, 75);
+INSERT INTO categories_websites (category_id, website_id) VALUES (24, 76);
+INSERT INTO categories_websites (category_id, website_id) VALUES (24, 77);
+INSERT INTO categories_websites (category_id, website_id) VALUES (22, 78);
+INSERT INTO categories_websites (category_id, website_id) VALUES (18, 79);
+INSERT INTO categories_websites (category_id, website_id) VALUES (22, 80);
+INSERT INTO categories_websites (category_id, website_id) VALUES (16, 81);
+INSERT INTO categories_websites (category_id, website_id) VALUES (18, 82);
+INSERT INTO categories_websites (category_id, website_id) VALUES (18, 83);
+INSERT INTO categories_websites (category_id, website_id) VALUES (18, 84);
+INSERT INTO categories_websites (category_id, website_id) VALUES (16, 85);
+INSERT INTO categories_websites (category_id, website_id) VALUES (18, 86);
 
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
-DELETE from categories_websites WHERE id BETWEEN 1 AND 73;
+DELETE from categories_websites WHERE id BETWEEN 1 AND 86;
 SELECT setval('categories_websites_id_seq', 1, false);
+;

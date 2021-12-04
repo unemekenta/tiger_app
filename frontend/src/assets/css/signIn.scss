@@ -8,6 +8,12 @@
   &-form {
     max-width: 1200px;
     margin: 5rem auto;
+    @include tb {
+      margin: 5rem 1rem;
+    }
+    >input {
+      font-size: 1.6rem;
+    }
     &-email {
       display: block;
       margin: 1.0rem auto;
@@ -40,6 +46,6 @@
   }
 
   &-to-signin {
-    margin: 5rem;
+    margin: 5rem 1rem;
   }
 }

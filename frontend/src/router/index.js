@@ -17,48 +17,59 @@ let router = new Router({
     {
       path: '/',
       name: 'TopList',
-      component: TopList
+      component: TopList,
+      meta: { title: 'TOPページ' }
     },
     {
       path: '/privacy_policy',
       name: 'PrivacyPolicy',
-      component: PrivacyPolicy
+      component: PrivacyPolicy,
+      meta: { title: 'プライバシーポリシー' }
     },
     {
       path: '/terms_of_service',
       name: 'TermsOfService',
-      component: TermsOfService
+      component: TermsOfService,
+      meta: { title: 'TermsOfService' }
     },
     {
       path: '/signup',
       name: 'Signup',
-      component: Signup
+      component: Signup,
+      meta: { title: 'サインアップ' }
     },
     {
       path: '/signin',
       name: 'Signin',
-      component: Signin
+      component: Signin,
+      meta: { title: 'サインイン' }
     },
     {
       path: '/mypage',
       name: 'MyPage',
       component: MyPage,
-      meta: { requiresAuth: true }
+      meta: {
+        title: 'マイページ',
+        requiresAuth: true
+      },
     },
     {
       path: '/website_detail/:id',
       name: 'WebsiteDetail',
-      component: WebsiteDetail
+      component: WebsiteDetail,
+      meta: { title: 'ウェブサイト詳細' }
     },
     {
       path: '/website_list',
       name: 'WebsiteList',
-      component: WebsiteList
+      component: WebsiteList,
+      meta: { title: 'ウェブ一覧' }
     },
     {
       path: '/website_list/:category_id',
       name: 'WebsiteListByCategory',
       component: WebsiteListByCategory
+      ,meta: { title: 'カテゴリー別一覧' }
     }
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -1,6 +1,6 @@
 <template lang="pug">
 .allWrapper
-  .l-container
+  .l-container#container
     .top-fv
       img(src="../assets/images/top-fv.png")
       .top-fv-txt

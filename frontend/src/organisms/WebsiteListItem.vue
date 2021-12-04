@@ -2,22 +2,30 @@
 .weblist
   h2.weblist-title 
     | メディア一覧
-  .weblist-contents(v-for="(item, key) in this.slicedList" :key="key")
-    router-link( :to="{name:'WebsiteDetail', params: {id:`${item.id}`}}").wrapper
-      .weblist-contents-icon
-        fa-icon(icon="building")
-        p.weblist-contents-icon-name
-          | {{item.company_name}}
-      p.weblist-contents-txt
-        | {{item.name}}
-      .weblist-contents-btm
-        .weblist-contents-btm-left
-          .weblist-contents-btm-left-category
-            category-tag(:websiteID="item.id")
-          p.weblist-contents-btm-left-time 
-            | {{createDate(item.CreatedAt)}}
-        .weblist-contents-btm-right
-          cv-button(label="公式サイトへ" :url="item.url")
+  .weblist-contents
+    .weblist-contents-inner(v-for="(item, key) in this.slicedList" :key="key")
+      router-link( :to="{name:'WebsiteDetail', params: {id:`${item.id}`}}").wrapper
+        .weblist-contents-inner-img(v-if="item.image")
+          img(:src="item.image")
+        .weblist-contents-inner-img(v-else)
+          img(src="../assets/images/no_image.jpg")
+        .weblist-contents-inner-quote
+          q(cite="item.url")
+            | 引用：{{item.name}} 公式HP
+        .weblist-contents-inner-icon
+          fa-icon(icon="building")
+          p.weblist-contents-inner-icon-name
+            | {{item.company_name}}
+        p.weblist-contents-inner-txt
+          | {{item.name}}
+        .weblist-contents-inner-btm
+          .weblist-contents-inner-btm-left
+            .weblist-contents-inner-btm-left-category
+              category-tag(:websiteID="item.id")
+            p.weblist-contents-inner-btm-left-time 
+              | {{createDate(item.CreatedAt)}}
+          .weblist-contents-inner-btm-right
+            cv-button(label="公式サイトへ" :url="item.url")
   pager(:maxPage="maxPage" @changePage="this.changePageNum")
 
 </template>

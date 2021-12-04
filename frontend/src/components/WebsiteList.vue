@@ -1,7 +1,7 @@
 <template lang="pug">
 .allWrapper
   header-nav(:allCategories="allCategories")
-  .l-container
+  .l-container#container
     .top
       .image
         img(src="../assets/images/list-top-fv.png")

@@ -1,7 +1,7 @@
 <template lang="pug">
 .allWrapper
   header-nav(:allCategories="allCategories")
-  .l-container
+  .l-container#container
     .top
       .header
         p DETAIL
