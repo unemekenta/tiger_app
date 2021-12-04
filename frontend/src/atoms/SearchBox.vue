@@ -23,7 +23,8 @@ export default {
   },
   methods: {
     reset () {
-      this.$router.push({name: 'WebsiteList', query: {q:this.searchQuery}})
+      this.$router.push({name: 'WebsiteList', query: {q:this.searchQuery}, force: true})
+      location.reload()
     },
   },
 }

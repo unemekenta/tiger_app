@@ -3,7 +3,7 @@
     .sub-category-item(v-for="(allSubCatrgory, key) in this.allSubCatrgories" :key="key")
       li(@click="reset(allSubCatrgory.id)")
         | {{allSubCatrgory.name}}
-
+      fa-icon(icon="chevron-right")
 </template>
 
 <script>
@@ -25,6 +25,7 @@ export default {
   methods: {
     reset (id) {
       this.$router.push({name: 'WebsiteListByCategory', params: {category_id: id}})
+      location.reload()
     },
     async getAllSubCatrgories () {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories_by_ancestor/' + this.ancestorID)
