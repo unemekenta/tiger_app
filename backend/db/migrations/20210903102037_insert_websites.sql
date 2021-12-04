@@ -1,8 +1,7 @@
-
 -- +goose Up
 -- SQL in section 'Up' is executed when this migration is applied
-INSERT INTO websites (id, name, url, company_name) VALUES (1, 'ZUU online', 'https://zuuonline.com/', '株式会社ZUU');
-INSERT INTO websites (id, name, url, company_name) VALUES (2, 'ferret（フェレット）', 'https://ferret-plus.com/', '株式会社ベーシック');
+INSERT INTO websites (id, name, url, company_name, image) VALUES (1, 'ZUU online', 'https://zuuonline.com/', '株式会社ZUU', 'https://storage.googleapis.com/tiger-prod/images/website/zuuonline.png');
+INSERT INTO websites (id, name, url, company_name, image) VALUES (2, 'ferret（フェレット）', 'https://ferret-plus.com/', '株式会社ベーシック', 'https://storage.googleapis.com/tiger-prod/images/website/ferret.png');
 INSERT INTO websites (id, name, url, company_name) VALUES (3, 'バズ部', 'https://bazubu.com/', '株式会社ルーシー');
 INSERT INTO websites (id, name, url, company_name) VALUES (4, 'FASHION PRESS（ファッションプレス）', 'https://www.fashion-press.net/', '株式会社カーリン');
 INSERT INTO websites (id, name, url, company_name) VALUES (5, 'HYPEBEAST（ハイプビースト）', 'https://hypebeast.com/jp', 'Hypebeast Ltd. ');
@@ -74,8 +73,22 @@ INSERT INTO websites (id, name, url, company_name) VALUES (70, 'Agenda note', 'h
 INSERT INTO websites (id, name, url, company_name) VALUES (71, 'アプリマーケティング研究所', 'https://appmarketinglabo.net/', 'アプリマーケティング研究所');
 INSERT INTO websites (id, name, url, company_name) VALUES (72, 'marketeer', 'https://marketeer.jp/', 'アナグラム株式会社');
 INSERT INTO websites (id, name, url, company_name) VALUES (73, 'SAIRU NOTE', 'https://sairu.co.jp/doernote/', '株式会社才流');
+INSERT INTO websites (id, name, url, company_name) VALUES (74, 'Web担当者Forum', 'https://webtan.impress.co.jp/', '株式会社インプレス');
+INSERT INTO websites (id, name, url, company_name) VALUES (75, 'かむなび', 'https://navi.kamuitracker.com/', '株式会社エビリー');
+INSERT INTO websites (id, name, url, company_name) VALUES (76, 'マーケティングキャンパス', 'https://marketing-campus.jp/', 'シンフォニーマーケティング株式会社');
+INSERT INTO websites (id, name, url, company_name) VALUES (77, 'DIGIDAY', 'https://digiday.jp/', '株式会社メディアジーン');
+INSERT INTO websites (id, name, url, company_name) VALUES (78, 'アド論', 'https://ad-ron.jp/', 'ＧＭＯ ＮＩＫＫＯ株式会社');
+INSERT INTO websites (id, name, url, company_name) VALUES (79, 'ソーシャルメディアラボ', 'https://gaiax-socialmedialab.jp/', '株式会社ガイアックス');
+INSERT INTO websites (id, name, url, company_name) VALUES (80, 'In-House Marketing Lab', 'https://shirofune.com/inhousemarketinglab/', '株式会社Shirofune');
+INSERT INTO websites (id, name, url, company_name) VALUES (81, 'COMPASS', 'https://compass-media.tokyo/', '株式会社GENEROSITY');
+INSERT INTO websites (id, name, url, company_name) VALUES (82, 'THE LPO BLOG', 'https://dlpo.jp/blog/', 'DLPO株式会社');
+INSERT INTO websites (id, name, url, company_name) VALUES (83, 'SEO HACKS', 'https://www.seohacks.net/blog/', 'ナイル株式会社');
+INSERT INTO websites (id, name, url, company_name) VALUES (84, 'Udemyメディア', 'https://udemy.benesse.co.jp/', '株式会社ベネッセコーポレーション');
+INSERT INTO websites (id, name, url, company_name) VALUES (85, '新R25', 'https://r25.jp/', '株式会社Cyber Now');
+INSERT INTO websites (id, name, url, company_name) VALUES (86, 'Mogura VR', 'https://www.moguravr.com/', '株式会社Mogura');
 
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
-DELETE from websites WHERE id BETWEEN 1 AND 73;
+
+DELETE from websites WHERE id BETWEEN 1 AND 86;
 SELECT setval('websites_id_seq', 1, false);
