@@ -77,7 +77,18 @@ button {
 }
 
 .is-hidden {
+  width: 0 !important;
   visibility: hidden;
-  transition: 0.3s;
+  transition: .5s;
   opacity: 0;
 }
+
+.is-bgBlack::before {
+  content: ' ';
+  background-color: rgba(0,0,0,.7);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+ }

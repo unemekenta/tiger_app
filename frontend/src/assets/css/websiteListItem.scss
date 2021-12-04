@@ -2,7 +2,7 @@
 .weblist {
   width: 100%;
   padding: 0;
-  background-color: $color-white;
+  background-color: $color-bg;
 
   &-title {
     padding: 1.5rem 2rem;
@@ -12,61 +12,84 @@
   }
 
   &-contents {
-    padding: 1.5rem 2rem;
-    border-bottom: solid 0.1rem $color-bg;
-    &:hover{
-      box-shadow: 0.3rem 0.3rem 0 $color-bg;
-      transform: translateX(-0.2rem) translateY(-0.2rem);
-      transition: 0.3s;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-    &-icon {
-      display: flex;
+    &-inner {
+      padding: 1.5rem 2rem;
+      background-color: $color-white;
+      width: calc(50% - 5rem);
+      margin: 1rem 0;
       @include tb {
-        font-size: 1.2rem;
+        width: 100%;
       }
-      svg {
-        width: 3.0rem;
-        margin: auto 0;
+      &:hover{
+        box-shadow: 0.3rem 0.3rem 0 $color-bg;
+        transform: translateX(-0.2rem) translateY(-0.2rem);
+        transition: 0.3s;
       }
-
-      &-name {
-        text-align: left;
-        line-height: 3.0rem;
-        margin: 0 1.0rem;
-        color: $color-brack;
-        font-size: 1.2rem;
-      }
-    }
-
-    &-txt {
-      font-size: 18px;
-      font-weight: bold;
-      text-align: left;
-      margin: 10px 0;
-    }
-
-    &-btm {
-      display: flex;
-      justify-content: space-between;
-
-      &-left {
-        &-category {
-          display: flex;
-          justify-content: left;
+  
+      &-img {
+        width: 100%;
+        >img {
+          max-width: 20rem;
+          width: 100%;
         }
+      }
 
-        &-time {
+      &-quote {
+        font-size: 1.0rem;
+      }
+  
+      &-icon {
+        display: flex;
+        margin: 1rem 0;
+        @include tb {
           font-size: 1.2rem;
-          margin: 1rem 0;
-          color: $color-green2;
+        }
+        svg {
+          width: 3.0rem;
+          margin: auto 0;
+        }
+  
+        &-name {
           text-align: left;
-          @include tb {
-            font-size: 1rem;
+          margin: 0 1.0rem;
+          color: $color-brack;
+          font-size: 1.2rem;
+        }
+      }
+  
+      &-txt {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: left;
+        margin: 10px 0;
+      }
+  
+      &-btm {
+        display: flex;
+        justify-content: space-between;
+  
+        &-left {
+          &-category {
+            display: flex;
+            justify-content: left;
+          }
+  
+          &-time {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: $color-green2;
+            text-align: left;
+            @include tb {
+              font-size: 1rem;
+            }
           }
         }
+  
       }
-
     }
   }
 }

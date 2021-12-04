@@ -81,7 +81,15 @@
       margin-bottom: 2rem;
       font-size: 1.6rem;
       font-weight: bold;
-      border-bottom: solid 0.1rem $color-green2;
+      border-bottom: solid 0.1rem $color-bg;
+
+      >a{
+        display: flex;
+        justify-content: space-between;
+        >svg{
+          margin: auto 0;
+        }
+      }
 
       >.header-nav-item-title {
         color: $color-green;

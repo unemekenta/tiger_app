@@ -1,5 +1,6 @@
 ul.pagination {
   font-size: 1.6rem;
+  background-color: $color-white;
   @include tb {
     font-size: 1.4rem;
   }

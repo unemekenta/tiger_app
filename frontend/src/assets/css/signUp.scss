@@ -8,7 +8,12 @@
   &-form {
     max-width: 1200px;
     margin: 5rem auto;
-    text-align: center;
+    @include tb {
+      margin: 5rem 1rem;
+    }
+    >input {
+      font-size: 1.6rem;
+    }
     &-name {
       display: block;
       margin: 1.0rem auto;
@@ -49,6 +54,7 @@
 
     &-agree {
       margin: 2.0rem auto;
+      font-size: 1.4rem;
       &-btn {
         >input {
           vertical-align: text-top;
@@ -70,6 +76,6 @@
   }
 
   &-to-signin {
-    margin: 5rem;
+    margin: 5rem 1rem;
   }
 }
