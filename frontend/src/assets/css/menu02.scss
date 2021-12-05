@@ -29,9 +29,21 @@
           transition: 0.3s;
         }
 
+        >p {
+          >svg {
+            margin: 0 1rem 0 0;
+          }
+        }
+
         > a {
           color: $color-white;
           text-decoration: none;
+
+          >p {
+            >svg {
+              margin: 0 1rem 0 0;
+            }
+          }
         }
       }
     }

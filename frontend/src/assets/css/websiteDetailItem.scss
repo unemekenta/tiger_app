@@ -57,6 +57,19 @@
         }
       }
     }
+
+    &-img {
+      margin: 2rem 0;
+      >img {
+        max-width: 50rem;
+        width: 100%;
+        border: solid 0.1rem $color-bg;
+      }
+    }
+
+    &-quote {
+      font-size: 1.0rem;
+    }
   }
 
   &-info {
