@@ -17,6 +17,12 @@
   display: flex;
   justify-content: right;
   padding: 3.0rem 2.0rem;
+
+  >p {
+    >svg {
+      margin: 0 1rem 0 0;
+    }
+  }
 }
 
 .user-icon {

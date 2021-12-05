@@ -1,6 +1,6 @@
 <template lang="pug">
 .weblist
-  h2.weblist-title 
+  h2.weblist-title
     | メディア一覧
   .weblist-contents
     .weblist-contents-inner(v-for="(item, key) in this.slicedList" :key="key")
@@ -47,7 +47,7 @@ export default {
   },
   data () {
     return {
-      itemNumPerPage: 10,
+      itemNumPerPage: 20,
       maxPage: 1,
       currentPage: 1,
       slicedList: [],

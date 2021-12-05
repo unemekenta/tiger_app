@@ -18,6 +18,13 @@
             //- | {{createDate(detailObject.CreatedAt)}}
         .webdetail-contents-btm-right
           cv-button(label="公式サイトへ" :url="detailObject.url")
+      .webdetail-contents-img(v-if="detailObject.image")
+          img(:src="detailObject.image")
+      .webdetail-contents-img(v-else)
+          img(src="../assets/images/no_image.jpg")
+      .webdetail-contents-quote
+        q(cite="item.url")
+          | 引用：{{detailObject.name}} 公式HP
   
   .webdetail-info(v-if="detailObjectContent")
     h3 {{detailObjectContent.title}}
