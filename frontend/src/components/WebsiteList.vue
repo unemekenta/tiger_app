@@ -6,7 +6,9 @@
       .image
         img(src="../assets/images/list-top-fv.png")
       .header
-        p Top List
+        p
+          fa-icon(icon="desktop")
+          | Top List
       .main
         menu01(:allCategories="allCategories").is-only-pc
         website-list-item(:allLists="allWebsites")

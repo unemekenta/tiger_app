@@ -6,21 +6,42 @@
     .menu02-content-items(v-if="signedIn")
       search-box
       .menu02-content-items-item
-        router-link( to="/" ) HOME
+        router-link( to="/" )
+          p
+            fa-icon(icon='home')
+            | HOME
       .menu02-content-items-item
-        router-link( to="/website_list" ) メディア一覧
+        router-link( to="/website_list" )
+          p
+            fa-icon(icon='list')
+            | メディア一覧
       .menu02-content-items-item
-        router-link( to="/mypage" ) マイページ
-      .menu02-content-items-item(@click="signOut") ログアウト
-    
+        router-link( to="/mypage" )
+          p
+            fa-icon(icon='user')
+            | マイページ
+      .menu02-content-items-item(@click="signOut")
+        p
+          fa-icon(icon='sign-out-alt')
+          | ログアウト
+
     .menu02-content-items(v-else)
       search-box
       .menu02-content-items-item
-        router-link( to="/" ) HOME
+        router-link( to="/" )
+          p
+            fa-icon(icon='home')
+            | HOME
       .menu02-content-items-item
-        router-link( to="/website_list" ) メディア一覧
+        router-link( to="/website_list" )
+          p
+            fa-icon(icon='list')
+            | メディア一覧
       .menu02-content-items-item
-        router-link( to="/signin" ) ログイン
+        router-link( to="/signin" )
+          p
+            fa-icon(icon='sign-in-alt')
+            | ログイン
 
 </template>
 

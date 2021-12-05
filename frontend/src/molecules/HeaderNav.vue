@@ -6,13 +6,24 @@
         img(src="../../src/assets/images/logo.png")
     .header-nav-pc.is-only-pc
       .header-nav-item
-        router-link( to="/" ) HOME
+        router-link( to="/" )
+          p
+            fa-icon(icon='home')
+            | HOME
       .header-nav-item
-        router-link( to="/website_list" ) メディア一覧
+        router-link( to="/website_list" )
+          p
+            fa-icon(icon='list')
+            | メディア一覧
       .header-nav-item
-        router-link( to="/mypage" ) マイページ
+        router-link( to="/mypage" )
+          p
+            fa-icon(icon='user')
+            | マイページ
       .header-nav-item
-        p.header-nav-item-title(@click="signOut") ログアウト
+        p.header-nav-item-title(@click="signOut")
+          fa-icon(icon='sign-out-alt')
+          | ログアウト
     .header-nav-button.is-only-sp(@click="onClick()")
       fa-icon(v-if="iconContent" icon='times')
       fa-icon(v-else icon='bars')
@@ -23,11 +34,20 @@
         img(src="../../src/assets/images/logo.png")
     .header-nav-pc.is-only-pc
       .header-nav-item
-        router-link( to="/" ) HOME
+        router-link( to="/" )
+          p
+            fa-icon(icon='home')
+            | HOME
       .header-nav-item
-        router-link( to="/website_list" ) メディア一覧
+        router-link( to="/website_list" )
+          p
+            fa-icon(icon='list')
+            | メディア一覧
       .header-nav-item
-        router-link( to="/signin" ) ログイン
+        router-link( to="/signin" )
+          p
+            fa-icon(icon='sign-in-alt')
+            | ログイン
     .header-nav-button.is-only-sp(@click="onClick()")
       fa-icon(v-if="iconContent" icon='times')
       fa-icon(v-else icon='bars')
@@ -36,19 +56,27 @@
     .header-nav-inner
       search-box
       .header-nav-item
-        router-link( to="/" ) 
-          p HOME
+        router-link( to="/" )
+          p
+            fa-icon(icon='home')
+            | HOME
           fa-icon(icon="chevron-right")
       .header-nav-item
         router-link( to="/website_list" )
-          p メディア一覧
+          p
+            fa-icon(icon='list')
+            | メディア一覧
           fa-icon(icon="chevron-right")
       .header-nav-item
         router-link( to="/mypage" )
-          p マイページ
+          p
+            fa-icon(icon='user')
+            | マイページ
           fa-icon(icon="chevron-right")
       .header-nav-item
-        p.header-nav-item-title(@click="signOut") ログアウト
+        p.header-nav-item-title(@click="signOut")
+          fa-icon(icon='sign-out-alt')
+          | ログアウト
       .header-nav-item
         p カテゴリから探す
         .header-nav-item-categories(v-for="(allCatrgory, key) in this.allCategories" :key="key")
@@ -60,15 +88,21 @@
       search-box
       .header-nav-item
         router-link( to="/" )
-          p HOME
+          p
+            fa-icon(icon='home')
+            | HOME
           fa-icon(icon="chevron-right")
       .header-nav-item
         router-link( to="/website_list" )
-          p メディア一覧
+          p
+            fa-icon(icon='list')
+            | メディア一覧
           fa-icon(icon="chevron-right")
       .header-nav-item
         router-link( to="/signin" )
-          p ログイン
+          p
+            fa-icon(icon='sign-in-alt')
+            | ログイン
           fa-icon(icon="chevron-right")
       .header-nav-item
         p カテゴリから探す

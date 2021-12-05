@@ -4,7 +4,9 @@
   .l-container#container
     .top
       .header
-        p DETAIL
+        p
+          fa-icon(icon="info-circle")
+          | DETAIL
       .main
         menu01(:allCategories="allCategories").is-only-pc
         website-detail-item(:detailObject="websiteDetail" :detailObjectContent="websiteDetailContent")
