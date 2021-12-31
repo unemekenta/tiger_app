@@ -48,7 +48,7 @@ export const loginMixin = {
             return;
           });
       } else {
-        alert('ログインしてください');
+        // チェックなので未ログインでも問題はないのでエラーハンドリングなし
         return;
       }
     },

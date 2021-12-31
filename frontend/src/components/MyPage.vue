@@ -74,7 +74,7 @@ export default {
           .then((res) => {
             this.jwtUserData = res.data;
           })
-          .catch((error) => {
+          .catch(error => {
             alert('ログインしてください', error);
             return;
           });
