@@ -1,12 +1,13 @@
 package handlers
 
 import (
+	"backend/models"
 	"net/http"
 	"strconv"
-	"backend/models"
 	"time"
 
 	jwt "github.com/form3tech-oss/jwt-go"
+	"github.com/google/uuid"
 	"github.com/labstack/echo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -32,8 +33,9 @@ func GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
+// 権限チェック
 func GetAuthCheck(c echo.Context) error {
-	return c.JSON(http.StatusAccepted, "mypage")
+	return c.JSON(http.StatusAccepted, "")
 }
 
 func UserSignup(c echo.Context) error {
@@ -99,9 +101,36 @@ func UserLogin(c echo.Context) error {
 			return err
 		}
 
-		return c.JSON(http.StatusOK, map[string]string{
-			"token": t,
-		})
+		u, err := uuid.NewRandom()
+		if err != nil {
+			return err
+		}
+		uu := u.String()
+
+		CreateSession(c, uu, t)
+
+		return c.JSON(http.StatusOK, uu)
 
 	}
+}
+
+func UserLoginCheck(c echo.Context) error {
+	r := models.OpenRedisConn()
+	key := c.QueryParam("key")
+	val, err := r.Get(key).Result()
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, val)
+}
+
+func CreateSession(c echo.Context, uuid string, value string) error {
+	r := models.OpenRedisConn()
+	// TODO セッション時間変更
+	err := r.Set(uuid, value, time.Minute*10).Err()
+	if err != nil {
+		return err
+	}
+	return nil
 }

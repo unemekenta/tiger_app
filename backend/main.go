@@ -39,6 +39,7 @@ func initRouting(e *echo.Echo) {
 
 	e.POST("/api/signup", handlers.UserSignup)
 	e.POST("/api/login", handlers.UserLogin)
+	e.GET("/api/login_check", handlers.UserLoginCheck)
 
 	a := e.Group("/auth")
 	a.Use(middleware.JWT([]byte("secret")))
