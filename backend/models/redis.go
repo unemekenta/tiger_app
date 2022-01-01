@@ -11,7 +11,7 @@ import (
 
 func RedisNewPool() *redis.Pool {
 	redisUrl := fmt.Sprintf("redis://%s@%s:%s", os.Getenv("REDIS_PASS"), os.Getenv("REDIS_HOST"), os.Getenv("REDIS_PORT"))
-	tsl, _ := strconv.ParseBool(os.Getenv("REDIS_PASS"))
+	tsl, _ := strconv.ParseBool(os.Getenv("REDIS_TSL"))
 
 	return &redis.Pool{
 		MaxIdle:     3,
