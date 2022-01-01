@@ -7,8 +7,10 @@ import (
 	"time"
 
 	jwt "github.com/form3tech-oss/jwt-go"
+	"github.com/gomodule/redigo/redis"
 	"github.com/google/uuid"
 	"github.com/labstack/echo"
+	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -110,27 +112,39 @@ func UserLogin(c echo.Context) error {
 		CreateSession(c, uu, t)
 
 		return c.JSON(http.StatusOK, uu)
-
 	}
 }
 
 func UserLoginCheck(c echo.Context) error {
-	r := models.OpenRedisConn()
+	// コネクションプールの作成
+	pool := models.RedisNewPool()
+
+	// コネクションの取得
+	conn := pool.Get()
+	defer conn.Close()
+
 	key := c.QueryParam("key")
-	val, err := r.Get(key).Result()
+
+	val, err := redis.String(conn.Do("GET", key))
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	return c.JSON(http.StatusOK, val)
 }
 
 func CreateSession(c echo.Context, uuid string, value string) error {
-	r := models.OpenRedisConn()
+	// コネクションプールの作成
+	pool := models.RedisNewPool()
+
+	// コネクションの取得
+	conn := pool.Get()
+	defer conn.Close()
+
 	// TODO セッション時間変更
-	err := r.Set(uuid, value, time.Minute*10).Err()
+	_, err := conn.Do("SET", uuid, value, "NX", "EX", 36000)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	return nil
 }

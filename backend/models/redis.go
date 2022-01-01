@@ -1,27 +1,27 @@
 package models
 
 import (
-	"crypto/tls"
 	"fmt"
 	"os"
+	"time"
 
-	"github.com/go-redis/redis"
+	"github.com/gomodule/redigo/redis"
 )
 
-func OpenRedisConn() *redis.Client {
-	addr := fmt.Sprintf("%s:%s", os.Getenv("REDIS_HOST"), os.Getenv("REDIS_PORT"))
-	pass := fmt.Sprintf("%s", os.Getenv("REDIS_PASS"))
-	insecureSkipVerify := true
-	if os.Getenv("MODE") == "local" {
-		insecureSkipVerify = false
-	}
-	redis := redis.NewClient(&redis.Options{
-		Addr:     addr,
-		Password: pass,
-		DB:       0,
-		TLSConfig: &tls.Config{
-			InsecureSkipVerify: insecureSkipVerify,
+func RedisNewPool() *redis.Pool {
+	redisUrl := fmt.Sprintf("redis://%s@%s:%s", os.Getenv("REDIS_PASS"), os.Getenv("REDIS_HOST"), os.Getenv("REDIS_PORT"))
+	fmt.Println(redisUrl)
+
+	return &redis.Pool{
+		MaxIdle:     3,
+		MaxActive:   0,
+		IdleTimeout: 120 * time.Second,
+		Dial: func() (redis.Conn, error) {
+			c, err := redis.DialURL(redisUrl)
+			if err != nil {
+				return nil, err
+			}
+			return c, err
 		},
-	})
-	return redis
+	}
 }
