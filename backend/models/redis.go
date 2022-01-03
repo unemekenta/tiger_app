@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 	"time"
@@ -10,7 +9,7 @@ import (
 )
 
 func RedisNewPool() *redis.Pool {
-	redisUrl := fmt.Sprintf("redis://%s@%s:%s", os.Getenv("REDIS_PASS"), os.Getenv("REDIS_HOST"), os.Getenv("REDIS_PORT"))
+	redisUrl := os.Getenv("REDIS_URL")
 	tsl, _ := strconv.ParseBool(os.Getenv("REDIS_TSL"))
 
 	return &redis.Pool{
