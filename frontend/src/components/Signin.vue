@@ -40,11 +40,11 @@ export default {
       params.append('email', this.formEmail)
       params.append('password', this.formPassword)
       await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/login', params)
-      .then(async(response) => {
+      .then(res => {
         this.$cookies.config('1d', '', '', true);
-        await this.$cookies.set('jwt', response.data.token);
+        this.$cookies.set('uuid', res.data);
         alert('ログインしました。')
-        this.$router.push('/')
+        this.$router.push({name: 'WebsiteList'})
       })
       .catch(error => {
         alert(error)

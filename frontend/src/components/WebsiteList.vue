@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     signOut () {
-      window.$cookies.remove('jwt');
+      window.$cookies.remove('uuid');
       this.$router.push('/signin');
     },
     async getWebsites () {

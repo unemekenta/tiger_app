@@ -5,8 +5,8 @@
     .top
       .user
         //- img.user-icon(src="../../src/assets/images/logo.png")
-        .user-name 
-          b {{userName}} 
+        .user-name
+          b {{userName}}
           |さんのページ
       .main
         menu01(:allCategories="allCategories").is-only-pc
@@ -45,6 +45,7 @@ export default {
     return {
       userName: '',
       allCategories: [],
+      jwtUserData: '',
     }
   },
   created () {
@@ -52,10 +53,6 @@ export default {
     this.getAllCategories();
   },
   methods: {
-    signOut () {
-      window.$cookies.remove('jwt');
-      this.$router.push('/signin');
-    },
     async getAllCategories () {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
@@ -67,17 +64,38 @@ export default {
       });
     },
     async getUser () {
-      let user_id = VueJwtDecode.decode(window.$cookies.get('jwt')).id;
-      await axios.get(process.env.VUE_APP_API_BASE_URL + '/auth/api/user/'+ user_id,
-      {
-        headers: {'Authorization': 'Bearer ' + window.$cookies.get('jwt')}
-      })
-        .then((res) => {
-          this.userName = res.data.name;
+      if (window.$cookies.isKey('uuid')) {
+        await axios
+          .get(process.env.VUE_APP_API_BASE_URL + "/api/login_check", {
+            params: {
+              key: window.$cookies.get('uuid')
+            },
+          })
+          .then((res) => {
+            this.jwtUserData = res.data;
+          })
+          .catch(error => {
+            alert('ログインしてください', error);
+            return;
+          });
+
+        let user_id = VueJwtDecode.decode(this.jwtUserData).id;
+        await axios.get(process.env.VUE_APP_API_BASE_URL + '/auth/api/user/'+ user_id,
+        {
+          headers: {'Authorization': 'Bearer ' + this.jwtUserData}
         })
-        .catch(error => {
-          alert(error)
-        });
+          .then((res) => {
+            this.userName = res.data.name;
+          })
+          .catch(error => {
+            alert('権限がありません', error);
+            return;
+          });
+        return;
+      } else {
+        alert('ログインしてください');
+        return;
+      }
     }
   }
 }

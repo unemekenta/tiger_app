@@ -28,19 +28,48 @@ router.beforeEach(async (to, from, next) => {
   var data =''
   if (requiresAuth) {
     // todo サインインの有無判断
-    await axios.post(process.env.VUE_APP_API_BASE_URL + '/auth/api/authCheck', data,
-    {
-      headers: {'Authorization': 'Bearer ' + window.$cookies.get('jwt')}
-    })
-      .then(() => {
-        next()
-      })
-      .catch(error => {
-        alert('ログインしてください', error)
-        next({
-          path: '/signin'
+    if (window.$cookies.isKey('uuid')) {
+      await axios
+        .get(process.env.VUE_APP_API_BASE_URL + "/api/login_check", {
+          params: {
+            key: window.$cookies.get('uuid')
+          },
         })
+        .then(() => {
+          next();
+        })
+        .catch((error) => {
+          alert('ログインしてください', error)
+          next({
+            path: '/signin'
+          });
+        });
+
+      await axios
+        .post(
+          process.env.VUE_APP_API_BASE_URL + '/auth/api/authCheck',
+          data,
+          {
+            headers: {
+              'Authorization': 'Bearer ' + this.jwtData,
+            },
+          })
+        .then(() => {
+          next();
+        })
+        .catch(error => {
+          alert('権限がありません。', error);
+          next({
+            path: ''
+          });
+        });
+
+    } else {
+      alert('セッションが切れました。ログインしてください');
+      next({
+        path: '/signin'
       });
+    }
   } else {
     next()
   }

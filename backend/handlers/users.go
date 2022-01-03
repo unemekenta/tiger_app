@@ -1,13 +1,16 @@
 package handlers
 
 import (
+	"backend/models"
 	"net/http"
 	"strconv"
-	"backend/models"
 	"time"
 
 	jwt "github.com/form3tech-oss/jwt-go"
+	"github.com/gomodule/redigo/redis"
+	"github.com/google/uuid"
 	"github.com/labstack/echo"
+	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -32,8 +35,9 @@ func GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
+// 権限チェック
 func GetAuthCheck(c echo.Context) error {
-	return c.JSON(http.StatusAccepted, "mypage")
+	return c.JSON(http.StatusAccepted, "")
 }
 
 func UserSignup(c echo.Context) error {
@@ -99,9 +103,48 @@ func UserLogin(c echo.Context) error {
 			return err
 		}
 
-		return c.JSON(http.StatusOK, map[string]string{
-			"token": t,
-		})
+		u, err := uuid.NewRandom()
+		if err != nil {
+			return err
+		}
+		uu := u.String()
 
+		CreateSession(c, uu, t)
+
+		return c.JSON(http.StatusOK, uu)
 	}
+}
+
+func UserLoginCheck(c echo.Context) error {
+	// コネクションプールの作成
+	pool := models.RedisNewPool()
+
+	// コネクションの取得
+	conn := pool.Get()
+	defer conn.Close()
+
+	key := c.QueryParam("key")
+
+	val, err := redis.String(conn.Do("GET", key))
+	if err != nil {
+		return errors.WithStack(err)
+	}
+
+	return c.JSON(http.StatusOK, val)
+}
+
+func CreateSession(c echo.Context, uuid string, value string) error {
+	// コネクションプールの作成
+	pool := models.RedisNewPool()
+
+	// コネクションの取得
+	conn := pool.Get()
+	defer conn.Close()
+
+	// TODO セッション時間変更
+	_, err := conn.Do("SET", uuid, value, "NX", "EX", 36000)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	return nil
 }

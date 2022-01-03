@@ -21,3 +21,9 @@ services:
       POSTGRES_USER: ${PSQL_USER}
       POSTGRES_PASSWORD: ${PSQL_PASS}
       POSTGRES_DB: ${PSQL_DBNAME}
+
+  redis:
+    ports:
+      - ${REDIS_HOST_PORT}:${REDIS_PORT}
+    env_file:
+      - .env.dev

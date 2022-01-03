@@ -20,7 +20,7 @@
           p
             fa-icon(icon='user')
             | マイページ
-      .menu02-content-items-item(@click="signOut")
+      .menu02-content-items-item(@click="$_loginMixin_signOut")
         p
           fa-icon(icon='sign-out-alt')
           | ログアウト
@@ -46,42 +46,22 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { loginMixin } from '../mixin/loginable'
 import SearchBox from '/src/atoms/SearchBox.vue'
 
 export default {
   name: 'Menu02',
+  mixins: [loginMixin],
   components: {
-    SearchBox
+    SearchBox,
   },
   data () {
     return {
-      signedIn: false,
     }
   },
   created () {
-    this.loginCheck();
   },
   methods: {
-    signOut () {
-      window.$cookies.remove('jwt');
-      this.$router.push('/signin');
-    },
-    async loginCheck () {
-      var data =''
-      if (window.$cookies.isKey('jwt')) {
-        await axios.post(process.env.VUE_APP_API_BASE_URL + '/auth/api/authCheck', data,
-        {
-          headers: {'Authorization': 'Bearer ' + window.$cookies.get('jwt')}
-        })
-          .then(() => {
-            this.signedIn = true;
-          })
-          .catch(() => {
-            this.signedIn = false;
-          });
-      }
-    }
   },
 }
 </script>
