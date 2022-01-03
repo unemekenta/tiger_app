@@ -1,6 +1,8 @@
 # リポジトリ（Webアプリ）の名前
+tiger-app
 
 # 概要：Overview
+自作CMS
 
 ## frontend
 ### Vue.js
@@ -18,12 +20,6 @@
 
 ## DB
 ### postgres
-
-# デモ：Demo
-# 使い方：Usage
-# 環境：Requirement
-# インストール方法：Install
-# 注意事項：Note
-# 文責：Author
-# ライセンスlicense
-# 参考文献 References
+Used to persistent data storage
+### redis
+Used to store cash
