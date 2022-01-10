@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"backend/models"
+	"backend/model"
 	"net/http"
 	"strconv"
 	"time"
@@ -15,8 +15,8 @@ import (
 )
 
 func GetUser(c echo.Context) error {
-	user := new(models.Users)
-	Db := models.OpenDBConn()
+	user := new(model.Users)
+	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	if err != nil {
 		return err
@@ -41,8 +41,8 @@ func GetAuthCheck(c echo.Context) error {
 }
 
 func UserSignup(c echo.Context) error {
-	user := new(models.Users)
-	Db := models.OpenDBConn()
+	user := new(model.Users)
+	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	if err != nil {
 		return err
@@ -71,8 +71,8 @@ func UserSignup(c echo.Context) error {
 }
 
 func UserLogin(c echo.Context) error {
-	user := new(models.Users)
-	Db := models.OpenDBConn()
+	user := new(model.Users)
+	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	if err != nil {
 		return err
@@ -117,7 +117,7 @@ func UserLogin(c echo.Context) error {
 
 func UserLoginCheck(c echo.Context) error {
 	// コネクションプールの作成
-	pool := models.RedisNewPool()
+	pool := model.RedisNewPool()
 
 	// コネクションの取得
 	conn := pool.Get()
@@ -135,7 +135,7 @@ func UserLoginCheck(c echo.Context) error {
 
 func CreateSession(c echo.Context, uuid string, value string) error {
 	// コネクションプールの作成
-	pool := models.RedisNewPool()
+	pool := model.RedisNewPool()
 
 	// コネクションの取得
 	conn := pool.Get()
