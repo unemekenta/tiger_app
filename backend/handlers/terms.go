@@ -4,13 +4,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"backend/model"
+	"backend/domain/model"
 
 	"github.com/labstack/echo"
 )
 
 func GetTerms(c echo.Context) error {
-	var terms []model.Terms
+	var terms []model.Term
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
@@ -23,7 +23,7 @@ func GetTerms(c echo.Context) error {
 }
 
 func GetTerm(c echo.Context) error {
-	term := new(model.Terms)
+	term := new(model.Term)
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()

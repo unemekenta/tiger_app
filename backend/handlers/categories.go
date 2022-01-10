@@ -4,13 +4,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"backend/model"
+	"backend/domain/model"
 
 	"github.com/labstack/echo"
 )
 
 func GetCategories(c echo.Context) error {
-	var categories []model.Categories
+	var categories []model.Category
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
@@ -23,7 +23,7 @@ func GetCategories(c echo.Context) error {
 }
 
 func GetCategoriesByAncestor(c echo.Context) error {
-	var categories []model.Categories
+	var categories []model.Category
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
@@ -41,8 +41,8 @@ func GetCategoriesByAncestor(c echo.Context) error {
 }
 
 func GetCategoriesByWebsites(c echo.Context) error {
-	var category model.Categories
-	var category_website model.CategoriesWebsites
+	var category model.Category
+	var category_website model.CategoriesWebsite
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()

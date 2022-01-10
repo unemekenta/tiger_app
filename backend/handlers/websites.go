@@ -4,13 +4,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"backend/model"
+	"backend/domain/model"
 
 	"github.com/labstack/echo"
 )
 
 func GetWebsites(c echo.Context) error {
-	var websites []model.Websites
+	var websites []model.Website
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
@@ -23,7 +23,7 @@ func GetWebsites(c echo.Context) error {
 }
 
 func GetWebsitesByCategory(c echo.Context) error {
-	var websites []model.Websites
+	var websites []model.Website
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
@@ -58,7 +58,7 @@ func GetWebsitesByCategory(c echo.Context) error {
 }
 
 func GetWebsite(c echo.Context) error {
-	website := new(model.Websites)
+	website := new(model.Website)
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
@@ -75,7 +75,7 @@ func GetWebsite(c echo.Context) error {
 }
 
 func SearchWebsite(c echo.Context) error {
-	var websites []model.Websites
+	var websites []model.Website
 	Db := model.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
