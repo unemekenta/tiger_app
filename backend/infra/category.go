@@ -38,6 +38,28 @@ func (cr *CategoryRepository) FindByID(id int) (*model.Category, error) {
 	return category, nil
 }
 
+// FindAllChildCategories 末端categoryを全て取得
+func (cr *CategoryRepository) FindAllChildCategories() (*[]model.Category, error) {
+	categories := &[]model.Category{}
+
+	if err := cr.Conn.Order("name").Where("ancestor_id IS NULL").Find(&categories).Error; err != nil {
+		return nil, err
+	}
+
+	return categories, nil
+}
+
+// FindCategoriesByAncestor 親カテゴリから子カテゴリを全て取得
+func (cr *CategoryRepository) FindCategoriesByAncestor(id int) (*[]model.Category, error) {
+	categories := &[]model.Category{}
+
+	if err := cr.Conn.Order("name").Where("ancestor_id = ?", id).Find(&categories).Error; err != nil {
+		return nil, err
+	}
+
+	return categories, nil
+}
+
 // Update categoryの更新
 func (cr *CategoryRepository) Update(category *model.Category) (*model.Category, error) {
 	if err := cr.Conn.Model(&category).Update(&category).Error; err != nil {

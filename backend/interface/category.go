@@ -85,6 +85,49 @@ func (ch *categoryHandler) Get() echo.HandlerFunc {
 	}
 }
 
+// GetAllChildCategories 末端categoryを全て取得するときのハンドラー
+func (ch *categoryHandler) GetAllChildCategories() echo.HandlerFunc {
+	return func(c echo.Context) error {
+
+		foundCategories, err := ch.categoryUsecase.FindAllChildCategories()
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		res := []responseCategory{
+			ID:         foundCategories.ID,
+			AncestorID: foundCategories.AncestorID,
+			Name:       foundCategories.Name,
+		}
+
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// GetCategoriesByAncestor 親カテゴリから子カテゴリを取得するときのハンドラー
+func (ch *categoryHandler) GetCategoriesByAncestor() echo.HandlerFunc {
+	return func(c echo.Context) error {
+
+		id, err := strconv.Atoi((c.Param("id")))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		foundCategories, err := ch.categoryUsecase.GetCategoriesByAncestor(id)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		res := []responseCategory{
+			ID:         foundCategories.ID,
+			AncestorID: foundCategories.AncestorID,
+			Name:       foundCategories.Name,
+		}
+
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
 // Put categoryを更新するときのハンドラー
 func (ch *categoryHandler) Put() echo.HandlerFunc {
 	return func(c echo.Context) error {

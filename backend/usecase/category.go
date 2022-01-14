@@ -13,6 +13,7 @@ import (
 type CategoryUsecase interface {
 	Create(ancestorId int, name string, updatedAt time.Time) (*model.Category, error)
 	FindByID(id int) (*model.Category, error)
+	FindAllChildCategories() (*[]model.Category, error)
 	Update(id int, ancestorId int, name string, updatedAt time.Time) (*model.Category, error)
 	Delete(id int) error
 }
@@ -49,6 +50,26 @@ func (cu *categoryUsecase) FindByID(id int) (*model.Category, error) {
 	}
 
 	return foundCategory, nil
+}
+
+// FindAllChildCategories 末端categoryを全て取得するときのユースケース
+func (cu *categoryUsecase) FindAllChildCategories() (*[]model.Category, error) {
+	foundCategories, err := cu.categoryRepo.FindAllChildCategories()
+	if err != nil {
+		return nil, err
+	}
+
+	return foundCategories, nil
+}
+
+// FindCategoriesByAncestor 親カテゴリから子カテゴリを取得するときのユースケース
+func (cu *categoryUsecase) FindCategoriesByAncestor(id int) (*[]model.Category, error) {
+	foundCategories, err := cu.categoryRepo.FindCategoriesByAncestor(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return foundCategories, nil
 }
 
 // Update categoryを更新するときのユースケース

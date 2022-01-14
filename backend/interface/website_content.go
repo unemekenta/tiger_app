@@ -55,10 +55,10 @@ func (wch *websiteContentHandler) Post() echo.HandlerFunc {
 		}
 
 		res := responseWebsiteContent{
-			ID:      createdWebsiteContent.ID,
-			WebsiteID  createdWebsiteContent.WebsiteID,
-	Title:    createdWebsiteContent.Title,
-			Contents: createdWebsiteContent.Contents,
+			ID:        createdWebsiteContent.ID,
+			WebsiteID: createdWebsiteContent.WebsiteID,
+			Title:     createdWebsiteContent.Title,
+			Contents:  createdWebsiteContent.Contents,
 		}
 
 		return c.JSON(http.StatusCreated, res)
@@ -79,10 +79,10 @@ func (wch *websiteContentHandler) Get() echo.HandlerFunc {
 		}
 
 		res := responseWebsiteContent{
-			ID:      foundWebsiteContent.ID,
-			WebsiteID:  foundWebsiteContent.WebsiteID,
-	Title:    foundWebsiteContent.Title,
-			Contents: foundWebsiteContent.Contents,
+			ID:        foundWebsiteContent.ID,
+			WebsiteID: foundWebsiteContent.WebsiteID,
+			Title:     foundWebsiteContent.Title,
+			Contents:  foundWebsiteContent.Contents,
 		}
 
 		return c.JSON(http.StatusOK, res)
@@ -108,10 +108,10 @@ func (wch *websiteContentHandler) Put() echo.HandlerFunc {
 		}
 
 		res := responseWebsiteContent{
-			ID:      updatedWebsiteContent.ID,
-			WebsiteID:  updatedWebsiteContent.WebsiteID,
-	Title:    updatedWebsiteContent.Title,
-			Contents: updatedWebsiteContent.Contents,
+			ID:        updatedWebsiteContent.ID,
+			WebsiteID: updatedWebsiteContent.WebsiteID,
+			Title:     updatedWebsiteContent.Title,
+			Contents:  updatedWebsiteContent.Contents,
 		}
 
 		return c.JSON(http.StatusOK, res)
