@@ -31,7 +31,7 @@ func NewTermHandler(termUsecase usecase.TermUsecase) TermHandler {
 type requestTerm struct {
 	Name      string    `json:"name"`
 	Content   string    `json:"content"`
-	UpdatedAt time.Time `json:"updated_at"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 type responseTerm struct {

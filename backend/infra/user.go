@@ -5,7 +5,9 @@ import (
 	"backend/domain/model"
 	"backend/domain/repository"
 
-	"github.com/jinzhu/gorm"
+	"github.com/gomodule/redigo/redis"
+	"github.com/pkg/errors"
+	"gorm.io/gorm"
 )
 
 // UserRepository user repositoryの構造体
@@ -38,9 +40,20 @@ func (ur *UserRepository) FindByID(id int) (*model.User, error) {
 	return user, nil
 }
 
+// FindByPassword userをパスワードで取得
+func (ur *UserRepository) FindByPassword(email string) (*model.User, error) {
+	user := &model.User{Email: email}
+
+	if err := ur.Conn.First(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
 // Update userの更新
 func (ur *UserRepository) Update(user *model.User) (*model.User, error) {
-	if err := ur.Conn.Model(&user).Update(&user).Error; err != nil {
+	if err := ur.Conn.Model(&user).Updates(&user).Error; err != nil {
 		return nil, err
 	}
 
@@ -54,4 +67,37 @@ func (ur *UserRepository) Delete(user *model.User) error {
 	}
 
 	return nil
+}
+
+// CreateSession sessionの作成
+func (ur *UserRepository) CreateSession(uuid string, value string) error {
+	// コネクションプールの作成
+	pool := model.RedisNewPool()
+
+	// コネクションの取得
+	conn := pool.Get()
+	defer conn.Close()
+
+	// TODO セッション時間変更
+	_, err := conn.Do("SET", uuid, value, "NX", "EX", 36000)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	return nil
+}
+
+func (ur *UserRepository) LoginCheck(uuid string) (string, error) {
+	// コネクションプールの作成
+	pool := model.RedisNewPool()
+
+	// コネクションの取得
+	conn := pool.Get()
+	defer conn.Close()
+
+	su, err := redis.String(conn.Do("GET", uuid))
+	if err != nil {
+		return "", errors.WithStack(err)
+	}
+
+	return su, nil
 }

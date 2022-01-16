@@ -28,15 +28,15 @@ func NewWebsiteContentHandler(websiteContentUsecase usecase.WebsiteContentUsecas
 }
 
 type requestWebsiteContent struct {
-	WebsiteID int       `json:"website_id"`
+	WebsiteID int       `json:"websiteId"`
 	Title     string    `json:"title"`
 	Contents  string    `json:"contents"`
-	UpdatedAt time.Time `json:"updated_at"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 type responseWebsiteContent struct {
 	ID        int    `json:"id"`
-	WebsiteID int    `json:"website_id"`
+	WebsiteID int    `json:"websiteId"`
 	Title     string `json:"title"`
 	Contents  string `json:"contents"`
 }

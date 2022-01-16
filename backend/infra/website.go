@@ -5,7 +5,7 @@ import (
 	"backend/domain/model"
 	"backend/domain/repository"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // WebsiteRepository website repositoryの構造体
@@ -38,9 +38,20 @@ func (wr *WebsiteRepository) FindByID(id int) (*model.Website, error) {
 	return website, nil
 }
 
+// FindAll websiteを全て取得
+func (wr *WebsiteRepository) FindAll() (*[]model.Website, error) {
+	websites := &[]model.Website{}
+
+	if err := wr.Conn.Order("name").Find(&websites).Error; err != nil {
+		return nil, err
+	}
+
+	return websites, nil
+}
+
 // Update websiteの更新
 func (wr *WebsiteRepository) Update(website *model.Website) (*model.Website, error) {
-	if err := wr.Conn.Model(&website).Update(&website).Error; err != nil {
+	if err := wr.Conn.Model(&website).Updates(&website).Error; err != nil {
 		return nil, err
 	}
 

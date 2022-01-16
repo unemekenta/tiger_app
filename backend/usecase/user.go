@@ -13,8 +13,11 @@ import (
 type UserUsecase interface {
 	Create(email string, name string, password string, roleid int, updatedAt time.Time) (*model.User, error)
 	FindByID(id int) (*model.User, error)
+	FindByPassword(email string) (*model.User, error)
 	Update(id int, email string, name string, password string, roleid int, updatedAt time.Time) (*model.User, error)
 	Delete(id int) error
+	CreateSession(uuid string, value string) error
+	LoginCheck(uuid string) (string, error)
 }
 
 type userUsecase struct {
@@ -44,6 +47,16 @@ func (uu *userUsecase) Create(email string, name string, password string, roleid
 // FindByID userをIDで取得するときのユースケース
 func (uu *userUsecase) FindByID(id int) (*model.User, error) {
 	foundUser, err := uu.userRepo.FindByID(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return foundUser, nil
+}
+
+// FindByPassword userをパスワードで取得するときのユースケース
+func (uu *userUsecase) FindByPassword(email string) (*model.User, error) {
+	foundUser, err := uu.userRepo.FindByPassword(email)
 	if err != nil {
 		return nil, err
 	}
@@ -84,4 +97,24 @@ func (uu *userUsecase) Delete(id int) error {
 	}
 
 	return nil
+}
+
+// CreateSession セッションを作成するときのユースケース
+func (uu *userUsecase) CreateSession(uuid string, value string) error {
+	err := uu.userRepo.CreateSession(uuid, value)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// LoginCheck ログイン状態を確認するときのユースケース
+func (uu *userUsecase) LoginCheck(uuid string) (string, error) {
+
+	su, err := uu.userRepo.LoginCheck(uuid)
+	if err != nil {
+		return "", err
+	}
+	return su, nil
+
 }

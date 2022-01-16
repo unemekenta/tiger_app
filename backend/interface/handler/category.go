@@ -30,14 +30,14 @@ func NewCategoryHandler(categoryUsecase usecase.CategoryUsecase) CategoryHandler
 }
 
 type requestCategory struct {
-	AncestorID int       `json:"ancestor_id"`
+	AncestorID int       `json:"ancestorId"`
 	Name       string    `json:"name"`
-	UpdatedAt  time.Time `json:"updated_at"`
+	UpdatedAt  time.Time `json:"updatedAt"`
 }
 
 type responseCategory struct {
 	ID         int    `json:"id"`
-	AncestorID int    `json:"ancestor_id"`
+	AncestorID int    `json:"ancestorId"`
 	Name       string `json:"name"`
 }
 

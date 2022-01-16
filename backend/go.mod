@@ -7,6 +7,7 @@ require (
 	github.com/form3tech-oss/jwt-go v3.2.5+incompatible
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-redis/redis/v8 v8.11.4 // indirect
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/gomodule/redigo v1.8.6
 	github.com/google/uuid v1.3.0
 	github.com/jinzhu/gorm v1.9.16

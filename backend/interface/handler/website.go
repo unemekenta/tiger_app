@@ -14,6 +14,7 @@ import (
 type WebsiteHandler interface {
 	Post() echo.HandlerFunc
 	Get() echo.HandlerFunc
+	GetAll() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
@@ -30,16 +31,16 @@ func NewWebsiteHandler(websiteUsecase usecase.WebsiteUsecase) WebsiteHandler {
 type requestWebsite struct {
 	Name        string    `json:"name"`
 	Url         string    `json:"url"`
-	CompanyName string    `json:"company_name"`
+	CompanyName string    `json:"companyName"`
 	Image       string    `json:"image"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	UpdatedAt   time.Time `json:"updatedAt"`
 }
 
 type responseWebsite struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
 	Url         string `json:"url"`
-	CompanyName string `json:"company_name"`
+	CompanyName string `json:"companyName"`
 	Image       string `json:"image"`
 }
 
@@ -87,6 +88,30 @@ func (wh *websiteHandler) Get() echo.HandlerFunc {
 			Url:         foundWebsite.Url,
 			CompanyName: foundWebsite.CompanyName,
 			Image:       foundWebsite.Image,
+		}
+
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// GetAll websiteを全て取得するときのハンドラー
+func (wh *websiteHandler) GetAll() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		foundWebsites, err := wh.websiteUsecase.FindAll()
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		var res []responseWebsite
+
+		for _, fw := range *foundWebsites {
+			res = append(res, responseWebsite{
+				ID:          fw.ID,
+				Name:        fw.Name,
+				Url:         fw.Url,
+				CompanyName: fw.CompanyName,
+				Image:       fw.Image,
+			})
 		}
 
 		return c.JSON(http.StatusOK, res)

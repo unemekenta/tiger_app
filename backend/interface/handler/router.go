@@ -7,14 +7,14 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler CategoryHandler) {
+func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler CategoryHandler, websiteHandler WebsiteHandler, userHandler UserHandler) {
 
 	api := e.Group("/api")
 	api.GET("/terms", termHandler.GetAll())
 	api.GET("/term/:id", termHandler.Get())
 
-	api.GET("/websites", handlers.GetWebsites)
-	api.GET("/websites/:id", handlers.GetWebsite)
+	api.GET("/websites", websiteHandler.GetAll())
+	api.GET("/website/:id", websiteHandler.Get())
 	api.GET("/websites_category/:id", handlers.GetWebsitesByCategory)
 	api.GET("/websites/search", handlers.SearchWebsite)
 
@@ -24,15 +24,15 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	api.GET("/categories_by_ancestor/:id", categoryHandler.GetCategoriesByAncestor())
 	api.GET("/categories_website/:id", categoryHandler.GetCategoriesByAncestor())
 
-	api.POST("/signup", handlers.UserSignup)
-	api.POST("/login", handlers.UserLogin)
-	api.GET("/login_check", handlers.UserLoginCheck)
+	api.POST("/signup", userHandler.Signup())
+	api.POST("/login", userHandler.Login())
+	api.POST("/login_check", userHandler.LoginCheck())
 
-	a := e.Group("/auth")
-	a.Use(middleware.JWT([]byte("secret")))
+	auth := api.Group("/auth")
+	auth.Use(middleware.JWT([]byte("secret")))
 	// /auth下はJWTの認証が必要
-	// curlで接続する場合は curl http://localhost:8000/auth/api/mypage -H "Authorization: Bearer {login時に発行されるtoken}"
-	a.POST("/api/authCheck", handlers.GetAuthCheck)
+	// curlで接続する場合は curl http://localhost:8000/api/auth/mypage -H "Authorization: Bearer {login時に発行されるtoken}"
+	auth.POST("/authCheck", handlers.GetAuthCheck)
 
-	a.GET("/api/user/:id", handlers.GetUser)
+	auth.GET("/user/:id", userHandler.Get())
 }

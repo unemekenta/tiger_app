@@ -16,6 +16,10 @@ type User struct {
 	UpdatedAt time.Time
 }
 
+type SessionUser struct {
+	Val string `json:"val"`
+}
+
 func NewUser(email string, name string, password string, roleid int, updatedAt time.Time) (*User, error) {
 	if name == "" {
 		return nil, errors.New("nameを入力してください")

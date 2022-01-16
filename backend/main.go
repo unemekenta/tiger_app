@@ -20,9 +20,17 @@ func main() {
 	categoryUsecase := usecase.NewCategoryUsecase(categoryRepository)
 	categoryHandler := handler.NewCategoryHandler(categoryUsecase)
 
+	websiteRepository := infra.NewWebsiteRepository(config.OpenDBConn())
+	websiteUsecase := usecase.NewWebsiteUsecase(websiteRepository)
+	websiteHandler := handler.NewWebsiteHandler(websiteUsecase)
+
+	userRepository := infra.NewUserRepository(config.OpenDBConn())
+	userUsecase := usecase.NewUserUsecase(userRepository)
+	userHandler := handler.NewUserHandler(userUsecase)
+
 	e := echo.New()
 	e.Use(middleware.CORS())
-	handler.InitRouting(e, termHandler, categoryHandler)
+	handler.InitRouting(e, termHandler, categoryHandler, websiteHandler, userHandler)
 
 	// heroku用
 	port := os.Getenv("PORT")
