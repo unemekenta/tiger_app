@@ -38,6 +38,17 @@ func (tr *TermRepository) FindByID(id int) (*model.Term, error) {
 	return term, nil
 }
 
+// FindAll termを全て取得
+func (tr *TermRepository) FindAll() (*[]model.Term, error) {
+	terms := &[]model.Term{}
+
+	if err := tr.Conn.Order("name").Find(&terms).Error; err != nil {
+		return nil, err
+	}
+
+	return terms, nil
+}
+
 // Update termの更新
 func (tr *TermRepository) Update(term *model.Term) (*model.Term, error) {
 	if err := tr.Conn.Model(&term).Updates(&term).Error; err != nil {

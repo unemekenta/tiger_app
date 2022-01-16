@@ -22,7 +22,7 @@ func main() {
 
 	e := echo.New()
 	e.Use(middleware.CORS())
-	handler.InitRouting(e, categoryHandler)
+	handler.InitRouting(e, termHandler, categoryHandler)
 
 	// heroku用
 	port := os.Getenv("PORT")

@@ -9,6 +9,7 @@ import (
 type TermRepository interface {
 	Create(term *model.Term) (*model.Term, error)
 	FindByID(id int) (*model.Term, error)
+	FindAll() (*[]model.Term, error)
 	Update(term *model.Term) (*model.Term, error)
 	Delete(term *model.Term) error
 }

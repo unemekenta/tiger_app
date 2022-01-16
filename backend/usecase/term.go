@@ -13,6 +13,7 @@ import (
 type TermUsecase interface {
 	Create(name string, content string, updatedAt time.Time) (*model.Term, error)
 	FindByID(id int) (*model.Term, error)
+	FindAll() (*[]model.Term, error)
 	Update(id int, name string, content string, updatedAt time.Time) (*model.Term, error)
 	Delete(id int) error
 }
@@ -49,6 +50,16 @@ func (tu *termUsecase) FindByID(id int) (*model.Term, error) {
 	}
 
 	return foundTerm, nil
+}
+
+// FindByID termをIDで取得するときのユースケース
+func (tu *termUsecase) FindAll() (*[]model.Term, error) {
+	foundTerms, err := tu.termRepo.FindAll()
+	if err != nil {
+		return nil, err
+	}
+
+	return foundTerms, nil
 }
 
 // Update termを更新するときのユースケース

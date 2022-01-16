@@ -14,6 +14,7 @@ import (
 type TermHandler interface {
 	Post() echo.HandlerFunc
 	Get() echo.HandlerFunc
+	GetAll() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
@@ -81,6 +82,27 @@ func (th *termHandler) Get() echo.HandlerFunc {
 			Content: foundTerm.Content,
 		}
 
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// GetAll termを全て取得するときのハンドラー
+func (th *termHandler) GetAll() echo.HandlerFunc {
+	return func(c echo.Context) error {
+
+		foundTerms, err := th.termUsecase.FindAll()
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		var res []responseTerm
+		for _, ft := range *foundTerms {
+			res = append(res, responseTerm{
+				ID:      ft.ID,
+				Name:    ft.Name,
+				Content: ft.Content,
+			})
+		}
 		return c.JSON(http.StatusOK, res)
 	}
 }

@@ -7,10 +7,10 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-func InitRouting(e *echo.Echo, categoryHandler CategoryHandler, termHandler TermHandler) {
+func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler CategoryHandler) {
 
 	api := e.Group("/api")
-	api.GET("/terms", handlers.GetTerms)
+	api.GET("/terms", termHandler.GetAll())
 	api.GET("/term/:id", termHandler.Get())
 
 	api.GET("/websites", handlers.GetWebsites)
