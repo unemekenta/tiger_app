@@ -5,7 +5,7 @@ import (
 	"backend/domain/model"
 	"backend/domain/repository"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // TermRepository term repositoryの構造体
@@ -40,7 +40,7 @@ func (tr *TermRepository) FindByID(id int) (*model.Term, error) {
 
 // Update termの更新
 func (tr *TermRepository) Update(term *model.Term) (*model.Term, error) {
-	if err := tr.Conn.Model(&term).Update(&term).Error; err != nil {
+	if err := tr.Conn.Model(&term).Updates(&term).Error; err != nil {
 		return nil, err
 	}
 

@@ -5,7 +5,7 @@ import (
 	"backend/domain/model"
 	"backend/domain/repository"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // CategoryRepository category repositoryの構造体
@@ -38,8 +38,8 @@ func (cr *CategoryRepository) FindByID(id int) (*model.Category, error) {
 	return category, nil
 }
 
-// FindAllChildCategories 末端categoryを全て取得
-func (cr *CategoryRepository) FindAllChildCategories() (*[]model.Category, error) {
+// FindAllParentCategories 末端categoryを全て取得
+func (cr *CategoryRepository) FindAllParentCategories() (*[]model.Category, error) {
 	categories := &[]model.Category{}
 
 	if err := cr.Conn.Order("name").Where("ancestor_id IS NULL").Find(&categories).Error; err != nil {
@@ -62,7 +62,7 @@ func (cr *CategoryRepository) FindCategoriesByAncestor(id int) (*[]model.Categor
 
 // Update categoryの更新
 func (cr *CategoryRepository) Update(category *model.Category) (*model.Category, error) {
-	if err := cr.Conn.Model(&category).Update(&category).Error; err != nil {
+	if err := cr.Conn.Model(&category).Updates(&category).Error; err != nil {
 		return nil, err
 	}
 

@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"backend/config"
 	"backend/domain/model"
 
 	"github.com/labstack/echo"
@@ -11,7 +12,7 @@ import (
 
 func GetContentByWebsite(c echo.Context) error {
 	var website_contents model.WebsiteContent
-	Db := model.OpenDBConn()
+	Db := config.OpenDBConn()
 	db, err := Db.DB()
 	defer db.Close()
 

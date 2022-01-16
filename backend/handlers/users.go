@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"backend/config"
 	"backend/domain/model"
 	"net/http"
 	"strconv"
@@ -16,7 +17,7 @@ import (
 
 func GetUser(c echo.Context) error {
 	user := new(model.User)
-	Db := model.OpenDBConn()
+	Db := config.OpenDBConn()
 	db, err := Db.DB()
 	if err != nil {
 		return err
@@ -42,7 +43,7 @@ func GetAuthCheck(c echo.Context) error {
 
 func UserSignup(c echo.Context) error {
 	user := new(model.User)
-	Db := model.OpenDBConn()
+	Db := config.OpenDBConn()
 	db, err := Db.DB()
 	if err != nil {
 		return err
@@ -72,7 +73,7 @@ func UserSignup(c echo.Context) error {
 
 func UserLogin(c echo.Context) error {
 	user := new(model.User)
-	Db := model.OpenDBConn()
+	Db := config.OpenDBConn()
 	db, err := Db.DB()
 	if err != nil {
 		return err
