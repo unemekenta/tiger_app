@@ -60,6 +60,17 @@ func (cr *CategoryRepository) FindCategoriesByAncestor(id int) (*[]model.Categor
 	return categories, nil
 }
 
+// FindCategoriesByWebsite websiteから子カテゴリを取得
+func (cr *CategoryRepository) FindCategoryByWebsite(id int) (*model.Category, error) {
+	category := &model.Category{}
+
+	if err := cr.Conn.Order("name").Joins("left join categories_websites on categories_websites.category_id = categories.id").Where("categories_websites.website_id = ?", id).Where("website_id = ?", id).First(&category).Error; err != nil {
+		return nil, err
+	}
+
+	return category, nil
+}
+
 // Update categoryの更新
 func (cr *CategoryRepository) Update(category *model.Category) (*model.Category, error) {
 	if err := cr.Conn.Model(&category).Updates(&category).Error; err != nil {

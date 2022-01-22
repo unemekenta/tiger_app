@@ -16,6 +16,7 @@ type CategoryHandler interface {
 	Get() echo.HandlerFunc
 	GetAllParentCategories() echo.HandlerFunc
 	GetCategoriesByAncestor() echo.HandlerFunc
+	GetCategoryByWebsite() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
@@ -132,6 +133,30 @@ func (ch *categoryHandler) GetCategoriesByAncestor() echo.HandlerFunc {
 				AncestorID: fc.AncestorID,
 				Name:       fc.Name,
 			})
+		}
+
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// GetCategoryByWebsite Websiteから子カテゴリを取得するときのハンドラー
+func (ch *categoryHandler) GetCategoryByWebsite() echo.HandlerFunc {
+	return func(c echo.Context) error {
+
+		id, err := strconv.Atoi((c.Param("id")))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		foundCategory, err := ch.categoryUsecase.FindCategoryByWebsite(id)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		res := responseCategory{
+			ID:         foundCategory.ID,
+			AncestorID: foundCategory.AncestorID,
+			Name:       foundCategory.Name,
 		}
 
 		return c.JSON(http.StatusOK, res)

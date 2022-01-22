@@ -11,6 +11,7 @@ type CategoryRepository interface {
 	FindByID(id int) (*model.Category, error)
 	FindAllParentCategories() (*[]model.Category, error)
 	FindCategoriesByAncestor(id int) (*[]model.Category, error)
+	FindCategoryByWebsite(id int) (*model.Category, error)
 	Update(category *model.Category) (*model.Category, error)
 	Delete(category *model.Category) error
 }

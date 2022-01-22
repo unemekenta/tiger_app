@@ -7,7 +7,7 @@
       .webdetail-contents-icon
         fa-icon(icon="building")
         p.webdetail-contents-icon-name
-          | {{detailObject.company_name}}
+          | {{detailObject.companyName}}
       p.webdetail-contents-txt
         | {{detailObject.name}}
       .webdetail-contents-btm

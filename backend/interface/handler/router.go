@@ -20,7 +20,7 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 
 	api.GET("/categories", categoryHandler.GetAllParentCategories())
 	api.GET("/categories_by_ancestor/:id", categoryHandler.GetCategoriesByAncestor())
-	api.GET("/categories_website/:id", categoryHandler.GetCategoriesByAncestor())
+	api.GET("/categories_website/:id", categoryHandler.GetCategoryByWebsite())
 
 	api.POST("/signup", userHandler.Signup())
 	api.POST("/login", userHandler.Login())

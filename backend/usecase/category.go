@@ -15,6 +15,7 @@ type CategoryUsecase interface {
 	FindByID(id int) (*model.Category, error)
 	FindAllParentCategories() (*[]model.Category, error)
 	FindCategoriesByAncestor(id int) (*[]model.Category, error)
+	FindCategoryByWebsite(id int) (*model.Category, error)
 	Update(id int, ancestorId int, name string, updatedAt time.Time) (*model.Category, error)
 	Delete(id int) error
 }
@@ -71,6 +72,16 @@ func (cu *categoryUsecase) FindCategoriesByAncestor(id int) (*[]model.Category, 
 	}
 
 	return foundCategories, nil
+}
+
+// FindCategoryByWebsite websiteから子カテゴリを取得するときのユースケース
+func (cu *categoryUsecase) FindCategoryByWebsite(id int) (*model.Category, error) {
+	foundCategory, err := cu.categoryRepo.FindCategoryByWebsite(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return foundCategory, nil
 }
 
 // Update categoryを更新するときのユースケース

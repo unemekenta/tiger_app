@@ -28,7 +28,8 @@ export default {
   data: function () {
     return {
       formEmail: '',
-      formPassword: ''
+      formPassword: '',
+      allCategories: [],
     }
   },
   created () {

@@ -15,14 +15,14 @@
         .weblist-contents-inner-icon
           fa-icon(icon="building")
           p.weblist-contents-inner-icon-name
-            | {{item.company_name}}
+            | {{item.companyName}}
         p.weblist-contents-inner-txt
           | {{item.name}}
         .weblist-contents-inner-btm
           .weblist-contents-inner-btm-left
             .weblist-contents-inner-btm-left-category
               category-tag(:websiteID="item.id")
-            p.weblist-contents-inner-btm-left-time 
+            p.weblist-contents-inner-btm-left-time
               | {{createDate(item.updatedAt)}}
           .weblist-contents-inner-btm-right
             cv-button(label="公式サイトへ" :url="item.url")
