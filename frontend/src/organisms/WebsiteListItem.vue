@@ -23,7 +23,7 @@
             .weblist-contents-inner-btm-left-category
               category-tag(:websiteID="item.id")
             p.weblist-contents-inner-btm-left-time 
-              | {{createDate(item.CreatedAt)}}
+              | {{createDate(item.updatedAt)}}
           .weblist-contents-inner-btm-right
             cv-button(label="公式サイトへ" :url="item.url")
   pager(:maxPage="maxPage" @changePage="this.changePageNum")
@@ -80,10 +80,10 @@ export default {
     }
   },
   methods: {
-    createDate (createdAt) {
-      let formattedDate = createdAt.split(/T|:|-/);
+    createDate (updatedAt) {
+      let formattedDate = updatedAt.split(/T|:|-/);
       formattedDate.pop()
-      let dateString = formattedDate[0] + '年' + formattedDate[1]+ '月' + formattedDate[2] + '日' + formattedDate[3] + '時' + formattedDate[4] + '分';
+      let dateString = formattedDate[0] + '年' + formattedDate[1]+ '月' + formattedDate[2] + '日';
       return dateString;
     },
     changePageNum (pageNum) {

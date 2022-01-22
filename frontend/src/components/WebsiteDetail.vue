@@ -50,7 +50,7 @@ export default {
       this.$router.push('/signin');
     },
     async getWebsiteDetail () {
-      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites/' + this.$route.params.id)
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/website/' + this.$route.params.id)
       .then(res => {
         this.websiteDetail = res.data;
       })

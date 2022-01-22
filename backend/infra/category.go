@@ -42,7 +42,7 @@ func (cr *CategoryRepository) FindByID(id int) (*model.Category, error) {
 func (cr *CategoryRepository) FindAllParentCategories() (*[]model.Category, error) {
 	categories := &[]model.Category{}
 
-	if err := cr.Conn.Order("name").Where("ancestor_id IS NOT NULL").Find(&categories).Error; err != nil {
+	if err := cr.Conn.Order("name").Where("ancestor_id IS NULL").Find(&categories).Error; err != nil {
 		return nil, err
 	}
 

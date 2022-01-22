@@ -39,11 +39,12 @@ type requestWebsite struct {
 }
 
 type responseWebsite struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Url         string `json:"url"`
-	CompanyName string `json:"companyName"`
-	Image       string `json:"image"`
+	ID          int       `json:"id"`
+	Name        string    `json:"name"`
+	Url         string    `json:"url"`
+	CompanyName string    `json:"companyName"`
+	Image       string    `json:"image"`
+	UpdatedAt   time.Time `json:"updatedAt"`
 }
 
 // Post websiteを保存するときのハンドラー
@@ -65,6 +66,7 @@ func (wh *websiteHandler) Post() echo.HandlerFunc {
 			Url:         createdWebsite.Url,
 			CompanyName: createdWebsite.CompanyName,
 			Image:       createdWebsite.Image,
+			UpdatedAt:   createdWebsite.UpdatedAt,
 		}
 
 		return c.JSON(http.StatusCreated, res)
@@ -90,6 +92,7 @@ func (wh *websiteHandler) Get() echo.HandlerFunc {
 			Url:         foundWebsite.Url,
 			CompanyName: foundWebsite.CompanyName,
 			Image:       foundWebsite.Image,
+			UpdatedAt:   foundWebsite.UpdatedAt,
 		}
 
 		return c.JSON(http.StatusOK, res)
@@ -113,6 +116,7 @@ func (wh *websiteHandler) GetAll() echo.HandlerFunc {
 				Url:         fw.Url,
 				CompanyName: fw.CompanyName,
 				Image:       fw.Image,
+				UpdatedAt:   fw.UpdatedAt,
 			})
 		}
 
@@ -138,6 +142,7 @@ func (wh *websiteHandler) GetByCategory() echo.HandlerFunc {
 				Url:         fw.Url,
 				CompanyName: fw.CompanyName,
 				Image:       fw.Image,
+				UpdatedAt:   fw.UpdatedAt,
 			})
 		}
 
@@ -163,6 +168,7 @@ func (wh *websiteHandler) SearchByName() echo.HandlerFunc {
 				Url:         fw.Url,
 				CompanyName: fw.CompanyName,
 				Image:       fw.Image,
+				UpdatedAt:   fw.UpdatedAt,
 			})
 		}
 
@@ -194,6 +200,7 @@ func (wh *websiteHandler) Put() echo.HandlerFunc {
 			Url:         updatedWebsite.Url,
 			CompanyName: updatedWebsite.CompanyName,
 			Image:       updatedWebsite.Image,
+			UpdatedAt:   updatedWebsite.UpdatedAt,
 		}
 
 		return c.JSON(http.StatusOK, res)
