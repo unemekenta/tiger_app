@@ -13,6 +13,7 @@ import (
 type WebsiteContentUsecase interface {
 	Create(websiteId int, title string, contents string, updatedAt time.Time) (*model.WebsiteContent, error)
 	FindByID(id int) (*model.WebsiteContent, error)
+	FindByWebsiteID(websiteID int) (*model.WebsiteContent, error)
 	Update(id int, title string, contents string, updatedAt time.Time) (*model.WebsiteContent, error)
 	Delete(id int) error
 }
@@ -44,6 +45,16 @@ func (wcu *websiteContentUsecase) Create(websiteId int, title string, contents s
 // FindByID websiteContentをIDで取得するときのユースケース
 func (wcu *websiteContentUsecase) FindByID(id int) (*model.WebsiteContent, error) {
 	foundWebsiteContent, err := wcu.websiteContentRepo.FindByID(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return foundWebsiteContent, nil
+}
+
+// FindByWebsiteID websiteContentをWebsiteIDで取得するときのユースケース
+func (wcu *websiteContentUsecase) FindByWebsiteID(websiteId int) (*model.WebsiteContent, error) {
+	foundWebsiteContent, err := wcu.websiteContentRepo.FindByWebsiteID(websiteId)
 	if err != nil {
 		return nil, err
 	}

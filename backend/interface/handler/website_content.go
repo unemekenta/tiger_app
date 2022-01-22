@@ -14,6 +14,7 @@ import (
 type WebsiteContentHandler interface {
 	Post() echo.HandlerFunc
 	Get() echo.HandlerFunc
+	GetByWebsiteID() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
@@ -74,6 +75,30 @@ func (wch *websiteContentHandler) Get() echo.HandlerFunc {
 		}
 
 		foundWebsiteContent, err := wch.websiteContentUsecase.FindByID(id)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		res := responseWebsiteContent{
+			ID:        foundWebsiteContent.ID,
+			WebsiteID: foundWebsiteContent.WebsiteID,
+			Title:     foundWebsiteContent.Title,
+			Contents:  foundWebsiteContent.Contents,
+		}
+
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// GetByWebsiteID websiteContentをWebsiteIDで取得するときのハンドラー
+func (wch *websiteContentHandler) GetByWebsiteID() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		websiteID, err := strconv.Atoi((c.Param("website_id")))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		foundWebsiteContent, err := wch.websiteContentUsecase.FindByWebsiteID(websiteID)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}

@@ -5,7 +5,7 @@ import (
 	"backend/domain/model"
 	"backend/domain/repository"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // WebsiteContentRepository websiteContent repositoryの構造体
@@ -38,9 +38,20 @@ func (wr *WebsiteContentRepository) FindByID(id int) (*model.WebsiteContent, err
 	return websiteContent, nil
 }
 
+// FindByWebsiteID websiteContentをWebsiteIDで取得
+func (wr *WebsiteContentRepository) FindByWebsiteID(websoteID int) (*model.WebsiteContent, error) {
+	websiteContent := &model.WebsiteContent{WebsiteID: websoteID}
+
+	if err := wr.Conn.First(&websiteContent).Error; err != nil {
+		return nil, err
+	}
+
+	return websiteContent, nil
+}
+
 // Update websiteContentの更新
 func (wr *WebsiteContentRepository) Update(websiteContent *model.WebsiteContent) (*model.WebsiteContent, error) {
-	if err := wr.Conn.Model(&websiteContent).Update(&websiteContent).Error; err != nil {
+	if err := wr.Conn.Model(&websiteContent).Updates(&websiteContent).Error; err != nil {
 		return nil, err
 	}
 

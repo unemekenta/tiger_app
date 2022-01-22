@@ -1,13 +1,11 @@
 package handler
 
 import (
-	"backend/handlers"
-
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
 
-func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler CategoryHandler, websiteHandler WebsiteHandler, userHandler UserHandler) {
+func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler CategoryHandler, websiteHandler WebsiteHandler, userHandler UserHandler, websiteContentHandler WebsiteContentHandler) {
 
 	api := e.Group("/api")
 	api.GET("/terms", termHandler.GetAll())
@@ -18,7 +16,7 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	api.GET("/websites_category/:id", websiteHandler.GetByCategory())
 	api.GET("/websites/search", websiteHandler.SearchByName())
 
-	api.GET("/website_content/:website_id", handlers.GetContentByWebsite)
+	api.GET("/website_content/:website_id", websiteContentHandler.GetByWebsiteID())
 
 	api.GET("/categories", categoryHandler.GetAllParentCategories())
 	api.GET("/categories_by_ancestor/:id", categoryHandler.GetCategoriesByAncestor())
