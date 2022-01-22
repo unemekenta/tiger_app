@@ -42,7 +42,7 @@ export default {
       await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/login', params)
       .then(res => {
         this.$cookies.config('1d', '', '', true);
-        this.$cookies.set('uuid', res.data);
+        this.$cookies.set('uuid', res.data.uuid);
         alert('ログインしました。')
         this.$router.push({name: 'WebsiteList'})
       })

@@ -30,7 +30,7 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	auth.Use(middleware.JWT([]byte("secret")))
 	// /auth下はJWTの認証が必要
 	// curlで接続する場合は curl http://localhost:8000/api/auth/mypage -H "Authorization: Bearer {login時に発行されるtoken}"
-	// auth.POST("/authCheck", handlers.GetAuthCheck)
+	auth.POST("/authCheck", userHandler.AuthCheck())
 
 	auth.GET("/user/:id", userHandler.Get())
 }

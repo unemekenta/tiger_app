@@ -12,14 +12,15 @@ export const loginMixin = {
   },
   methods: {
     async $_loginMixin_loginCheck() {
-      var data = "";
+      let data = "";
       if (window.$cookies.isKey('uuid')) {
         await axios
-          .get(process.env.VUE_APP_API_BASE_URL + "/api/login_check", {
-            params: {
-              key: window.$cookies.get('uuid')
+          .post(
+            process.env.VUE_APP_API_BASE_URL + "/api/login_check",
+            {
+              uuid: window.$cookies.get('uuid')
             },
-          })
+          )
           .then((res) => {
             this.jwtData = res.data;
           })
@@ -30,7 +31,7 @@ export const loginMixin = {
 
         await axios
           .post(
-            process.env.VUE_APP_API_BASE_URL + '/auth/api/authCheck',
+            process.env.VUE_APP_API_BASE_URL + '/api/auth/authCheck',
             data,
             {
               headers: {

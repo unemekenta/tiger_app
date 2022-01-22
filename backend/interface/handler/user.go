@@ -22,6 +22,7 @@ type UserHandler interface {
 	Signup() echo.HandlerFunc
 	Login() echo.HandlerFunc
 	LoginCheck() echo.HandlerFunc
+	AuthCheck() echo.HandlerFunc
 }
 
 type userHandler struct {
@@ -56,6 +57,15 @@ type responseUser struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
 	RoleId   int    `json:"roleId"`
+}
+
+type responseLoginUser struct {
+	ID       int    `json:"id"`
+	Email    string `json:"email"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
+	RoleId   int    `json:"roleId"`
+	Uuid     string `json:"uuid"`
 }
 
 // Post userを保存するときのハンドラー
@@ -187,6 +197,7 @@ func (uh *userHandler) Signup() echo.HandlerFunc {
 func (uh *userHandler) Login() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var req requestUserLogin
+		var reqSession requestUserSession
 		if err := c.Bind(&req); err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
@@ -225,14 +236,17 @@ func (uh *userHandler) Login() echo.HandlerFunc {
 
 			uh.userUsecase.CreateSession(uu, t)
 
+			reqSession.Uuid = uu
+
 		}
 
-		res := responseUser{
+		res := responseLoginUser{
 			ID:       foundUser.ID,
 			Email:    foundUser.Email,
 			Name:     foundUser.Name,
 			Password: foundUser.Password,
 			RoleId:   foundUser.RoleId,
+			Uuid:     reqSession.Uuid,
 		}
 
 		return c.JSON(http.StatusCreated, res)
@@ -253,5 +267,12 @@ func (uh *userHandler) LoginCheck() echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusCreated, res)
+	}
+}
+
+// 権限チェック
+func (uh *userHandler) AuthCheck() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return c.JSON(http.StatusAccepted, "OK")
 	}
 }
