@@ -41,7 +41,8 @@ export default {
       formName: '',
       formEmail: '',
       formPassword: '',
-      agree: false
+      agree: false,
+      allCategories: [],
     }
   },
   created () {

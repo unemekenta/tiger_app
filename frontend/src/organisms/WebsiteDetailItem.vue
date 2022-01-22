@@ -7,7 +7,7 @@
       .webdetail-contents-icon
         fa-icon(icon="building")
         p.webdetail-contents-icon-name
-          | {{detailObject.company_name}}
+          | {{detailObject.companyName}}
       p.webdetail-contents-txt
         | {{detailObject.name}}
       .webdetail-contents-btm
@@ -15,7 +15,7 @@
           .webdetail-contents-btm-left-category
             category-tag(:websiteID="detailObject.id")
           p.webdetail-contents-btm-left-time
-            //- | {{createDate(detailObject.CreatedAt)}}
+            | {{createDate(detailObject.updatedAt)}}
         .webdetail-contents-btm-right
           cv-button(label="公式サイトへ" :url="detailObject.url")
       .webdetail-contents-img(v-if="detailObject.image")
@@ -25,7 +25,7 @@
       .webdetail-contents-quote
         q(cite="item.url")
           | 引用：{{detailObject.name}} 公式HP
-  
+
   .webdetail-info(v-if="detailObjectContent")
     h3 {{detailObjectContent.title}}
     p {{detailObjectContent.contents}}
@@ -49,10 +49,10 @@ export default {
     detailObjectContent: Object,
   },
   methods: {
-    createDate (createdAt) {
-      let formattedDate = createdAt.split(/T|:|-/);
+    createDate (updatedAt) {
+      let formattedDate = updatedAt.split(/T|:|-/);
       formattedDate.pop()
-      let dateString = formattedDate[0] + '年' + formattedDate[1]+ '月' + formattedDate[2] + '日' + formattedDate[3] + '時' + formattedDate[4] + '分';
+      let dateString = formattedDate[0] + '年' + formattedDate[1]+ '月' + formattedDate[2] + '日';
       return dateString;
     },
   }

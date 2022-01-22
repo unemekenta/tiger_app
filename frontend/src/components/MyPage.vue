@@ -66,11 +66,12 @@ export default {
     async getUser () {
       if (window.$cookies.isKey('uuid')) {
         await axios
-          .get(process.env.VUE_APP_API_BASE_URL + "/api/login_check", {
-            params: {
-              key: window.$cookies.get('uuid')
+          .post(
+            process.env.VUE_APP_API_BASE_URL + "/api/login_check",
+            {
+              uuid: window.$cookies.get('uuid')
             },
-          })
+          )
           .then((res) => {
             this.jwtUserData = res.data;
           })
@@ -80,7 +81,7 @@ export default {
           });
 
         let user_id = VueJwtDecode.decode(this.jwtUserData).id;
-        await axios.get(process.env.VUE_APP_API_BASE_URL + '/auth/api/user/'+ user_id,
+        await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/user/'+ user_id,
         {
           headers: {'Authorization': 'Bearer ' + this.jwtUserData}
         })

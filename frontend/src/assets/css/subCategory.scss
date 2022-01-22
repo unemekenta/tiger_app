@@ -6,6 +6,8 @@
     border-bottom: solid 0.1rem $color-bg;
     >li {
       color: $color-green;
+      display: block;
+      width: 100%;
       &:hover {
         cursor: pointer;
         opacity: 0.5;
