@@ -141,12 +141,26 @@ export default {
   created() {
   },
   methods: {
+    toggleView(iconContent, menu, background) {
+      if(iconContent) {
+        menu.classList.remove("is-hidden");
+        background.classList.add("is-bgBlack");
+      } else {
+        menu.classList.add("is-hidden");
+        background.classList.remove("is-bgBlack");
+      }
+    },
     onClick() {
-      var manu = document.getElementById("headerNavMenu");
-      manu.classList.toggle("is-hidden");
-      var background = document.getElementById("container");
-      background.classList.toggle("is-bgBlack");
-      this.iconContent = !this.iconContent;
+      const menu = document.getElementById("headerNavMenu");
+      const background = document.getElementById("container");
+      if (!this.iconContent) {
+        this.iconContent = true;
+        this.toggleView(this.iconContent, menu, background);
+      }
+      else {
+        this.iconContent = false;
+        this.toggleView(this.iconContent, menu, background);
+      }
     },
   },
 };

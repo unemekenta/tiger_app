@@ -83,12 +83,14 @@ button {
   opacity: 0;
 }
 
-.is-bgBlack::before {
-  content: ' ';
-  background-color: rgba(0,0,0,.7);
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.is-bgBlack {
+  overflow: hidden;
+  position: fixed;
+  &::before {
+    content: ' ';
+    background-color: rgba(0,0,0,.7);
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
  }
