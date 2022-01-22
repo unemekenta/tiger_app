@@ -14,6 +14,8 @@ type WebsiteUsecase interface {
 	Create(name string, url string, companyName string, image string, updatedAt time.Time) (*model.Website, error)
 	FindByID(id int) (*model.Website, error)
 	FindAll() (*[]model.Website, error)
+	FindByCategory(id int) (*[]model.Website, error)
+	SearchByName(query string) (*[]model.Website, error)
 	Update(id int, name string, url string, companyName string, image string, updatedAt time.Time) (*model.Website, error)
 	Delete(id int) error
 }
@@ -55,6 +57,26 @@ func (wu *websiteUsecase) FindByID(id int) (*model.Website, error) {
 // FindAll websiteを全て取得するときのユースケース
 func (wu *websiteUsecase) FindAll() (*[]model.Website, error) {
 	foundWebsites, err := wu.websiteRepo.FindAll()
+	if err != nil {
+		return nil, err
+	}
+
+	return foundWebsites, nil
+}
+
+// FindByCategory websiteをカテゴリから取得するときのユースケース
+func (wu *websiteUsecase) FindByCategory(id int) (*[]model.Website, error) {
+	foundWebsites, err := wu.websiteRepo.FindByCategory(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return foundWebsites, nil
+}
+
+// SearchByName 検索結果を取得するときのユースケース
+func (wu *websiteUsecase) SearchByName(query string) (*[]model.Website, error) {
+	foundWebsites, err := wu.websiteRepo.SearchByName(query)
 	if err != nil {
 		return nil, err
 	}

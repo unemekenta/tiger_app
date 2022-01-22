@@ -49,6 +49,28 @@ func (wr *WebsiteRepository) FindAll() (*[]model.Website, error) {
 	return websites, nil
 }
 
+// FindByCategory カテゴリからwebsiteを取得
+func (wr *WebsiteRepository) FindByCategory(id int) (*[]model.Website, error) {
+	websites := &[]model.Website{}
+
+	if err := wr.Conn.Order("websites.name").Joins("left join categories_websites on categories_websites.website_id = websites.id").Where("categories_websites.category_id = ?", id).Find(&websites).Error; err != nil {
+		return nil, err
+	}
+
+	return websites, nil
+}
+
+// SearchByName 検索結果からwebsiteを取得
+func (wr *WebsiteRepository) SearchByName(query string) (*[]model.Website, error) {
+	websites := &[]model.Website{}
+
+	if err := wr.Conn.Order("name").Where("name ILIKE ?", "%"+query+"%").Find(&websites).Error; err != nil {
+		return nil, err
+	}
+
+	return websites, nil
+}
+
 // Update websiteの更新
 func (wr *WebsiteRepository) Update(website *model.Website) (*model.Website, error) {
 	if err := wr.Conn.Model(&website).Updates(&website).Error; err != nil {

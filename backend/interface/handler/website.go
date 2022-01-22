@@ -15,6 +15,8 @@ type WebsiteHandler interface {
 	Post() echo.HandlerFunc
 	Get() echo.HandlerFunc
 	GetAll() echo.HandlerFunc
+	GetByCategory() echo.HandlerFunc
+	SearchByName() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
@@ -98,6 +100,56 @@ func (wh *websiteHandler) Get() echo.HandlerFunc {
 func (wh *websiteHandler) GetAll() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		foundWebsites, err := wh.websiteUsecase.FindAll()
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		var res []responseWebsite
+
+		for _, fw := range *foundWebsites {
+			res = append(res, responseWebsite{
+				ID:          fw.ID,
+				Name:        fw.Name,
+				Url:         fw.Url,
+				CompanyName: fw.CompanyName,
+				Image:       fw.Image,
+			})
+		}
+
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// GetByCategory カテゴリからwebsiteを全て取得するときのハンドラー
+func (wh *websiteHandler) GetByCategory() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id, err := strconv.Atoi((c.Param("id")))
+		foundWebsites, err := wh.websiteUsecase.FindByCategory(id)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		var res []responseWebsite
+
+		for _, fw := range *foundWebsites {
+			res = append(res, responseWebsite{
+				ID:          fw.ID,
+				Name:        fw.Name,
+				Url:         fw.Url,
+				CompanyName: fw.CompanyName,
+				Image:       fw.Image,
+			})
+		}
+
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// SearchByName nameでの検索結果を全て取得するときのハンドラー
+func (wh *websiteHandler) SearchByName() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		query := c.QueryParam("q")
+		foundWebsites, err := wh.websiteUsecase.SearchByName(query)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}

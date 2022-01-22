@@ -15,8 +15,8 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 
 	api.GET("/websites", websiteHandler.GetAll())
 	api.GET("/website/:id", websiteHandler.Get())
-	api.GET("/websites_category/:id", handlers.GetWebsitesByCategory)
-	api.GET("/websites/search", handlers.SearchWebsite)
+	api.GET("/websites_category/:id", websiteHandler.GetByCategory())
+	api.GET("/websites/search", websiteHandler.SearchByName())
 
 	api.GET("/website_content/:website_id", handlers.GetContentByWebsite)
 
@@ -32,7 +32,7 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	auth.Use(middleware.JWT([]byte("secret")))
 	// /auth下はJWTの認証が必要
 	// curlで接続する場合は curl http://localhost:8000/api/auth/mypage -H "Authorization: Bearer {login時に発行されるtoken}"
-	auth.POST("/authCheck", handlers.GetAuthCheck)
+	// auth.POST("/authCheck", handlers.GetAuthCheck)
 
 	auth.GET("/user/:id", userHandler.Get())
 }
