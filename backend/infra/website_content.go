@@ -39,10 +39,10 @@ func (wr *WebsiteContentRepository) FindByID(id int) (*model.WebsiteContent, err
 }
 
 // FindByWebsiteID websiteContentをWebsiteIDで取得
-func (wr *WebsiteContentRepository) FindByWebsiteID(websoteID int) (*model.WebsiteContent, error) {
-	websiteContent := &model.WebsiteContent{WebsiteID: websoteID}
+func (wr *WebsiteContentRepository) FindByWebsiteID(websiteID int) (*model.WebsiteContent, error) {
+	websiteContent := &model.WebsiteContent{}
 
-	if err := wr.Conn.First(&websiteContent).Error; err != nil {
+	if err := wr.Conn.Where("website_id = ?", websiteID).First(&websiteContent).Error; err != nil {
 		return nil, err
 	}
 
