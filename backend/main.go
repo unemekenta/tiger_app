@@ -32,9 +32,13 @@ func main() {
 	websiteContentUsecase := usecase.NewWebsiteContentUsecase(websiteContentRepository)
 	websiteContentHandler := handler.NewWebsiteContentHandler(websiteContentUsecase)
 
+	moneyAccountRepository := infra.NewMoneyAccountRepository(config.OpenDBConn())
+	moneyAccountUsecase := usecase.NewMoneyAccountUsecase(moneyAccountRepository)
+	moneyAccountHandler := handler.NewMoneyAccountHandler(moneyAccountUsecase)
+
 	e := echo.New()
 	e.Use(middleware.CORS())
-	handler.InitRouting(e, termHandler, categoryHandler, websiteHandler, userHandler, websiteContentHandler)
+	handler.InitRouting(e, termHandler, categoryHandler, websiteHandler, userHandler, websiteContentHandler, moneyAccountHandler)
 
 	// heroku用
 	port := os.Getenv("PORT")
