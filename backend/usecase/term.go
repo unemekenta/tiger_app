@@ -52,7 +52,7 @@ func (tu *termUsecase) FindByID(id int) (*model.Term, error) {
 	return foundTerm, nil
 }
 
-// FindByID termをIDで取得するときのユースケース
+// FindAll termを全て取得するときのユースケース
 func (tu *termUsecase) FindAll() (*[]model.Term, error) {
 	foundTerms, err := tu.termRepo.FindAll()
 	if err != nil {
