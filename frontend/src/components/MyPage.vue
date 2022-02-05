@@ -9,7 +9,7 @@
           b {{userName}}
           |さんのページ
       .main
-        menu01(:allCategories="allCategories").is-only-pc
+        menu01-item(:allCategories="allCategories").is-only-pc
         .main-mypage
           h2.main-mypage-title マイクリップ
           .main-mypage-contents
@@ -20,7 +20,7 @@
             //- .main-mypage-contents-item
             //- .main-mypage-contents-item
             //- .main-mypage-contents-item
-        menu02.is-only-pc
+        menu02-item.is-only-pc
   footer-nav
 
 </template>
@@ -28,16 +28,16 @@
 <script>
 import axios from 'axios'
 import VueJwtDecode from 'vue-jwt-decode'
-import Menu01 from '/src/organisms/Menu01.vue'
-import Menu02 from '/src/organisms/Menu02.vue'
+import Menu01Item from '/src/organisms/Menu01.vue'
+import Menu02Item from '/src/organisms/Menu02.vue'
 import HeaderNav from '/src/molecules/HeaderNav.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
   name: 'MyPage',
   components: {
-    Menu01,
-    Menu02,
+    Menu01Item,
+    Menu02Item,
     HeaderNav,
     FooterNav,
   },

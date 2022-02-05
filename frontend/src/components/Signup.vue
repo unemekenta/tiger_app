@@ -31,7 +31,7 @@ import HeaderNav from '/src/molecules/HeaderNav.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
-  name: 'Signup',
+  name: 'SignupItem',
   components: {
     HeaderNav,
     FooterNav,

@@ -16,7 +16,7 @@
 import Paginate from 'vuejs-paginate'
 
 export default {
-  name: 'Pager',
+  name: 'PagerItem',
   components: {
     Paginate,
   },

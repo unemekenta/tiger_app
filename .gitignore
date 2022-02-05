@@ -11,3 +11,5 @@ backend/db/storage/
 db/data/
 db/sh/
 db/storage/
+
+air.log

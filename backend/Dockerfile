@@ -1,5 +1,5 @@
 # ベースとなるDockerイメージ指定
-FROM golang:1.15-alpine
+FROM golang:1.17-alpine
 
 # コンテナ内に作業ディレクトリを作成 コンテナログイン時のディレクトリ指定
 WORKDIR /go/src/tiger_app/backend

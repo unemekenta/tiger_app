@@ -14,7 +14,7 @@
 import SubCategory from '/src/atoms/SubCategory.vue'
 
 export default {
-  name: 'Menu01',
+  name: 'Menu01Item',
   components: {
     SubCategory,
   },

@@ -20,7 +20,7 @@ import HeaderNav from '/src/molecules/HeaderNav.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
-  name: 'Signin',
+  name: 'SigninItem',
   components: {
     HeaderNav,
     FooterNav,

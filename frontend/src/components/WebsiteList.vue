@@ -10,17 +10,17 @@
           fa-icon(icon="desktop")
           | Top List
       .main
-        menu01(:allCategories="allCategories").is-only-pc
+        menu01-item(:allCategories="allCategories").is-only-pc
         website-list-item(:allLists="allWebsites")
-        menu02.is-only-pc
+        menu02-item.is-only-pc
   footer-nav
 
 </template>
 
 <script>
 import axios from 'axios'
-import Menu01 from '/src/organisms/Menu01.vue'
-import Menu02 from '/src/organisms/Menu02.vue'
+import Menu01Item from '/src/organisms/Menu01.vue'
+import Menu02Item from '/src/organisms/Menu02.vue'
 import WebsiteListItem from '/src/organisms/WebsiteListItem.vue'
 import HeaderNav from '/src/molecules/HeaderNav.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
@@ -28,8 +28,8 @@ import FooterNav from '/src/molecules/FooterNav.vue'
 export default {
   name: 'WebsiteList',
   components: {
-    Menu01,
-    Menu02,
+    Menu01Item,
+    Menu02Item,
     WebsiteListItem,
     HeaderNav,
     FooterNav,

@@ -50,7 +50,7 @@ import { loginMixin } from '../mixin/loginable'
 import SearchBox from '/src/atoms/SearchBox.vue'
 
 export default {
-  name: 'Menu02',
+  name: 'Menu02Item',
   mixins: [loginMixin],
   components: {
     SearchBox,
