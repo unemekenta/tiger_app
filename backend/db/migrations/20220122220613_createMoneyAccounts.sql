@@ -15,11 +15,13 @@ CREATE TABLE money_accounts (
     amount INTEGER NOT NULL,
     title VARCHAR(255) NOT NULL,
     contents TEXT,
+    year INTEGER NOT NULL,
+    month INTEGER NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
-DROP TABLE money_account_labels;
 DROP TABLE money_accounts;
+DROP TABLE money_account_labels;
