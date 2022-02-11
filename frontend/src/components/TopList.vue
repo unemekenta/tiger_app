@@ -9,6 +9,9 @@
         .top-fv-button
           router-link( to="/website_list" ontouchstart="")
             p 一覧ページへ
+        .top-fv-button
+          router-link( to="/my-asset" ontouchstart="")
+            p あといくら？
     .top-list
       //- .top-list-features
       //-   h3 新着

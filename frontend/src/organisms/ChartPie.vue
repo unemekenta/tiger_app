@@ -1,8 +1,10 @@
 <script>
-import { Doughnut } from 'vue-chartjs'
+import { Pie, mixins } from 'vue-chartjs'
+import 'chartjs-plugin-colorschemes'
 
 export default {
-  extends: Doughnut,
+  extends: Pie,
+  mixins: [mixins.reactiveProp],
   name: 'ChartPie',
    props: {
     chartData: Object,
@@ -32,5 +34,5 @@ export default {
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
-<style scoped lang="scss" src="../assets/css/myPage.scss">
+<style scoped lang="scss" src="../assets/css/organisms/chartPie.scss">
 </style>

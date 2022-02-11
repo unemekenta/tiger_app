@@ -45,7 +45,7 @@ export default {
         this.$cookies.config('1d', '', '', true);
         this.$cookies.set('uuid', res.data.uuid);
         alert('ログインしました。')
-        this.$router.push({name: 'WebsiteList'})
+        this.$router.push({name: 'TopList'})
       })
       .catch(error => {
         alert(error)

@@ -1,0 +1,195 @@
+.allWrapper{
+  background-color: $color-bg;
+}
+
+.l-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 0;
+}
+
+.top {
+  line-height: 1.5rem;
+  background-color: $color-bg;
+  margin-top: 2rem;
+}
+
+.main {
+  display: flex;
+  padding: 0 1.0rem;
+  max-width: 120rem;
+  margin: 0 auto;
+
+  &-myasset {
+    margin: 0 auto;
+    padding: 0;
+    background-color: $color-white;
+    width: 100%;
+
+    &-title {
+      padding: 1.5rem 2rem;
+      text-align: left;
+      border-bottom: solid 0.1rem $color-bg;
+      font-weight: bold;
+    }
+
+    &-contents {
+      padding: 1.5rem 0;
+
+      h2 {
+        font-size: 2.0rem;
+        line-height: 1.8em;
+        font-weight: bold;
+        color: $color-white;
+        text-align: left;
+        border-bottom: solid 0.1rem $color-white;
+      }
+
+      h3 {
+        text-align: left;
+        border-bottom: solid 0.1rem $color-brack;
+      }
+      &-top {
+        background-color: $color-green;
+        padding: 1rem;
+
+        &-income {
+          font-weight: bold;
+          display: flex;
+          justify-content: space-between;
+          margin: 1rem 0;
+          color: $color-white;
+          &-label {
+            >p {
+              font-size: 1.6rem;
+            }
+          }
+          &-amount {
+            >p {
+              font-size: 2.0rem;
+            }
+          }
+          &-yen {
+            font-size: 1.6rem;
+          }
+        }
+
+        &-expenses {
+          font-weight: bold;
+          display: flex;
+          justify-content: space-between;
+          margin: 1rem 0;
+          color: $color-white;
+          &-label {
+            >p {
+              font-size: 1.6rem;
+            }
+          }
+          &-amount {
+            >p {
+              font-size: 2.0rem;
+            }
+          }
+          &-yen {
+            font-size: 1.6rem;
+          }
+        }
+
+        &-sum {
+          font-weight: bold;
+          display: flex;
+          justify-content: space-between;
+          margin: 1rem 0;
+          background-color: $color-white;
+          padding: 1rem;
+          &-label {
+            >p {
+              font-size: 1.6rem;
+            }
+          }
+          &-amount {
+            >p {
+              font-size: 2.6rem;
+            }
+          }
+          &-yen {
+            font-size: 1.6rem;
+          }
+        }
+      }
+
+      &-details {
+        padding: 1rem;
+        &-item {
+          display: flex;
+          &-inner {
+            width: 50%;
+          }
+        }
+      }
+      &-form {
+        &-component {
+          margin: auto;
+          padding: 1rem 0;
+          width: 70%;
+        }
+        >form {
+          background-color: $color-green;
+
+          label {
+            display: block;
+            text-align: left;
+            width: 70%;
+            margin: auto;
+            >p {
+              color: $color-white;
+            }
+          }
+
+          input, select {
+            font-size: 1.6rem;
+            margin: 1.0rem auto;
+            height: 2.7rem;
+            width: 70%;
+          }
+
+          >button {
+            width: 70%;
+            background-color: $color-green;
+            color: $color-white;
+            font-weight: bold;
+            border: solid $color-white 0.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            &:hover {
+              background-color: $color-white;
+              >p {
+                color: $color-green;
+              }
+            }
+          }
+        }
+
+        // &-component {
+          
+        // }
+
+        >button {
+          width: 20rem;
+          background-color: $color-green;
+          color: $color-white;
+          font-weight: bold;
+          border: solid $color-green 0.1rem;
+          cursor: pointer;
+          transition: 0.3s;
+          &:hover {
+            background-color: $color-white;
+            >p {
+              color: $color-green;
+            }
+          }
+        }
+      }
+    }
+  }
+}
