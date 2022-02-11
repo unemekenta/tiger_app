@@ -11,10 +11,10 @@ import (
 
 // MoneyAccountUsecase moneyAccount usecaseのinterface
 type MoneyAccountUsecase interface {
-	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, updatedAt time.Time) (*model.MoneyAccount, error)
+	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	FindByID(id int) (*model.MoneyAccount, error)
-	FindByUser(id int) (*[]model.MoneyAccount, error)
-	Update(id int, moneyAccountLabelID int, amount int, title string, contents string, updatedAt time.Time) (*model.MoneyAccount, error)
+	FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error)
+	Update(id int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	Delete(id int) error
 }
 
@@ -28,8 +28,8 @@ func NewMoneyAccountUsecase(moneyAccountRepo repository.MoneyAccountRepository) 
 }
 
 // Create moneyAccountを保存するときのユースケース
-func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, updatedAt time.Time) (*model.MoneyAccount, error) {
-	moneyAccount, err := model.NewMoneyAccount(userID, moneyAccountLabelID, amount, title, contents, updatedAt)
+func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error) {
+	moneyAccount, err := model.NewMoneyAccount(userID, moneyAccountLabelID, amount, title, contents, year, month, updatedAt)
 	if err != nil {
 		return nil, err
 	}
@@ -53,8 +53,8 @@ func (mu *moneyAccountUsecase) FindByID(id int) (*model.MoneyAccount, error) {
 }
 
 // FindByUser moneyAccountをUserで取得するときのユースケース
-func (mu *moneyAccountUsecase) FindByUser(id int) (*[]model.MoneyAccount, error) {
-	foundMoneyAccounts, err := mu.moneyAccountRepo.FindByUser(id)
+func (mu *moneyAccountUsecase) FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error) {
+	foundMoneyAccounts, err := mu.moneyAccountRepo.FindByUser(id, year, month)
 	if err != nil {
 		return nil, err
 	}
@@ -63,13 +63,13 @@ func (mu *moneyAccountUsecase) FindByUser(id int) (*[]model.MoneyAccount, error)
 }
 
 // Update moneyAccountを更新するときのユースケース
-func (mu *moneyAccountUsecase) Update(id int, moneyAccountLabelID int, amount int, title string, contents string, updatedAt time.Time) (*model.MoneyAccount, error) {
+func (mu *moneyAccountUsecase) Update(id int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error) {
 	targetMoneyAccount, err := mu.moneyAccountRepo.FindByID(id)
 	if err != nil {
 		return nil, err
 	}
 
-	err = targetMoneyAccount.Set(moneyAccountLabelID, amount, title, contents, updatedAt)
+	err = targetMoneyAccount.Set(moneyAccountLabelID, amount, title, contents, year, month, updatedAt)
 	if err != nil {
 		return nil, err
 	}

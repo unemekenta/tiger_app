@@ -13,11 +13,13 @@ type MoneyAccount struct {
 	Amount              int    `json:"amount"`
 	Title               string `json:"title"`
 	Contents            string `json:"contents"`
+	Year                int    `json:"year"`
+	Month               int    `json:"month"`
 	CreatedAt           time.Time
 	UpdatedAt           time.Time
 }
 
-func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title string, contents string, updatedAt time.Time) (*MoneyAccount, error) {
+func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*MoneyAccount, error) {
 	if title == "" {
 		return nil, errors.New("titleを入力してください")
 	}
@@ -27,6 +29,8 @@ func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title stri
 		MoneyAccountLabelID: moneyAccountLabelID,
 		Amount:              amount,
 		Title:               title,
+		Year:                year,
+		Month:               month,
 		Contents:            contents,
 		UpdatedAt:           updatedAt,
 	}
@@ -35,7 +39,7 @@ func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title stri
 }
 
 // Set moneyAccountのセッター
-func (c *MoneyAccount) Set(moneyAccountLabelID int, amount int, title string, contents string, updatedAt time.Time) error {
+func (c *MoneyAccount) Set(moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) error {
 	if title == "" {
 		return errors.New("titleを入力してください")
 	}
@@ -44,6 +48,8 @@ func (c *MoneyAccount) Set(moneyAccountLabelID int, amount int, title string, co
 	c.Amount = amount
 	c.Title = title
 	c.Contents = contents
+	c.Year = year
+	c.Month = month
 	c.UpdatedAt = updatedAt
 
 	return nil
