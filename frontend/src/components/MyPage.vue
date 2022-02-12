@@ -57,6 +57,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);
@@ -87,6 +88,7 @@ export default {
         })
           .then((res) => {
             this.userName = res.data.name;
+            return;
           })
           .catch(error => {
             alert('権限がありません', error);

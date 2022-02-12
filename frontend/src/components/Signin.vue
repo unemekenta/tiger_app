@@ -48,13 +48,15 @@ export default {
         this.$router.push({name: 'TopList'})
       })
       .catch(error => {
-        alert(error)
+        alert(error);
+        return;
       });
     },
     async getAllCategories () {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

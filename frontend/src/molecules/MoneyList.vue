@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     ul(v-for="i in arr")
-      money-list-item-shadow(:label="i.title" :amount="i.amount" :url="i.title")
+      money-list-item-shadow(:id="i.id" :label="i.title" :amount="i.amount")
 
 </template>
 

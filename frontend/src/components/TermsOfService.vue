@@ -47,6 +47,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

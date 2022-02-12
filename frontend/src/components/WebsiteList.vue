@@ -67,6 +67,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites')
         .then(res => {
           this.allWebsites = res.data;
+          return;
         })
         .catch(error => {
           console.log(error);
@@ -77,6 +78,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites/search?q=' + this.serchQuery)
         .then(res => {
           this.allWebsites = res.data;
+          return;
         })
         .catch(error => {
           console.log(error);
@@ -87,6 +89,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

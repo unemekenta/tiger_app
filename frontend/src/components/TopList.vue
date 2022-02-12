@@ -10,7 +10,7 @@
           router-link( to="/website_list" ontouchstart="")
             p 一覧ページへ
         .top-fv-button
-          router-link( to="/my-asset" ontouchstart="")
+          router-link( to="/my_asset" ontouchstart="")
             p あといくら？
     .top-list
       //- .top-list-features
@@ -56,6 +56,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

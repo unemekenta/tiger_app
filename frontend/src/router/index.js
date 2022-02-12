@@ -10,6 +10,7 @@ import MyPage from '@/components/MyPage'
 import WebsiteDetail from '@/components/WebsiteDetail'
 import WebsiteListByCategory from '@/components/WebsiteListByCategory'
 import MyAsset from '@/components/MyAsset'
+import MyAssetItemDetail from '@/components/MyAssetItemDetail'
 
 Vue.use(Router)
 
@@ -73,11 +74,20 @@ let router = new Router({
       ,meta: { title: 'カテゴリー別一覧' }
     },
     {
-      path: '/my-asset',
+      path: '/my_asset',
       name: 'MyAsset',
       component: MyAsset,
       meta: {
         title: '今月いくら？TOP',
+        requiresAuth: true
+      },
+    },
+    {
+      path: '/my_asset_detail/:id',
+      name: 'MyAssetItemDetail',
+      component: MyAssetItemDetail,
+      meta: {
+        title: '項目詳細',
         requiresAuth: true
       },
     },

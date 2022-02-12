@@ -1,5 +1,5 @@
 <template lang="pug">
-  li.moneylist-shadow(@click.prevent.self="jumpTo(url)")
+  li.moneylist-shadow(@click.prevent.self="jumpTo(id)")
     p {{this.label}}
     p {{this.amount}} 円
 
@@ -11,11 +11,11 @@ export default {
   props: {
     label: String,
     amount: Number,
-    url: String,
+    id: Number,
   },
   methods: {
-    jumpTo (url) {
-      window.open(url, '_blank')
+    jumpTo (id) {
+      this.$router.push({name: 'MyAssetItemDetail', params: {id: id}})
     },
   },
 }

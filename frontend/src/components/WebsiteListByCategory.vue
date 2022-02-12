@@ -58,6 +58,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/websites_category/' + this.$route.params.category_id)
       .then(res => {
         this.allWebsites = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);
@@ -68,6 +69,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

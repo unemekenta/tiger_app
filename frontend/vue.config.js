@@ -8,6 +8,8 @@ if (process.env.NODE_ENV !== undefined) {
 
 module.exports = {
   devServer: {
+    // heroku用
+    disableHostCheck: true
   },
 
   css: {

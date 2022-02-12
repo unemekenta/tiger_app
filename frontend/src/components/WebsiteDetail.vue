@@ -53,6 +53,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/website/' + this.$route.params.id)
       .then(res => {
         this.websiteDetail = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);
@@ -63,6 +64,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/website_content/' + this.$route.params.id)
       .then(res => {
         this.websiteDetailContent = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

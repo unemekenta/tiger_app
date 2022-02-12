@@ -194,6 +194,7 @@ export default {
           this.insertChartData(element);
           this.classifyMoneyAccount(element);
         })
+        return;
       })
       .catch(error => {
         console.log(error);
@@ -234,6 +235,7 @@ export default {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);
@@ -252,6 +254,7 @@ export default {
           )
           .then((res) => {
             this.jwtUserData = res.data;
+            return;
           })
           .catch((error) => {
             alert('ログインしてください');
@@ -282,7 +285,6 @@ export default {
       this.formVisibleFlg =! this.formVisibleFlg;
     },
     async postMoneyAccount() {
-      console.log("送信");
       let params = new URLSearchParams()
       params.append('userId', this.userID)
       params.append('moneyAccountLabelId', this.formMoneyAccountLabelId)
@@ -291,16 +293,18 @@ export default {
       params.append('contents', this.formContents)
       params.append('year', this.formYear)
       params.append('month', this.formMonth)
-      await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user', params)
-      .then(res => {
-        this.$cookies.config('1d', '', '', true);
-        this.$cookies.set('uuid', res.data.uuid);
+      await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user', params, {
+        headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+      })
+      .then(() => {
         alert( this.formTitle + 'を登録しました。');
         this.getMoneyAccount(this.userID);
         this.formVisibleFlg = false;
+        return;
       })
       .catch(error => {
-        alert(error)
+        alert(error);
+        return;
       });
     },
   }
