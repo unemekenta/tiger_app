@@ -272,10 +272,9 @@ export default {
             this.getMoneyAccount(this.userID);
           })
           .catch((error) => {
-            alert('権限がありません');
+            alert('権限がありません。');
             return error;
           });
-        return;
       } else {
         alert('ログインしてください');
         return;

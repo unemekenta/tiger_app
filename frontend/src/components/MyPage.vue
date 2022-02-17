@@ -91,8 +91,8 @@ export default {
             return;
           })
           .catch(error => {
-            alert('権限がありません', error);
-            return;
+            alert('権限がありません。');
+            return error;
           });
         return;
       } else {
