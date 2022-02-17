@@ -4,7 +4,6 @@
   .l-container#container
     .top
       .main
-        menu01-item(:allCategories="allCategories").is-only-pc
         .main-myasset
           h2.main-myasset-title {{userName}} さんのページ
           .main-myasset-contents
@@ -14,7 +13,7 @@
               :options="chartOptions"
               :style='"width: 70%; margin: 2rem auto;"'
             )
-  
+
             .main-myasset-contents-top
               h2 {{year}} 年 {{month}} 月の収支
               .main-myasset-contents-top-income
@@ -38,7 +37,7 @@
                   p {{ sumIncome - sumExpenses }}
                     span.main-myasset-contents-top-sum-yen
                       | 円
-  
+
             .main-myasset-contents-details
               h3 {{year}} 年 {{month}} 月の収支内訳
               .main-myasset-contents-details-item
@@ -86,7 +85,6 @@
                 p -
               button(v-else @click="changeFormVisibleFlg()")
                 p +
-        menu02-item.is-only-pc
   footer-nav
 
 </template>
@@ -94,8 +92,6 @@
 <script>
 import axios from 'axios'
 import VueJwtDecode from 'vue-jwt-decode'
-import Menu01Item from '../organisms/Menu01.vue'
-import Menu02Item from '../organisms/Menu02.vue'
 import HeaderNav from '../molecules/HeaderNav.vue'
 import FooterNav from '../molecules/FooterNav.vue'
 import ChartPie from '../organisms/ChartPie.vue';
@@ -104,8 +100,6 @@ import MoneyList from '../molecules/MoneyList.vue'
 export default {
   name: 'MyAsset',
   components: {
-    Menu01Item,
-    Menu02Item,
     HeaderNav,
     FooterNav,
     ChartPie,
@@ -138,7 +132,6 @@ export default {
         { text: '2021年', value: '2021' },
         { text: '2022年', value: '2022' },
       ],
-      allCategories: [],
       jwtUserData: '',
       income: [],
       expenses: [],
@@ -156,7 +149,6 @@ export default {
     }
   },
   async created() {
-    this.getAllCategories();
     await this.getUser();
     this.sumAmount(this.income, this.sumIncome);
   },
