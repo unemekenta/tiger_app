@@ -12,5 +12,4 @@ db/data/
 db/sh/
 db/storage/
 
-backend/tmp/air.log
-backend/tmp/main
+backend/tmp/
