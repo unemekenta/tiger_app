@@ -34,6 +34,8 @@ type requestMoneyAccount struct {
 	Amount              int       `json:"amount"`
 	Title               string    `json:"title"`
 	Contents            string    `json:"contents"`
+	Year                int       `json:"year"`
+	Month               int       `json:"month"`
 	UpdatedAt           time.Time `json:"updatedAt"`
 }
 
@@ -43,6 +45,8 @@ type responseMoneyAccount struct {
 	Amount              int       `json:"amount"`
 	Title               string    `json:"title"`
 	Contents            string    `json:"contents"`
+	Year                int       `json:"year"`
+	Month               int       `json:"month"`
 	UpdatedAt           time.Time `json:"updatedAt"`
 }
 
@@ -54,7 +58,7 @@ func (mh *moneyAccountHandler) Post() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		createdMoneyAccount, err := mh.moneyAccountUsecase.Create(req.UserID, req.MoneyAccountLabelID, req.Amount, req.Title, req.Contents, req.UpdatedAt)
+		createdMoneyAccount, err := mh.moneyAccountUsecase.Create(req.UserID, req.MoneyAccountLabelID, req.Amount, req.Title, req.Contents, req.Year, req.Month, req.UpdatedAt)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
@@ -65,6 +69,8 @@ func (mh *moneyAccountHandler) Post() echo.HandlerFunc {
 			Amount:              createdMoneyAccount.Amount,
 			Title:               createdMoneyAccount.Title,
 			Contents:            createdMoneyAccount.Contents,
+			Year:                createdMoneyAccount.Year,
+			Month:               createdMoneyAccount.Month,
 			UpdatedAt:           createdMoneyAccount.UpdatedAt,
 		}
 
@@ -91,6 +97,8 @@ func (mh *moneyAccountHandler) Get() echo.HandlerFunc {
 			Amount:              foundMoneyAccount.Amount,
 			Title:               foundMoneyAccount.Title,
 			Contents:            foundMoneyAccount.Contents,
+			Year:                foundMoneyAccount.Year,
+			Month:               foundMoneyAccount.Month,
 			UpdatedAt:           foundMoneyAccount.UpdatedAt,
 		}
 
@@ -102,7 +110,9 @@ func (mh *moneyAccountHandler) Get() echo.HandlerFunc {
 func (mh *moneyAccountHandler) GetByUser() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id, err := strconv.Atoi((c.Param("id")))
-		foundMoneyAccounts, err := mh.moneyAccountUsecase.FindByUser(id)
+		year, err := strconv.Atoi((c.Param("year")))
+		month, err := strconv.Atoi((c.Param("month")))
+		foundMoneyAccounts, err := mh.moneyAccountUsecase.FindByUser(id, year, month)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
@@ -116,6 +126,8 @@ func (mh *moneyAccountHandler) GetByUser() echo.HandlerFunc {
 				Amount:              fm.Amount,
 				Title:               fm.Title,
 				Contents:            fm.Contents,
+				Year:                fm.Year,
+				Month:               fm.Month,
 				UpdatedAt:           fm.UpdatedAt,
 			})
 		}
@@ -137,7 +149,7 @@ func (mh *moneyAccountHandler) Put() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		updatedMoneyAccount, err := mh.moneyAccountUsecase.Update(id, req.MoneyAccountLabelID, req.Amount, req.Title, req.Contents, req.UpdatedAt)
+		updatedMoneyAccount, err := mh.moneyAccountUsecase.Update(id, req.MoneyAccountLabelID, req.Amount, req.Title, req.Contents, req.Year, req.Month, req.UpdatedAt)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
@@ -148,6 +160,8 @@ func (mh *moneyAccountHandler) Put() echo.HandlerFunc {
 			Amount:              updatedMoneyAccount.Amount,
 			Title:               updatedMoneyAccount.Title,
 			Contents:            updatedMoneyAccount.Contents,
+			Year:                updatedMoneyAccount.Year,
+			Month:               updatedMoneyAccount.Month,
 			UpdatedAt:           updatedMoneyAccount.UpdatedAt,
 		}
 

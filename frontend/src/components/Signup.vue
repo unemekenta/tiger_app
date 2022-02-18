@@ -31,7 +31,7 @@ import HeaderNav from '/src/molecules/HeaderNav.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
-  name: 'Signup',
+  name: 'SignupItem',
   components: {
     HeaderNav,
     FooterNav,
@@ -62,15 +62,18 @@ export default {
           })
           .catch(error => {
             alert('アカウントを作成できませんでした。emailがすでに登録されている可能性があります。', error)
+            return;
           });
       } else {
         alert('未記入の項目があります')
+        return;
       }
     },
     async getAllCategories () {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

@@ -1,0 +1,96 @@
+.allWrapper{
+  background-color: $color-bg;
+}
+
+.l-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 0;
+}
+
+.top {
+  line-height: 1.5rem;
+  background-color: $color-bg;
+  margin-top: 1rem;
+}
+
+.main {
+  display: flex;
+  padding: 0 1.0rem;
+  max-width: 120rem;
+  margin: 0 auto;
+
+  &-myasset-detail {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+
+    &-title {
+      padding: 1.5rem 2rem;
+      text-align: left;
+      border-bottom: solid 0.1rem $color-bg;
+      font-weight: bold;
+    }
+
+    &-contents {
+      padding: 1.5rem 0;
+
+      &-form {
+        &-component {
+          margin: 0 auto;
+          padding: 1rem 0;
+        }
+        >form {
+          label {
+            display: block;
+            text-align: left;
+            width: 70%;
+            margin: auto;
+            >p {
+              font-size: 1.4rem;
+            }
+          }
+
+          input, select, textarea {
+            font-size: 1.6rem;
+            margin: 0 auto;
+            width: 70%;
+            outline: none;
+            border: none;
+          }
+          input, select {
+            height: 2.7rem;
+          }
+
+          >button {
+            width: 70%;
+            font-weight: bold;
+            border: solid $color-white 0.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            &:hover {
+              background-color: $color-white;
+              >p {
+                color: $color-green;
+              }
+            }
+          }
+        }
+
+        >button {
+          width: 20rem;
+          font-weight: bold;
+          border: solid $color-green 0.1rem;
+          cursor: pointer;
+          transition: 0.3s;
+          &:hover {
+            background-color: $color-white;
+            >p {
+              color: $color-green;
+            }
+          }
+        }
+      }
+    }
+  }
+}

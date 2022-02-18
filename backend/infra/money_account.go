@@ -39,10 +39,10 @@ func (mr *MoneyAccountRepository) FindByID(id int) (*model.MoneyAccount, error) 
 }
 
 // FindByUser moneyAccountををUserで取得
-func (mr *MoneyAccountRepository) FindByUser(id int) (*[]model.MoneyAccount, error) {
+func (mr *MoneyAccountRepository) FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error) {
 	moneyAccounts := &[]model.MoneyAccount{}
 
-	if err := mr.Conn.Order("id").Where("user_id = ?", id).Find(&moneyAccounts).Error; err != nil {
+	if err := mr.Conn.Order("id").Where("user_id = ?", id).Where("user_id = ?", id).Where("year = ?", year).Where("month = ?", month).Find(&moneyAccounts).Error; err != nil {
 		return nil, err
 	}
 

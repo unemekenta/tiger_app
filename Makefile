@@ -24,3 +24,6 @@ frontend-local:
 
 air:
 	cd backend; air -c .air.toml
+
+reset-frontend:
+	cd frontend; rm -rf node_modules && rm package-lock.json && npm cache clear --force && npm cache clean --force && npm i

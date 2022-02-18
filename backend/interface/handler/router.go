@@ -26,10 +26,6 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	api.POST("/login", userHandler.Login())
 	api.POST("/login_check", userHandler.LoginCheck())
 
-	api.GET("/money_account/user/:id", moneyAccountHandler.GetByUser())
-	api.POST("/money_account/user", moneyAccountHandler.Post())
-	api.DELETE("/money_account/user/:id", moneyAccountHandler.Delete())
-
 	auth := api.Group("/auth")
 	auth.Use(middleware.JWT([]byte("secret")))
 	// /auth下はJWTの認証が必要
@@ -37,4 +33,10 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	auth.POST("/authCheck", userHandler.AuthCheck())
 
 	auth.GET("/user/:id", userHandler.Get())
+
+	auth.GET("/money_account/user/:id/:year/:month", moneyAccountHandler.GetByUser())
+	auth.POST("/money_account/user", moneyAccountHandler.Post())
+	auth.GET("/money_account/user/detail/:id", moneyAccountHandler.Get())
+	auth.PUT("/money_account/user/:id", moneyAccountHandler.Put())
+	auth.DELETE("/money_account/user/:id", moneyAccountHandler.Delete())
 }

@@ -4,11 +4,13 @@ import TopList from '@/components/TopList'
 import PrivacyPolicy from '@/components/PrivacyPolicy'
 import TermsOfService from '@/components/TermsOfService'
 import WebsiteList from '@/components/WebsiteList'
-import Signup from '@/components/Signup'
-import Signin from '@/components/Signin'
+import SignupItem from '@/components/Signup'
+import SigninItem from '@/components/Signin'
 import MyPage from '@/components/MyPage'
 import WebsiteDetail from '@/components/WebsiteDetail'
 import WebsiteListByCategory from '@/components/WebsiteListByCategory'
+import MyAsset from '@/components/MyAsset'
+import MyAssetItemDetail from '@/components/MyAssetItemDetail'
 
 Vue.use(Router)
 
@@ -35,13 +37,13 @@ let router = new Router({
     {
       path: '/signup',
       name: 'Signup',
-      component: Signup,
+      component: SignupItem,
       meta: { title: 'サインアップ' }
     },
     {
       path: '/signin',
       name: 'Signin',
-      component: Signin,
+      component: SigninItem,
       meta: { title: 'サインイン' }
     },
     {
@@ -70,7 +72,25 @@ let router = new Router({
       name: 'WebsiteListByCategory',
       component: WebsiteListByCategory
       ,meta: { title: 'カテゴリー別一覧' }
-    }
+    },
+    {
+      path: '/my_asset',
+      name: 'MyAsset',
+      component: MyAsset,
+      meta: {
+        title: '今月いくら？TOP',
+        requiresAuth: true
+      },
+    },
+    {
+      path: '/my_asset_detail/:id',
+      name: 'MyAssetItemDetail',
+      component: MyAssetItemDetail,
+      meta: {
+        title: '項目詳細',
+        requiresAuth: true
+      },
+    },
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

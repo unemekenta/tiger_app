@@ -20,7 +20,7 @@ import HeaderNav from '/src/molecules/HeaderNav.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
 
 export default {
-  name: 'Signin',
+  name: 'SigninItem',
   components: {
     HeaderNav,
     FooterNav,
@@ -45,16 +45,18 @@ export default {
         this.$cookies.config('1d', '', '', true);
         this.$cookies.set('uuid', res.data.uuid);
         alert('ログインしました。')
-        this.$router.push({name: 'WebsiteList'})
+        this.$router.push({name: 'TopList'})
       })
       .catch(error => {
-        alert(error)
+        alert(error);
+        return;
       });
     },
     async getAllCategories () {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
       .then(res => {
         this.allCategories = res.data;
+        return;
       })
       .catch(error => {
         console.log(error);

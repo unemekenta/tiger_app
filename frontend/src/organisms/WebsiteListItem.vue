@@ -26,20 +26,20 @@
               | {{createDate(item.updatedAt)}}
           .weblist-contents-inner-btm-right
             cv-button(label="公式サイトへ" :url="item.url")
-  pager(:maxPage="maxPage" @changePage="this.changePageNum")
+  pager-item(:maxPage="maxPage" @changePage="this.changePageNum")
 
 </template>
 
 <script>
 import CvButton from '/src/atoms/CvButton.vue'
-import Pager from '/src/atoms/Pager.vue'
+import PagerItem from '/src/atoms/Pager.vue'
 import CategoryTag from '/src/atoms/CategoryTag.vue'
 
 export default {
   name: 'WebsiteListItem',
   components: {
     CvButton,
-    Pager,
+    PagerItem,
     CategoryTag,
   },
   props: {

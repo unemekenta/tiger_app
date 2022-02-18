@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 
 if (process.env.NODE_ENV !== undefined) {
   if (!process.env.VUE_APP_API_BASE_URL) {
@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== undefined) {
 
 module.exports = {
   devServer: {
+    // heroku用
     disableHostCheck: true
   },
 

@@ -5,24 +5,25 @@
       img(src="../assets/images/top-fv.png")
       .top-fv-txt
         h1 Web Media Database
-        p webメディアの情報を蓄積する・見つける
         .top-fv-button
           router-link( to="/website_list" ontouchstart="")
-            p 一覧ページへ
+            p Web Media Database
+        .top-fv-button
+          router-link( to="/my_asset" ontouchstart="")
+            p あといくら？
     .top-list
       //- .top-list-features
       //-   h3 新着
       //-   card-slider(:itemList="this.cardItems")
-      .top-list-categories
-        h3 カテゴリから探す
-        tag-slider(:itemList="this.allCategories")
+      //- .top-list-categories
+      //-   h3 カテゴリから探す
+      //-   tag-slider(:itemList="this.allCategories")
   footer-nav
 
 
 </template>
 
 <script>
-import axios from 'axios'
 import CardSlider from '/src/organisms/CardSlider.vue'
 import TagSlider from '/src/organisms/TagSlider.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
@@ -38,27 +39,24 @@ export default {
     return {
       // items準備
       cardItems:['aa', 'bb', 'cc'],
-      allCategories: [],
+      // allCategories: [],
     }
   },
   created () {
-    this.getAllCategories();
+    // this.getAllCategories();
   },
   methods: {
-    signOut () {
-      window.$cookies.remove('jwt');
-      this.$router.push('/signin');
-    },
-    async getAllCategories () {
-      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
-      .then(res => {
-        this.allCategories = res.data;
-      })
-      .catch(error => {
-        console.log(error);
-        return;
-      });
-    },
+    // async getAllCategories () {
+    //   await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
+    //   .then(res => {
+    //     this.allCategories = res.data;
+    //     return;
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     return;
+    //   });
+    // },
   },
 }
 </script>
