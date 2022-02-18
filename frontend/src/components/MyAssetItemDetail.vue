@@ -122,7 +122,6 @@ export default {
     };
   },
   async created() {
-    this.getAllCategories();
     await this.getUser();
     this.getItemData();
   },
