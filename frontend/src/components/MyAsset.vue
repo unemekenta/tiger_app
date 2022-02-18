@@ -15,7 +15,7 @@
             )
 
             .main-myasset-contents-top
-              h2 {{year}} 年 {{month}} 月の収支
+              h2 {{targetYear}} 年 {{targetMonth}} 月
               .main-myasset-contents-top-income
                 .main-myasset-contents-top-income-label
                   p 収入
@@ -39,7 +39,7 @@
                       |  円
 
             .main-myasset-contents-details
-              h3 {{year}} 年 {{month}} 月の収支内訳
+              h3 収支内訳
               .main-myasset-contents-details-item
                 .main-myasset-contents-details-item-inner
                   h4 収入
@@ -53,14 +53,14 @@
                   label(for="year")
                     p 年
                   select(name="year" v-model="formYear")
-                    option(v-for="option in formYearOptions" :value="option.value")
-                      | {{ option.text }}
+                    option(v-for="y in 50" :value="y + 2020")
+                      | {{ y + 2020 }}年
                 .main-myasset-contents-form-component
                   label(for="month")
                     p 月
                   select(name="month" v-model="formMonth")
-                    option(v-for="option in formMonthOptions" :value="option.value")
-                      | {{ option.text }}
+                    option(v-for="m in 12" :value="m")
+                      | {{ m }}月
                 .main-myasset-contents-form-component
                   label(for="title")
                     p 項目名
@@ -111,29 +111,8 @@ export default {
     return {
       userName: '',
       userID: 0,
-      year: 2022,
-      month: 2,
-      formMonthOptions: [
-        { text: '1月', value: '1' },
-        { text: '2月', value: '2' },
-        { text: '3月', value: '3' },
-        { text: '4月', value: '4' },
-        { text: '5月', value: '5' },
-        { text: '6月', value: '6' },
-        { text: '7月', value: '7' },
-        { text: '8月', value: '8' },
-        { text: '9月', value: '9' },
-        { text: '10月', value: '10' },
-        { text: '11月', value: '11' },
-        { text: '12月', value: '12' },
-      ],
-      formYearOptions: [
-        { text: '2018年', value: '2018' },
-        { text: '2019年', value: '2019' },
-        { text: '2020年', value: '2020' },
-        { text: '2021年', value: '2021' },
-        { text: '2022年', value: '2022' },
-      ],
+      targetYear: 2020,
+      targetMonth: 1,
       jwtUserData: '',
       income: [],
       expenses: [],
@@ -151,15 +130,21 @@ export default {
     }
   },
   async created() {
-    await this.getUser();
-    this.sumAmount(this.income, this.sumIncome);
+    this.getUser();
+    this.getDate();
+    await this.sumAmount(this.income, this.sumIncome);
   },
   methods: {
+    getDate() {
+      const date = new Date();
+      this.targetYear = date.getFullYear();
+      this.targetMonth = date.getMonth()+1;
+    },
     async getMoneyAccount (userID) {
       this.resetMoneyAccount();
       this.resetChartData();
       this.resetSumData();
-      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user/' + userID+ '/' + this.year+ '/' + this.month,
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user/' + userID+ '/' + this.targetYear+ '/' + this.targetMonth,
       {
         headers: {'Authorization': 'Bearer ' + this.jwtUserData}
       })
@@ -272,6 +257,9 @@ export default {
       params.append('moneyAccountLabelId', this.formMoneyAccountLabelId)
       params.append('amount', this.formAmount)
       params.append('title', this.formTitle)
+      if (!this.formContents) {
+        this.formContents = "";
+      }
       params.append('contents', this.formContents)
       params.append('year', this.formYear)
       params.append('month', this.formMonth)

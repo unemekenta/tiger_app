@@ -13,20 +13,14 @@
                   label(for="year")
                     p 年
                   select(name="year" v-model="formYear")
-                    option(
-                      v-for="option in formYearOptions",
-                      :value="option.value"
-                    )
-                      | {{ option.text }}
+                    option(v-for="y in 50" :value="y + 2020")
+                      | {{ y + 2020 }}年
                 .main-myasset-detail-contents-form-component
                   label(for="month")
                     p 月
                   select(name="month", v-model="formMonth")
-                    option(
-                      v-for="option in formMonthOptions",
-                      :value="option.value"
-                    )
-                      | {{ option.text }}
+                    option(v-for="m in 12" :value="m")
+                      | {{ m }}月
                 .main-myasset-detail-contents-form-component
                   label(for="title")
                     p 項目名
@@ -79,27 +73,6 @@ export default {
     return {
       userName: "",
       userID: 0,
-      formMonthOptions: [
-        { text: "1月", value: "1" },
-        { text: "2月", value: "2" },
-        { text: "3月", value: "3" },
-        { text: "4月", value: "4" },
-        { text: "5月", value: "5" },
-        { text: "6月", value: "6" },
-        { text: "7月", value: "7" },
-        { text: "8月", value: "8" },
-        { text: "9月", value: "9" },
-        { text: "10月", value: "10" },
-        { text: "11月", value: "11" },
-        { text: "12月", value: "12" },
-      ],
-      formYearOptions: [
-        { text: "2018年", value: "2018" },
-        { text: "2019年", value: "2019" },
-        { text: "2020年", value: "2020" },
-        { text: "2021年", value: "2021" },
-        { text: "2022年", value: "2022" },
-      ],
       allCategories: [],
       jwtUserData: "",
       formMoneyAccountLabelOptions: [
