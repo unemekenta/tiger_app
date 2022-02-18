@@ -20,23 +20,23 @@
                 .main-myasset-contents-top-income-label
                   p 収入
                 .main-myasset-contents-top-income-amount
-                  p {{ sumIncome }} 
+                  p {{ $_commify(sumIncome) }}
                     span.main-myasset-contents-top-income-yen
-                      | 円
+                      |  円
               .main-myasset-contents-top-expenses
                 .main-myasset-contents-top-expenses-label
                   p 支出
                 .main-myasset-contents-top-expenses-amount
-                  p {{ sumExpenses }} 
+                  p {{ $_commify(sumExpenses) }}
                     span.main-myasset-contents-top-expenses-yen
-                      | 円
+                      |  円
               .main-myasset-contents-top-sum
                 .main-myasset-contents-top-sum-label
                   p 残金
                 .main-myasset-contents-top-sum-amount
-                  p {{ sumIncome - sumExpenses }}
+                  p {{ $_commify(sumIncome - sumExpenses) }}
                     span.main-myasset-contents-top-sum-yen
-                      | 円
+                      |  円
 
             .main-myasset-contents-details
               h3 {{year}} 年 {{month}} 月の収支内訳
@@ -90,6 +90,7 @@
 </template>
 
 <script>
+import { priceMixin } from '../mixin/price'
 import axios from 'axios'
 import VueJwtDecode from 'vue-jwt-decode'
 import HeaderNav from '../molecules/HeaderNav.vue'
@@ -99,6 +100,7 @@ import MoneyList from '../molecules/MoneyList.vue'
 
 export default {
   name: 'MyAsset',
+  mixins: [priceMixin],
   components: {
     HeaderNav,
     FooterNav,
@@ -223,17 +225,6 @@ export default {
       }
     },
 
-    async getAllCategories () {
-      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
-      .then(res => {
-        this.allCategories = res.data;
-        return;
-      })
-      .catch(error => {
-        console.log(error);
-        return;
-      });
-    },
     async getUser () {
       if (window.$cookies.isKey('uuid')) {
         console.log(window.$cookies.get('uuid'));

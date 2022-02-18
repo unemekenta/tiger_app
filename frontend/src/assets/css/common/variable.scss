@@ -69,6 +69,16 @@ button {
   border: none;
 }
 
+button.basic-btn {
+  background-color: $color-blue;
+  color: $color-white;
+}
+
+button.warn-btn {
+  background-color: $color-red;
+  color: $color-white;
+}
+
 .is-only-sp {
   display: none;
   @include tb {

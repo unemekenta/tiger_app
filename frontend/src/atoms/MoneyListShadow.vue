@@ -1,13 +1,16 @@
 <template lang="pug">
   li.moneylist-shadow(@click.prevent.self="jumpTo(id)")
     p {{this.label}}
-    p {{this.amount}} 円
+    p {{$_commify(this.amount)}} 円
 
 </template>
 
 <script>
+import { priceMixin } from '../mixin/price'
+
 export default {
   name: 'MoneyListItemShadow',
+  mixins: [priceMixin],
   props: {
     label: String,
     amount: Number,
