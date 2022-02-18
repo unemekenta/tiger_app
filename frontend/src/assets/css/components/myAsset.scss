@@ -41,7 +41,7 @@
         line-height: 1.8em;
         font-weight: bold;
         color: $color-white;
-        text-align: left;
+        text-align: center;
         border-bottom: solid 0.1rem $color-white;
       }
 
@@ -52,6 +52,15 @@
       &-top {
         background-color: $color-green;
         padding: 1rem;
+
+        &-icon {
+          margin: auto 3rem;
+          padding: 0;
+          background-color: transparent;
+          color: $color-white;
+          font-size: 2.0rem;
+          line-height: 1.8em;
+        }
 
         &-income {
           font-weight: bold;
@@ -131,10 +140,11 @@
         &-component {
           margin: auto;
           padding: 1rem 0;
-          width: 70%;
         }
         >form {
-          background-color: $color-green;
+          background-color: $color-bg;
+          border: solid 0.1rem $color-green;
+          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 
           label {
             display: block;
@@ -142,15 +152,21 @@
             width: 70%;
             margin: auto;
             >p {
-              color: $color-white;
+              color: $color-brack;
             }
           }
 
-          input, select {
+          input, select, textarea {
             font-size: 1.6rem;
-            margin: 1.0rem auto;
-            height: 2.7rem;
+            margin: 0 auto;
             width: 70%;
+            outline: none;
+            border: none;
+            border-radius: 0.1rem;
+            background-color: $color-white;
+          }
+          input, select {
+            height: 2.7rem;
           }
 
           >button {
@@ -169,11 +185,6 @@
             }
           }
         }
-
-        // &-component {
-          
-        // }
-
         >button {
           width: 20rem;
           background-color: $color-green;
@@ -189,6 +200,10 @@
             }
           }
         }
+
+        // &-component {
+        
+        // }
       }
     }
   }
