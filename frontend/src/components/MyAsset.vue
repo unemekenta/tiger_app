@@ -5,7 +5,7 @@
     .top
       .main
         .main-myasset
-          h2.main-myasset-title {{userName}} さんのページ
+          h2.main-myasset-title {{userName}} さん
           .main-myasset-contents
 
             chart-pie(
@@ -15,7 +15,12 @@
             )
 
             .main-myasset-contents-top
-              h2 {{targetYear}} 年 {{targetMonth}} 月
+              h2
+                button.main-myasset-contents-top-icon(@click="onClickBefore()")
+                  fa-icon(icon='angle-left')
+                | {{targetYear}} 年 {{targetMonth}} 月
+                button.main-myasset-contents-top-icon(@click="onClickAfter()")
+                  fa-icon(icon='angle-right')
               .main-myasset-contents-top-income
                 .main-myasset-contents-top-income-label
                   p 収入
@@ -78,7 +83,7 @@
                 .main-myasset-contents-form-component
                   label(for="contents")
                     p メモ
-                  input(name="contents" type="text" v-model="formContents")
+                  textarea(name="contents", rows="5", v-model="formContents")
                 button(@click.prevent="postMoneyAccount()")
                   p 保存
               button(v-if="formVisibleFlg" @click="changeFormVisibleFlg()")
@@ -135,6 +140,18 @@ export default {
     await this.sumAmount(this.income, this.sumIncome);
   },
   methods: {
+    onClickBefore() {
+      if (this.targetMonth !== 1) {
+        this.targetMonth = this.targetMonth -1;
+        this.getMoneyAccount(this.userID);
+      }
+    },
+    onClickAfter() {
+      if (this.targetMonth !== 12) {
+        this.targetMonth = this.targetMonth +1;
+        this.getMoneyAccount(this.userID);
+      }
+    },
     getDate() {
       const date = new Date();
       this.targetYear = date.getFullYear();

@@ -57,6 +57,8 @@
             width: 70%;
             outline: none;
             border: none;
+            border-radius: 0.1rem;
+            background-color: $color-white;
           }
           input, select {
             height: 2.7rem;
