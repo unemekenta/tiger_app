@@ -1,0 +1,42 @@
+.myasset-form {
+  padding: 0 1.5rem;
+  &-component {
+    margin: 0 auto;
+    padding: 1rem 0;
+
+    label {
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: auto;
+      >p {
+        font-size: 1.4rem;
+      }
+    }
+
+    input, select, textarea {
+      font-size: 1.6rem;
+      margin: 0 auto;
+      width: 100%;
+      outline: none;
+      border: none;
+      border-radius: 0.1rem;
+      background-color: $color-white;
+    }
+
+    input, select {
+      height: 2.7rem;
+    }
+
+    &-v-error {
+      color: $color-red;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+  button {
+    width: 70%;
+    font-weight: bold;
+  }
+}

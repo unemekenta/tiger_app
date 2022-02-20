@@ -1,6 +1,6 @@
 <template lang="pug">
 .header-nav
-  .header-nav-top(v-if="signedIn")
+  .header-nav-top
     h1
       a(href="/")
         img(src="../../src/assets/images/logo.png")
@@ -16,43 +16,30 @@
             fa-icon(icon="list")
             | メディア一覧
       .header-nav-item
+        router-link(to="/my_asset")
+          p
+            fa-icon(icon="coins")
+            | あといくら？
+      .header-nav-item(v-if="signedIn")
         router-link(to="/mypage")
           p
             fa-icon(icon="user")
             | マイページ
-      .header-nav-item
+      .header-nav-item(v-if="signedIn")
         p.header-nav-item-title(@click="$_loginMixin_signOut")
           fa-icon(icon="sign-out-alt")
           | ログアウト
-    .header-nav-button.is-only-sp(@click="onClick()")
-      fa-icon(v-if="iconContent", icon="times")
-      fa-icon(v-else, icon="bars")
-
-  .header-nav-top(v-else)
-    h1
-      a(href="/")
-        img(src="../../src/assets/images/logo.png")
-    .header-nav-pc.is-only-pc
-      .header-nav-item
-        router-link(to="/")
-          p
-            fa-icon(icon="home")
-            | HOME
-      .header-nav-item
-        router-link(to="/website_list")
-          p
-            fa-icon(icon="list")
-            | メディア一覧
-      .header-nav-item
+      .header-nav-item(v-if="!signedIn")
         router-link(to="/signin")
           p
             fa-icon(icon="sign-in-alt")
             | ログイン
+
     .header-nav-button.is-only-sp(@click="onClick()")
       fa-icon(v-if="iconContent", icon="times")
       fa-icon(v-else, icon="bars")
 
-  #headerNavMenu.header-nav.is-hidden(v-if="signedIn")
+  #headerNavMenu.header-nav.is-hidden
     .header-nav-inner
       search-box
       .header-nav-item
@@ -68,15 +55,26 @@
             | メディア一覧
           fa-icon(icon="chevron-right")
       .header-nav-item
+        router-link(to="/my_asset")
+          p
+            fa-icon(icon="coins")
+            | あといくら？
+          fa-icon(icon="chevron-right")
+      .header-nav-item(v-if="signedIn")
         router-link(to="/mypage")
           p
             fa-icon(icon="user")
             | マイページ
           fa-icon(icon="chevron-right")
-      .header-nav-item
+      .header-nav-item(v-if="signedIn")
         p.header-nav-item-title(@click="$_loginMixin_signOut")
           fa-icon(icon="sign-out-alt")
           | ログアウト
+      .header-nav-item(v-if="!signedIn")
+        router-link(to="/signin")
+          p
+            fa-icon(icon="sign-in-alt")
+            | ログイン
       .header-nav-item
         p カテゴリから探す
         .header-nav-item-categories(
@@ -86,36 +84,7 @@
           li(@click="reset(allCatrgory.id)")
             | {{ allCatrgory.name }}
           sub-category(:ancestorID="allCatrgory.id")
-  #headerNavMenu.header-nav.is-hidden(v-else)
-    .header-nav-inner
-      search-box
-      .header-nav-item
-        router-link(to="/")
-          p
-            fa-icon(icon="home")
-            | HOME
-          fa-icon(icon="chevron-right")
-      .header-nav-item
-        router-link(to="/website_list")
-          p
-            fa-icon(icon="list")
-            | メディア一覧
-          fa-icon(icon="chevron-right")
-      .header-nav-item
-        router-link(to="/signin")
-          p
-            fa-icon(icon="sign-in-alt")
-            | ログイン
-          fa-icon(icon="chevron-right")
-      .header-nav-item
-        p カテゴリから探す
-        .header-nav-item-categories(
-          v-for="(allCatrgory, key) in this.allCategories",
-          :key="key"
-        )
-          li
-            | {{ allCatrgory.name }}
-          sub-category(:ancestorID="allCatrgory.id")
+
 </template>
 
 <script>

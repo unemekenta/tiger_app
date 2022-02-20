@@ -14,7 +14,7 @@ CREATE TABLE money_accounts (
     money_account_label_id INTEGER NOT NULL REFERENCES money_account_labels(id),
     amount INTEGER NOT NULL,
     title VARCHAR(255) NOT NULL,
-    contents TEXT,
+    contents  VARCHAR(3000),
     year INTEGER NOT NULL,
     month INTEGER NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,

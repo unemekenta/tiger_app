@@ -3,10 +3,13 @@
   .footer-nav-wrapper
     .footer-nav-top
       li
-        router-link( to="/terms_of_service" ) 利用規約
+        router-link( to="/terms_of_service" )
+          p 利用規約
       li
-        router-link( to="/privacy_policy" ) プライバシーポリシー
-    .footer-nav-btm {{copyright}}
+        router-link( to="/privacy_policy" )
+          p プライバシーポリシー
+    .footer-nav-btm
+      p {{copyright}}
 
 </template>
 
