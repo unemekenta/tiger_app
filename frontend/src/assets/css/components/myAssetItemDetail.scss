@@ -36,49 +36,6 @@
       padding: 1.5rem 0;
 
       &-form {
-        &-component {
-          margin: 0 auto;
-          padding: 1rem 0;
-        }
-        >form {
-          label {
-            display: block;
-            text-align: left;
-            width: 70%;
-            margin: auto;
-            >p {
-              font-size: 1.4rem;
-            }
-          }
-
-          input, select, textarea {
-            font-size: 1.6rem;
-            margin: 0 auto;
-            width: 70%;
-            outline: none;
-            border: none;
-            border-radius: 0.1rem;
-            background-color: $color-white;
-          }
-          input, select {
-            height: 2.7rem;
-          }
-
-          >button {
-            width: 70%;
-            font-weight: bold;
-            border: solid $color-white 0.1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            &:hover {
-              background-color: $color-white;
-              >p {
-                color: $color-green;
-              }
-            }
-          }
-        }
-
         >button {
           width: 20rem;
           font-weight: bold;

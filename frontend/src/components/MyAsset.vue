@@ -52,6 +52,7 @@
                 .main-myasset-contents-details-item-inner
                   h4 支出
                   money-list(:arr="expenses")
+
             .main-myasset-contents-form
               form(v-if="formVisibleFlg")
                 .main-myasset-contents-form-component
@@ -132,6 +133,12 @@ export default {
         { text: '収入', value: '1' },
         { text: '支出', value: '2' },
       ],
+      formYear : 0,
+      formMonth: 0,
+      formMoneyAccountLabelId: 0,
+      formAmount: null,
+      formTitle: "",
+      formContents: "",
     }
   },
   async created() {

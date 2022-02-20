@@ -24,5 +24,5 @@ export default {
 }
 </script>
 
-<style scoped lang="scss" src="../assets/css/atoms/MoneyListShadow.scss">
+<style scoped lang="scss" src="../assets/css/atoms/moneyListShadow.scss">
 </style>

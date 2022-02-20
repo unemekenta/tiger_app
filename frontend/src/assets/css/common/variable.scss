@@ -67,16 +67,35 @@ button {
   margin: 1rem 0;
   padding: 1rem;
   border: none;
+  cursor: pointer;
 }
 
 button.basic-btn {
   background-color: $color-blue;
   color: $color-white;
+  transition: 0.3s;
+  &:hover {
+    background-color: $color-white;
+    >p {
+      color: $color-blue;
+    }
+  }
 }
 
 button.warn-btn {
   background-color: $color-red;
   color: $color-white;
+  &:hover {
+    background-color: $color-white;
+    >p {
+      color: $color-red;
+    }
+  }
+}
+
+button:disabled {
+  background-color: $color-gray;
+  pointer-events: none;
 }
 
 .is-only-sp {

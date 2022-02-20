@@ -3,10 +3,10 @@ form {
   margin: 1rem 0.5rem;
   width: calc(100% - 1rem);
   @include tb {
-    margin: 1rem 0;
+    margin: 2rem 0;
     width: 100%;
   }
-  
+
   >input {
     width: 80%;
     height: 3rem;
