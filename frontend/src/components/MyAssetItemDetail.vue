@@ -19,6 +19,10 @@
                 :title="this.title",
                 :contents="this.contents",
               )
+          .main-myasset-detail-link-toback
+            router-link(:to="{name:'MyAsset'}")
+              fa-icon(icon='angle-left')
+              p 一覧へ戻る
 
   footer-nav
 </template>
