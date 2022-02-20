@@ -51,5 +51,16 @@
         }
       }
     }
+
+    &-link-toback {
+      >a {
+        display: flex;
+
+        >svg {
+          font-size: 1.6rem;
+          margin: auto 1rem auto 0;
+        }
+      }
+    }
   }
 }

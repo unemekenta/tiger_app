@@ -1,7 +1,8 @@
 <template lang="pug">
-  li.moneylist-shadow(@click.prevent.self="jumpTo(id)")
-    p {{this.label}}
-    p {{$_commify(this.amount)}} 円
+  router-link(:to="{name:'MyAssetItemDetail', params: {id: id}}")
+    li.moneylist-shadow
+      p {{this.label}}
+      p {{$_commify(this.amount)}} 円
 
 </template>
 
@@ -17,9 +18,6 @@ export default {
     id: Number,
   },
   methods: {
-    jumpTo (id) {
-      this.$router.push({name: 'MyAssetItemDetail', params: {id: id}})
-    },
   },
 }
 </script>

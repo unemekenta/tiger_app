@@ -8,7 +8,7 @@
           h2.main-myasset-detail-title 登録項目詳細
           .main-myasset-detail-contents
             .main-myasset-detail-contents-form
-              my-asset-form(
+              my-asset-edit-form(
                 :userID="this.userID",
                 :jwtUserData="this.jwtUserData",
                 :itemId="this.itemId",
@@ -19,6 +19,10 @@
                 :title="this.title",
                 :contents="this.contents",
               )
+          .main-myasset-detail-link-toback
+            router-link(:to="{name:'MyAsset'}")
+              fa-icon(icon='angle-left')
+              p 一覧へ戻る
 
   footer-nav
 </template>
@@ -29,7 +33,7 @@ import VueJwtDecode from "vue-jwt-decode";
 import HeaderNav from "../molecules/HeaderNav.vue";
 import FooterNav from "../molecules/FooterNav.vue";
 import MoneyList from "../molecules/MoneyList.vue";
-import MyAssetForm from "../organisms/MyAssetForm.vue";
+import MyAssetEditForm from "../organisms/MyAssetEditForm.vue";
 
 export default {
   name: "MyAssetItemDetail",
@@ -37,7 +41,7 @@ export default {
     HeaderNav,
     FooterNav,
     MoneyList,
-    MyAssetForm,
+    MyAssetEditForm,
   },
   data() {
     return {
