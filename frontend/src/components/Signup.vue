@@ -54,6 +54,7 @@ export default {
       params.append('name', this.formName)
       params.append('email', this.formEmail)
       params.append('password', this.formPassword)
+      params.append('roleId', 1)
       if (this.agree && this.formName && this.formEmail && this.formPassword) {
         await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/signup', params)
           .then((response) => {
