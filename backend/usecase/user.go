@@ -13,11 +13,12 @@ import (
 type UserUsecase interface {
 	Create(email string, name string, password string, roleid int, updatedAt time.Time) (*model.User, error)
 	FindByID(id int) (*model.User, error)
-	FindByPassword(email string) (*model.User, error)
+	FindByEmail(email string) (*model.User, error)
 	Update(id int, email string, name string, password string, roleid int, updatedAt time.Time) (*model.User, error)
 	Delete(id int) error
 	CreateSession(uuid string, value string) error
 	LoginCheck(uuid string) (string, error)
+	CreateJwt(foundUser *model.User, byteDbPassword []byte, byteFormPassword []byte) (string, string, error)
 }
 
 type userUsecase struct {
@@ -54,9 +55,9 @@ func (uu *userUsecase) FindByID(id int) (*model.User, error) {
 	return foundUser, nil
 }
 
-// FindByPassword userをパスワードで取得するときのユースケース
-func (uu *userUsecase) FindByPassword(email string) (*model.User, error) {
-	foundUser, err := uu.userRepo.FindByPassword(email)
+// FindByEmail userをemailで取得するときのユースケース
+func (uu *userUsecase) FindByEmail(email string) (*model.User, error) {
+	foundUser, err := uu.userRepo.FindByEmail(email)
 	if err != nil {
 		return nil, err
 	}
@@ -117,4 +118,12 @@ func (uu *userUsecase) LoginCheck(uuid string) (string, error) {
 	}
 	return su, nil
 
+}
+
+func (uu *userUsecase) CreateJwt(foundUser *model.User, byteDbPassword []byte, byteFormPassword []byte) (string, string, error) {
+	uuid, t, err := model.CreateJwt(foundUser, byteDbPassword, byteFormPassword)
+	if err != nil {
+		return "", "", err
+	}
+	return uuid, t, nil
 }

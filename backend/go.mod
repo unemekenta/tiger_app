@@ -11,6 +11,7 @@ require (
 	github.com/gomodule/redigo v1.8.6
 	github.com/google/uuid v1.3.0
 	github.com/jinzhu/gorm v1.9.16
+	github.com/jinzhu/now v1.1.4
 	github.com/joho/godotenv v1.4.0
 	github.com/kr/fs v0.1.0 // indirect
 	github.com/labstack/echo v3.3.10+incompatible

@@ -40,11 +40,11 @@ func (ur *UserRepository) FindByID(id int) (*model.User, error) {
 	return user, nil
 }
 
-// FindByPassword userをパスワードで取得
-func (ur *UserRepository) FindByPassword(email string) (*model.User, error) {
-	user := &model.User{Email: email}
+// FindByEmail userをemailで取得
+func (ur *UserRepository) FindByEmail(email string) (*model.User, error) {
+	user := &model.User{}
 
-	if err := ur.Conn.First(&user).Error; err != nil {
+	if err := ur.Conn.Debug().Where("email = ?", email).First(&user).Error; err != nil {
 		return nil, err
 	}
 

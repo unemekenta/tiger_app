@@ -1,12 +1,14 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
 
 	"backend/usecase"
 
+	"github.com/jinzhu/now"
 	"github.com/labstack/echo"
 )
 
@@ -48,6 +50,18 @@ type responseMoneyAccount struct {
 	Year                int       `json:"year"`
 	Month               int       `json:"month"`
 	UpdatedAt           time.Time `json:"updatedAt"`
+}
+
+type responseUserInfo struct {
+	MoneyAccountListIncome      []responseMoneyAccount `json:"moneyAccountListIncome"`
+	MoneyAccountListExpenses    []responseMoneyAccount `json:"moneyAccountListExpenses"`
+	MoneyAccountListIncomeSum   int                    `json:"moneyAccountListIncomeSum"`
+	MoneyAccountListExpensesSum int                    `json:"moneyAccountListExpensesSum"`
+	Today                       time.Time              `json:"today"`
+	EndOfThisMonth              time.Time              `json:"endOfThisMonth"`
+	RemainingDateOfThisMonth    int                    `json:"remainingDateOfThisMonth"`
+	RemainingMoney              int                    `json:"remainingMoney"`
+	RemainingMoneyPerDay        int                    `json:"remainingMoneyPerDay"`
 }
 
 // Post moneyAccountを保存するときのハンドラー
@@ -117,19 +131,67 @@ func (mh *moneyAccountHandler) GetByUser() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		var res []responseMoneyAccount
+		var mai []responseMoneyAccount
+		var mae []responseMoneyAccount
+		var maiSum int
+		var maeSum int
+
+		// github.com/jinzhu/now
+		today := time.Now()
+		endOfThisMonth := now.EndOfMonth()
+		remainingDateOfThisMonthDuration := endOfThisMonth.Sub(today)
+
+		remainingDateOfThisMonth := int(remainingDateOfThisMonthDuration.Hours()) / 24
+
+		fmt.Println(today, endOfThisMonth, remainingDateOfThisMonth)
 
 		for _, fm := range *foundMoneyAccounts {
-			res = append(res, responseMoneyAccount{
-				ID:                  fm.ID,
-				MoneyAccountLabelID: fm.MoneyAccountLabelID,
-				Amount:              fm.Amount,
-				Title:               fm.Title,
-				Contents:            fm.Contents,
-				Year:                fm.Year,
-				Month:               fm.Month,
-				UpdatedAt:           fm.UpdatedAt,
-			})
+			switch fm.MoneyAccountLabelID {
+			case 1:
+				maiSum += fm.Amount
+				mai = append(mai, responseMoneyAccount{
+					ID:                  fm.ID,
+					MoneyAccountLabelID: fm.MoneyAccountLabelID,
+					Amount:              fm.Amount,
+					Title:               fm.Title,
+					Contents:            fm.Contents,
+					Year:                fm.Year,
+					Month:               fm.Month,
+					UpdatedAt:           fm.UpdatedAt,
+				})
+				break
+
+			case 2:
+				maeSum += fm.Amount
+				mae = append(mae, responseMoneyAccount{
+					ID:                  fm.ID,
+					MoneyAccountLabelID: fm.MoneyAccountLabelID,
+					Amount:              fm.Amount,
+					Title:               fm.Title,
+					Contents:            fm.Contents,
+					Year:                fm.Year,
+					Month:               fm.Month,
+					UpdatedAt:           fm.UpdatedAt,
+				})
+				break
+
+			default:
+				break
+			}
+		}
+		remainingMoney := maiSum - maeSum
+		remainingMoneyPerDay := remainingMoney / remainingDateOfThisMonth
+
+		res := responseUserInfo{
+			MoneyAccountListIncome:      mai,
+			MoneyAccountListExpenses:    mae,
+			MoneyAccountListIncomeSum:   maiSum,
+			MoneyAccountListExpensesSum: maeSum,
+			Today:                       today,
+			EndOfThisMonth:              endOfThisMonth,
+			RemainingDateOfThisMonth:    remainingDateOfThisMonth,
+			RemainingMoney:              remainingMoney,
+			RemainingMoneyPerDay:        remainingMoneyPerDay,
 		}
 
 		return c.JSON(http.StatusOK, res)
