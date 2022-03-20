@@ -3,7 +3,7 @@ jobs:
   backend:
     # working_directory: /tiger_app/backend
     docker:
-      - image: cimg/go:1.17
+      - image: cimg/go:1.17.8
     steps:
       - checkout
       - run:
