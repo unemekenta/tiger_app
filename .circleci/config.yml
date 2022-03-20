@@ -1,0 +1,14 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    steps:
+      - checkout
+      - run:
+          name: echo
+          command: echo "Hello, world!!"
+workflows:
+  test_workflow:
+    jobs:
+      - test
