@@ -1,19 +1,19 @@
 version: 2.1
 jobs:
   backend:
-    working_directory: /tiger_app/backend
+    working_directory: ~/tiger_app/backend
     docker:
       - image: cimg/go:1.17.8
     steps:
       - checkout
       - restore_cache:
           keys:
-            - go-mod-v4-{{ checksum "/tiger_app/backend/go.sum" }}
+            - go-mod-v4-{{ checksum "~/tiger_app/backend/go.sum" }}
       - run:
           name: Install Dependencies
           command: go get ./...
       - save_cache:
-          key: go-mod-v4-{{ checksum "/tiger_app/backend/go.sum" }}
+          key: go-mod-v4-{{ checksum "~/tiger_app/backend/go.sum" }}
           paths:
             - "/go/pkg/mod"
       - run:
