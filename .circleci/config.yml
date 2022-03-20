@@ -10,7 +10,7 @@ jobs:
           keys:
             - go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
             - go-module-cache-v1-
-      - run: go mod tidy
+      - run: go mod download
       - save_cache:
           key: go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
           paths:
