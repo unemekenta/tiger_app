@@ -9,9 +9,8 @@ jobs:
       - restore_cache:
           keys:
             - go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
-      - run:
-          name: Install Dependencies
-          command: go get ./...
+            - go-module-cache-v1-
+      - run: go mod tidy
       - save_cache:
           key: go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
           paths:
