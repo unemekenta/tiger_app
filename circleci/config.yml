@@ -3,7 +3,8 @@ jobs:
   backend:
     # working_directory: /tiger_app/backend
     docker:
-      - image: cimg/go:1.17.8
+      # - image: cimg/go:1.17.8
+      - image: circleci/ruby:2.6.3-stretch-node
     steps:
       - checkout
       - run:
