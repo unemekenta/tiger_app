@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   backend:
-    working_directory: /tiger_app/backend
+    # working_directory: /tiger_app/backend
     docker:
       - image: cimg/go:1.17
     steps:
