@@ -49,6 +49,24 @@
         text-align: left;
         border-bottom: solid 0.1rem $color-brack;
       }
+
+      &-data {
+        background-color: $color-bg;
+
+        &-info {
+          background-color: $color-white;
+          &-bold {
+            font-size: 2.4rem;
+            font-weight: bold;
+          }
+        }
+        &-chart {
+          display: flex;
+          width: 50%;
+          padding: 2rem 0;
+        }
+      }
+
       &-top {
         background-color: $color-green;
         padding: 1rem;

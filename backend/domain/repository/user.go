@@ -9,7 +9,7 @@ import (
 type UserRepository interface {
 	Create(user *model.User) (*model.User, error)
 	FindByID(id int) (*model.User, error)
-	FindByPassword(email string) (*model.User, error)
+	FindByEmail(email string) (*model.User, error)
 	Update(user *model.User) (*model.User, error)
 	Delete(user *model.User) error
 	CreateSession(uuid string, value string) error

@@ -7,8 +7,6 @@ import (
 
 	"backend/usecase"
 
-	"github.com/golang-jwt/jwt"
-	"github.com/google/uuid"
 	"github.com/labstack/echo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -202,43 +200,23 @@ func (uh *userHandler) Login() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		foundUser, err := uh.userUsecase.FindByPassword(req.Email)
+		foundUser, err := uh.userUsecase.FindByEmail(req.Email)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
-
 		dbPassword := foundUser.Password
 		byteDbPassword := []byte(dbPassword)
 		formPassword := req.Password
 		byteFormPassword := []byte(formPassword)
 
-		if err := bcrypt.CompareHashAndPassword(byteDbPassword, byteFormPassword); err != nil {
-			return err
-		} else {
-			token := jwt.New(jwt.SigningMethodHS256)
-			claims := token.Claims.(jwt.MapClaims)
-			claims["admin"] = true
-			claims["id"] = foundUser.ID
-			claims["name"] = foundUser.Name
-			claims["iat"] = time.Now()
-			claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
-
-			t, err := token.SignedString([]byte("secret"))
-			if err != nil {
-				return err
-			}
-
-			u, err := uuid.NewRandom()
-			if err != nil {
-				return err
-			}
-			uu := u.String()
-
-			uh.userUsecase.CreateSession(uu, t)
-
-			reqSession.Uuid = uu
-
+		uu, t, err := uh.userUsecase.CreateJwt(foundUser, byteDbPassword, byteFormPassword)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
 		}
+
+		uh.userUsecase.CreateSession(uu, t)
+
+		reqSession.Uuid = uu
 
 		res := responseLoginUser{
 			ID:       foundUser.ID,

@@ -93,7 +93,6 @@ export default {
     },
     async getUser() {
       if (window.$cookies.isKey("uuid")) {
-        console.log(window.$cookies.get("uuid"));
         await axios
           .post(process.env.VUE_APP_API_BASE_URL + "/api/login_check", {
             uuid: window.$cookies.get("uuid"),

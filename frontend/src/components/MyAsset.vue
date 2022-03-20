@@ -5,14 +5,35 @@
     .top
       .main
         .main-myasset
-          h2.main-myasset-title {{userName}} さん
+          h2.main-myasset-title あといくら？
           .main-myasset-contents
+            .main-myasset-contents-data
+              .main-myasset-contents-data-info(v-if="targetYear === thisYear && targetMonth === thisMonth")
+                p {{userName}} さん
+                p
+                  | 今月の残り日数 
+                  span.main-myasset-contents-data-info-bold {{ remainingDateOfThisMonth }}
+                  | 日
+                p
+                  | 1日 
+                  span.main-myasset-contents-data-info-bold {{ $_commify(remainingMoneyPerDay) }} 
+                  | 円で生きろ！
+              .main-myasset-contents-data-info(v-else)
+                p {{userName}} さん
+                p よくがんばりました。
 
-            chart-pie(
-              :chartData="chartData"
-              :options="chartOptions"
-              :style='"width: 70%; margin: 2rem auto;"'
-            )
+              .main-myasset-contents-data-chart
+                chart-pie(
+                  :chartData="chartData"
+                  :options="chartOptions"
+                  :style='"width: 100%;"'
+                )
+
+                chart-horizontal-bar(
+                  :chartData="chartBarData"
+                  :options="chartBarOptions"
+                  :style='"width: 100%;"'
+                )
 
             .main-myasset-contents-top
               h2
@@ -39,7 +60,7 @@
                 .main-myasset-contents-top-sum-label
                   p 残金
                 .main-myasset-contents-top-sum-amount
-                  p {{ $_commify(sumIncome - sumExpenses) }}
+                  p {{ $_commify(remainingMoney) }}
                     span.main-myasset-contents-top-sum-yen
                       |  円
 
@@ -102,6 +123,7 @@ import VueJwtDecode from 'vue-jwt-decode'
 import HeaderNav from '../molecules/HeaderNav.vue'
 import FooterNav from '../molecules/FooterNav.vue'
 import ChartPie from '../organisms/ChartPie.vue';
+import ChartHorizontalBar from '../organisms/ChartBar.vue';
 import MoneyList from '../molecules/MoneyList.vue'
 
 export default {
@@ -111,22 +133,76 @@ export default {
     HeaderNav,
     FooterNav,
     ChartPie,
+    ChartHorizontalBar,
     MoneyList,
   },
   data () {
     return {
       userName: '',
       userID: 0,
+      thisYear: 2022,
+      thisMonth: 3,
       targetYear: 2020,
       targetMonth: 1,
       jwtUserData: '',
+      remainingMoney: 0,
+      remainingMoneyPerDay: 0,
       income: [],
       expenses: [],
       sumIncome: 0,
       sumExpenses: 0,
+      remainingDateOfThisMonth: 0,
       chartData: null,
+      chartBarData: null,
       chartOptions: {
-        responsive: true
+        responsive: true,
+        title: {
+          display: true,
+          text: '支出割合',
+        },
+        legend: {                          //凡例設定
+          display: true,                 //表示設定
+          position: "bottom",     // タイトルでの position と同じ
+          labels: {
+            fontSize: 8,
+          },
+        },
+      },
+      chartBarOptions: {
+        responsive: true,
+        title: {
+          display: true,
+          text: '項目別支出',
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        legend: {                          //凡例設定
+          display: false                 //表示設定
+        },
+        scales: {
+          xAxes: [
+            {
+              display: true,
+              ticks: {
+                  fontSize: 8             //フォントサイズ
+              },
+              scaleLabel: {                 //軸ラベル設定
+                display: false,             //表示設定
+              },
+              borderWidth: 0.4,
+            },
+          ],
+          yAxes: [
+            {
+              ticks: {                      //最大値最小値設定
+                fontSize: 8,             //フォントサイズ
+                stepSize: 3               //軸間隔
+              },
+            },
+          ],
+        },
       },
       formVisibleFlg: false,
       formMoneyAccountLabelOptions: [
@@ -161,6 +237,8 @@ export default {
     },
     getDate() {
       const date = new Date();
+      this.thisYear = date.getFullYear();
+      this.thisMonth = date.getMonth()+1;
       this.targetYear = date.getFullYear();
       this.targetMonth = date.getMonth()+1;
     },
@@ -173,7 +251,20 @@ export default {
         headers: {'Authorization': 'Bearer ' + this.jwtUserData}
       })
       .then(res => {
-        const dataObj = res.data
+        const dataObjIncome = res.data.moneyAccountListIncome;
+        const dataObjExpenses = res.data.moneyAccountListExpenses;
+        const incomeSum = res.data.moneyAccountListIncomeSum;
+        const expensesSum = res.data.moneyAccountListExpensesSum;
+        const remainingMoney = res.data.remainingMoney;
+        const remainingDateOfThisMonth = res.data.remainingDateOfThisMonth;
+        const remainingMoneyPerDay = res.data.remainingMoneyPerDay;
+        this.income = dataObjIncome;
+        this.expenses = dataObjExpenses;
+        this.sumIncome = incomeSum;
+        this.sumExpenses = expensesSum;
+        this.remainingMoney = remainingMoney;
+        this.remainingDateOfThisMonth = remainingDateOfThisMonth;
+        this.remainingMoneyPerDay = remainingMoneyPerDay
 
         this.chartData = {
           labels: [],
@@ -183,7 +274,6 @@ export default {
             },
           ],
           options: {
-            responsive: true,
             maintainAspectRatio: true,
             plugins: {
               colorschemes: {
@@ -193,9 +283,26 @@ export default {
           },
         }
 
-        dataObj.forEach (element => {
+        this.chartBarData = {
+          labels: [],
+          datasets: [
+            {
+              data: [],
+              barPercentage: 0.5,
+              categoryPercentage: 0.4,      //棒グラフ幅
+            },
+          ],
+          options: {
+            plugins: {
+              colorschemes: {
+                scheme: 'tableau.Tableau20',
+              },
+            },
+          },
+        }
+
+        dataObjExpenses.forEach (element => {
           this.insertChartData(element);
-          this.classifyMoneyAccount(element);
         })
         return;
       })
@@ -207,6 +314,8 @@ export default {
     insertChartData(data) {
       this.chartData.labels.push(data.title);
       this.chartData.datasets[0].data.push(data.amount);
+      this.chartBarData.labels.push(data.title);
+      this.chartBarData.datasets[0].data.push(data.amount);
     },
     resetMoneyAccount() {
       this.income = [];
@@ -219,24 +328,23 @@ export default {
       this.sumIncome = 0;
       this.sumExpenses = 0;
     },
-    classifyMoneyAccount(data) {
-      switch (data.moneyAccountLabelId) {
-        case 1:
-          this.income.push(data);
-          this.sumIncome = this.sumIncome + data.amount
-          break;
-        case 2:
-          this.expenses.push(data);
-          this.sumExpenses = this.sumExpenses + data.amount
-          break;
-        default:
-          break;
-      }
-    },
+    // classifyMoneyAccount(data) {
+    //   switch (data.moneyAccountLabelId) {
+    //     case 1:
+    //       this.income.push(data);
+    //       this.sumIncome = this.sumIncome + data.amount
+    //       break;
+    //     case 2:
+    //       this.expenses.push(data);
+    //       this.sumExpenses = this.sumExpenses + data.amount
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // },
 
     async getUser () {
       if (window.$cookies.isKey('uuid')) {
-        console.log(window.$cookies.get('uuid'));
         await axios
           .post(
             process.env.VUE_APP_API_BASE_URL + "/api/login_check",

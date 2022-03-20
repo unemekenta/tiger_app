@@ -3,6 +3,10 @@ package model
 import (
 	"errors"
 	"time"
+
+	"github.com/golang-jwt/jwt"
+	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // https://echo.labstack.com/guide/binding/
@@ -48,4 +52,31 @@ func (c *User) Set(email string, name string, password string, roleid int, updat
 	c.UpdatedAt = updatedAt
 
 	return nil
+}
+
+func CreateJwt(foundUser *User, byteDbPassword []byte, byteFormPassword []byte) (string, string, error) {
+	if err := bcrypt.CompareHashAndPassword(byteDbPassword, byteFormPassword); err != nil {
+		return "", "", err
+	} else {
+		token := jwt.New(jwt.SigningMethodHS256)
+		claims := token.Claims.(jwt.MapClaims)
+		claims["admin"] = true
+		claims["id"] = foundUser.ID
+		claims["name"] = foundUser.Name
+		claims["iat"] = time.Now()
+		claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
+
+		t, err := token.SignedString([]byte("secret"))
+		if err != nil {
+			return "", "", err
+		}
+
+		u, err := uuid.NewRandom()
+		if err != nil {
+			return "", "", err
+		}
+		uu := u.String()
+
+		return uu, t, nil
+	}
 }
