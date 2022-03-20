@@ -8,12 +8,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - go-mod-v4-{{ checksum "~/tiger_app/backend/go.sum" }}
+            - go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
       - run:
           name: Install Dependencies
           command: go get ./...
       - save_cache:
-          key: go-mod-v4-{{ checksum "~/tiger_app/backend/go.sum" }}
+          key: go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
           paths:
             - "/go/pkg/mod"
       - run:
