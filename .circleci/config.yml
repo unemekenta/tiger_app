@@ -5,12 +5,15 @@ jobs:
     docker:
       - image: cimg/go:1.17.8
     steps:
+      - run: go env
       - checkout
       - restore_cache:
           keys:
             - go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
             - go-module-cache-v1-
-      - run: go mod download
+      - run:
+        name: Vendoring
+        command: go mod download
       - save_cache:
           key: go-mod-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
           paths:
