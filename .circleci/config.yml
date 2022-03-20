@@ -1,14 +1,25 @@
 version: 2.1
 jobs:
-  test:
+  backend:
+    working_directory: /tiger_app/backend
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: cimg/go:1.17.8
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "/tiger_app/backend/go.sum" }}
       - run:
-          name: echo
-          command: echo "Hello, world!!"
+          name: Install Dependencies
+          command: go get ./...
+      - save_cache:
+          key: go-mod-v4-{{ checksum "/tiger_app/backend/go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+      - run:
+          name: Run golang tests
+          command: go test -v
 workflows:
-  test_workflow:
+  test_workflow: # workflowの名前
     jobs:
-      - test
+      - backend # 実行するjobの順番
