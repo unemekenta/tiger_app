@@ -10,6 +10,7 @@ jobs:
       - run: go env
       - restore_cache:
           key: mod-{{ checksum "go.sum" }}
+      - run: go mod init
       - run: go mod tidy
       - run:
           name: Run golang tests
