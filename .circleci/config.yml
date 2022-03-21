@@ -21,6 +21,6 @@ jobs:
           paths:
             - "/go/pkg/mod"
 workflows:
-  test_workflow: # workflowの名前
+  test_workflow:
     jobs:
       - backend
