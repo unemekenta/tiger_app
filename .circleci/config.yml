@@ -1,0 +1,26 @@
+version: 2.1
+jobs:
+  backend:
+    working_directory: ~/tiger_app/backend
+    docker:
+      - image: cimg/go:1.17
+    steps:
+      - checkout
+      - run: go env -w GO111MODULE=on
+      - run: go env
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
+      - run: go mod init github.com/unemekenta/tiger_app
+      - run: go mod download
+      - run:
+          name: Run golang tests
+          command: go test testing
+      - save_cache:
+          key: go-mod-v4-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+workflows:
+  test_workflow: # workflowの名前
+    jobs:
+      - backend # 実行するjobの順番
