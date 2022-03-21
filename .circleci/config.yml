@@ -10,7 +10,7 @@ jobs:
       - run: go env
       - restore_cache:
           key: mod-{{ checksum "go.sum" }}
-      - run: go mod init https://github.com/unemekenta/tiger_app
+      - run: go mod init github.com/unemekenta/tiger_app
       - run: go mod tidy
       - run:
           name: Run golang tests
