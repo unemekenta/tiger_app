@@ -14,7 +14,7 @@ jobs:
       - run: go mod tidy
       - run:
           name: Run golang tests
-          command: go test -v
+          command: go test testing
 workflows:
   test_workflow: # workflowの名前
     jobs:
