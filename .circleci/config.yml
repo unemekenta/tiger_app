@@ -12,7 +12,7 @@ jobs:
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
       - run: go mod init github.com/unemekenta/tiger_app
-      - run: go get
+      - run: go mod download
       - run:
           name: Run golang tests
           command: go test testing
