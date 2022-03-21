@@ -5,9 +5,9 @@ jobs:
     docker: # ジョブを実行するマシンを定義
       - image: cimg/go:1.17
     steps:
+      - checkout
       - run: go env -w GO111MODULE=on
       - run: go env
-      - checkout # コードをレポジトリからチェックアウト
       - restore_cache:
           key: mod-{{ checksum "go.sum" }}
       - run: go mod tidy
