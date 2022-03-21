@@ -23,4 +23,4 @@ jobs:
 workflows:
   test_workflow: # workflowの名前
     jobs:
-      - backend # 実行するjobの順番
+      - backend
