@@ -1,4 +1,4 @@
-module backend
+module github.com/unemekenta/tiger_app
 
 go 1.17
 
