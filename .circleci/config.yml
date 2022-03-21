@@ -2,18 +2,18 @@ version: 2.1
 jobs:
   backend:
     working_directory: ~/tiger_app/backend
-    docker:
-      - image: cimg/go:1.17.8
+    docker: # ジョブを実行するマシンを定義
+      - image: cimg/go:1.17
     steps:
       - run: go env
-      - checkout
+      - checkout # コードをレポジトリからチェックアウト
       - restore_cache:
           keys:
             - go-mod-v4-{{ checksum "~/tiger_app/backend/go.sum" }}
             - go-module-cache-v1-
       - run:
           name: Vendoring
-          command: go mod tidy
+          command: go mod init
       - save_cache:
           key: go-mod-v4-{{ checksum "~/tiger_app/backend/go.sum" }}
           paths:
