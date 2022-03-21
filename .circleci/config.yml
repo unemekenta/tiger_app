@@ -15,6 +15,10 @@ jobs:
       - run:
           name: Run golang tests
           command: go test testing
+      - save_cache:
+          key: mod-{{ checksum "go.sum" }}
+          paths:
+            - $GOPATH/pkg/mod
 workflows:
   test_workflow: # workflowの名前
     jobs:
