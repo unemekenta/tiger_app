@@ -8,19 +8,14 @@ jobs:
       - checkout
       - run: go env -w GO111MODULE=on
       - run: go env
-      - restore_cache: # restores saved cache if no changes are detected since last run
-          keys:
-            - go-module-cache-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
-            - go-module-cache-v1-
-      - run: go mod init github.com/unemekenta/tiger_app
-      - run: go mod download
+      - go/load-cache
+      - go/mod-download
+      # - run: go mod init github.com/unemekenta/tiger_app
+      # - run: go mod download
       - run:
           name: Run golang tests
           command: go test testing
-      - save_cache:
-          key: go-module-cache-v1-{{ checksum "~/tiger_app/backend/go.sum" }}
-          paths:
-            - "/go/pkg/mod"
+      - go/save-cache
 workflows:
   test_workflow: # workflowの名前
     jobs:
