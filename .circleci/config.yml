@@ -9,7 +9,7 @@ jobs:
       - checkout # コードをレポジトリからチェックアウト
       - restore_cache:
           key: mod-{{ checksum "go.sum" }}
-      - run: go mod init
+      - run: go mod tidy
       - run: go get
       - run:
           name: Run golang tests
