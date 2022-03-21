@@ -12,6 +12,7 @@ require (
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.1 // indirect
 	github.com/pkg/errors v0.8.1
+	github.com/stretchr/testify v1.7.0
 	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871
 	gorm.io/driver/postgres v1.2.2
 	gorm.io/gorm v1.22.3

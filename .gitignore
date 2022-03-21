@@ -13,3 +13,5 @@ db/sh/
 db/storage/
 
 backend/tmp/
+go.mod
+go.sum
