@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   backend:
     working_directory: ~/tiger_app/backend
-    docker: # ジョブを実行するマシンを定義
+    docker:
       - image: cimg/go:1.17
     steps:
       - checkout
