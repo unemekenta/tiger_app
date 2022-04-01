@@ -2,8 +2,10 @@
 package infra
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
+	"time"
+
+	"github.com/unemekenta/tiger_app/backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
 
 	"gorm.io/gorm"
 )
@@ -38,11 +40,36 @@ func (mr *MoneyAccountRepository) FindByID(id int) (*model.MoneyAccount, error) 
 	return moneyAccount, nil
 }
 
-// FindByUser moneyAccountををUserで取得
+// FindByUser moneyAccountをUserで取得
 func (mr *MoneyAccountRepository) FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error) {
 	moneyAccounts := &[]model.MoneyAccount{}
 
-	if err := mr.Conn.Order("id").Where("user_id = ?", id).Where("user_id = ?", id).Where("year = ?", year).Where("month = ?", month).Find(&moneyAccounts).Error; err != nil {
+	if err := mr.Conn.Debug().Order("id").
+		Joins("left join subscriptions on subscriptions.money_account_id = money_accounts.id").
+		Where("user_id = ?", id).
+		Where(mr.Conn.Where("subscriptions_flg = ?", false).
+			Where("year = ?", year).
+			Where("month = ?", month),
+		).
+		Or(mr.Conn.Where("subscriptions_flg = ?", true).
+			Where("start_date < ?", time.Now()).
+			Where("end_date > ?", time.Now()),
+		).
+		Find(&moneyAccounts).Error; err != nil {
+		return nil, err
+	}
+
+	return moneyAccounts, nil
+}
+
+// FindSubscriptionsByUser moneyAccountのうちSubscriptionsをUserで取得
+func (mr *MoneyAccountRepository) FindSubscriptionsByUser(id int) (*[]model.MoneyAccount, error) {
+	moneyAccounts := &[]model.MoneyAccount{}
+
+	if err := mr.Conn.Debug().Order("id").
+		Where("user_id = ?", id).
+		Where("subscriptions_flg = ?", true).
+		Find(&moneyAccounts).Error; err != nil {
 		return nil, err
 	}
 

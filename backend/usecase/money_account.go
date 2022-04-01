@@ -4,8 +4,9 @@
 package usecase
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
+	"github.com/unemekenta/tiger_app/backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
+
 	"time"
 )
 
@@ -14,6 +15,7 @@ type MoneyAccountUsecase interface {
 	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	FindByID(id int) (*model.MoneyAccount, error)
 	FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error)
+	FindSubscriptionsByUser(id int) (*[]model.MoneyAccount, error)
 	Update(id int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	Delete(id int) error
 }
@@ -60,6 +62,16 @@ func (mu *moneyAccountUsecase) FindByUser(id int, year int, month int) (*[]model
 	}
 
 	return foundMoneyAccounts, nil
+}
+
+// FindSubscriptionsByUser moneyAccountのうちSubscriptionをUserで取得するときのユースケース
+func (mu *moneyAccountUsecase) FindSubscriptionsByUser(id int) (*[]model.MoneyAccount, error) {
+	foundSubscriptions, err := mu.moneyAccountRepo.FindSubscriptionsByUser(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return foundSubscriptions, nil
 }
 
 // Update moneyAccountを更新するときのユースケース

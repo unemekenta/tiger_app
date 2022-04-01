@@ -6,10 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"backend/usecase"
-
 	"github.com/jinzhu/now"
 	"github.com/labstack/echo"
+	"github.com/unemekenta/tiger_app/backend/usecase"
 )
 
 // MoneyAccountHandler moneyAccount handlerのinterface
@@ -17,6 +16,7 @@ type MoneyAccountHandler interface {
 	Post() echo.HandlerFunc
 	Get() echo.HandlerFunc
 	GetByUser() echo.HandlerFunc
+	GetSubscriptionsByUser() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
@@ -194,6 +194,37 @@ func (mh *moneyAccountHandler) GetByUser() echo.HandlerFunc {
 			RemainingMoneyPerDay:        remainingMoneyPerDay,
 		}
 
+		return c.JSON(http.StatusOK, res)
+	}
+}
+
+// GetSubscriptionsByUser moneyAccountのうち、Subscriptionを取得するときのハンドラー
+func (mh *moneyAccountHandler) GetSubscriptionsByUser() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id, err := strconv.Atoi((c.Param("id")))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		foundSubscriptions, err := mh.moneyAccountUsecase.FindSubscriptionsByUser(id)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		var res []responseMoneyAccount
+
+		for _, fs := range *foundSubscriptions {
+			res = append(res, responseMoneyAccount{
+				ID:                  fs.ID,
+				MoneyAccountLabelID: fs.MoneyAccountLabelID,
+				Amount:              fs.Amount,
+				Title:               fs.Title,
+				Contents:            fs.Contents,
+				Year:                fs.Year,
+				Month:               fs.Month,
+				UpdatedAt:           fs.UpdatedAt,
+			})
+		}
 		return c.JSON(http.StatusOK, res)
 	}
 }

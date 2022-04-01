@@ -5,9 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"backend/usecase"
-
 	"github.com/labstack/echo"
+	"github.com/unemekenta/tiger_app/backend/usecase"
 	"golang.org/x/crypto/bcrypt"
 )
 

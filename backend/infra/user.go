@@ -2,8 +2,8 @@
 package infra
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
+	"github.com/unemekenta/tiger_app/backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
 
 	"github.com/gomodule/redigo/redis"
 	"github.com/pkg/errors"
