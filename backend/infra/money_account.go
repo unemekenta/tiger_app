@@ -2,8 +2,6 @@
 package infra
 
 import (
-	"time"
-
 	"github.com/unemekenta/tiger_app/backend/domain/model"
 	"github.com/unemekenta/tiger_app/backend/domain/repository"
 
@@ -47,13 +45,9 @@ func (mr *MoneyAccountRepository) FindByUser(id int, year int, month int) (*[]mo
 	if err := mr.Conn.Debug().Order("id").
 		Joins("left join subscriptions on subscriptions.money_account_id = money_accounts.id").
 		Where("user_id = ?", id).
-		Where(mr.Conn.Where("subscriptions_flg = ?", false).
-			Where("year = ?", year).
-			Where("month = ?", month),
-		).
-		Or(mr.Conn.Where("subscriptions_flg = ?", true).
-			Where("start_date < ?", time.Now()).
-			Where("end_date > ?", time.Now()),
+		Where(mr.Conn.
+			Where("subscriptions_flg = ? AND year = ? AND month = ?", false, year, month).
+			Or("subscriptions_flg = ? AND(((start_year <= ? AND start_month <= ?) OR (start_year IS NULL AND start_month IS NULL) ) AND ( (? <= end_year AND ? <= end_month) OR (end_year IS NULL AND end_month IS NULL)))", true, year, month, year, month),
 		).
 		Find(&moneyAccounts).Error; err != nil {
 		return nil, err

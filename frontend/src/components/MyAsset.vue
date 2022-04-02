@@ -112,6 +112,10 @@
                 p -
               button(v-else @click="changeFormVisibleFlg()")
                 p +
+
+            .main-myasset-contents-details
+              h3 サブスクリプション/固定費
+              subscription-item(:subscriptions="subscriptions")
   footer-nav
 
 </template>
@@ -125,6 +129,7 @@ import FooterNav from '../molecules/FooterNav.vue'
 import ChartPie from '../organisms/ChartPie.vue';
 import ChartHorizontalBar from '../organisms/ChartBar.vue';
 import MoneyList from '../molecules/MoneyList.vue'
+import SubscriptionItem from '../organisms/Subscription.vue'
 
 export default {
   name: 'MyAsset',
@@ -135,9 +140,11 @@ export default {
     ChartPie,
     ChartHorizontalBar,
     MoneyList,
+    SubscriptionItem,
   },
   data () {
     return {
+      subscriptions: [],
       userName: '',
       userID: 0,
       thisYear: 2022,
@@ -218,11 +225,25 @@ export default {
     }
   },
   async created() {
-    this.getUser();
-    this.getDate();
-    await this.sumAmount(this.income, this.sumIncome);
+    await this.getDate();
+    await this.getUser();
+    this.getSubscriptions();
   },
   methods: {
+    async getSubscriptions () {
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/subscription/user/' + this.userID,
+      {
+        headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+      })
+      .then(res => {
+        this.subscriptions = res.data;
+        return;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
+    },
     onClickBefore() {
       if (this.targetMonth !== 1) {
         this.targetMonth = this.targetMonth -1;
@@ -328,21 +349,6 @@ export default {
       this.sumIncome = 0;
       this.sumExpenses = 0;
     },
-    // classifyMoneyAccount(data) {
-    //   switch (data.moneyAccountLabelId) {
-    //     case 1:
-    //       this.income.push(data);
-    //       this.sumIncome = this.sumIncome + data.amount
-    //       break;
-    //     case 2:
-    //       this.expenses.push(data);
-    //       this.sumExpenses = this.sumExpenses + data.amount
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // },
-
     async getUser () {
       if (window.$cookies.isKey('uuid')) {
         await axios

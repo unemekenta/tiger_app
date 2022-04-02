@@ -11,9 +11,10 @@
       .main
         menu01-item(:allCategories="allCategories").is-only-pc
         .main-mypage
-          h2.main-mypage-title マイクリップ
+          h2.main-mypage-title マイページ
           .main-mypage-contents
            p 準備中..
+          subscription-item(:subscriptions="subscriptions")
             //- .main-mypage-contents-item
             //- .main-mypage-contents-item
             //- .main-mypage-contents-item
@@ -30,6 +31,7 @@ import axios from 'axios'
 import VueJwtDecode from 'vue-jwt-decode'
 import Menu01Item from '/src/organisms/Menu01.vue'
 import Menu02Item from '/src/organisms/Menu02.vue'
+import SubscriptionItem from '/src/organisms/Subscription.vue'
 import HeaderNav from '/src/molecules/HeaderNav.vue'
 import FooterNav from '/src/molecules/FooterNav.vue'
 
@@ -38,25 +40,30 @@ export default {
   components: {
     Menu01Item,
     Menu02Item,
+    SubscriptionItem,
     HeaderNav,
     FooterNav,
   },
   data () {
     return {
       userName: '',
-      allCategories: [],
+      subscriptions: [],
       jwtUserData: '',
+      userID: 0,
     }
   },
-  created () {
-    this.getUser();
-    this.getAllCategories();
+  async created () {
+    await this.getUser();
+    this.getSubscriptions();
   },
   methods: {
-    async getAllCategories () {
-      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/categories')
+    async getSubscriptions () {
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/subscription/user/' + this.userID,
+      {
+        headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+      })
       .then(res => {
-        this.allCategories = res.data;
+        this.subscriptions = res.data;
         return;
       })
       .catch(error => {
@@ -81,8 +88,8 @@ export default {
             return;
           });
 
-        let user_id = VueJwtDecode.decode(this.jwtUserData).id;
-        await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/user/'+ user_id,
+        this.userID = VueJwtDecode.decode(this.jwtUserData).id;
+        await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/user/'+ this.userID,
         {
           headers: {'Authorization': 'Bearer ' + this.jwtUserData}
         })

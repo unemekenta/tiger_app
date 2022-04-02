@@ -1,0 +1,16 @@
+.subscription-label {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 2rem);
+  margin: auto;
+  padding: 1rem;
+  background-color: $color-green;
+  > P{
+    font-size: 1.4rem;
+    color: $color-white;
+    font-weight: bold;
+    > svg {
+      margin-right: 1rem;
+    }
+  }
+}
