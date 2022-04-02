@@ -57,17 +57,21 @@ func (mr *MoneyAccountRepository) FindByUser(id int, year int, month int) (*[]mo
 }
 
 // FindSubscriptionsByUser moneyAccountのうちSubscriptionsをUserで取得
-func (mr *MoneyAccountRepository) FindSubscriptionsByUser(id int) (*[]model.MoneyAccount, error) {
-	moneyAccounts := &[]model.MoneyAccount{}
+func (mr *MoneyAccountRepository) FindSubscriptionsByUser(id int) (*[]model.Subscription, error) {
+	subscriptions := &[]model.Subscription{}
 
-	if err := mr.Conn.Debug().Order("id").
-		Where("user_id = ?", id).
+	if err := mr.Conn.Debug().
+		Table("subscriptions").
+		Order("subscriptions.id").
+		Select("subscriptions.*, money_accounts.*").
+		Joins("left join money_accounts on subscriptions.money_account_id = money_accounts.id").
+		Where("money_accounts.user_id = ?", id).
 		Where("subscriptions_flg = ?", true).
-		Find(&moneyAccounts).Error; err != nil {
+		Find(&subscriptions).Error; err != nil {
 		return nil, err
 	}
 
-	return moneyAccounts, nil
+	return subscriptions, nil
 }
 
 // Update moneyAccountの更新

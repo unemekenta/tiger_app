@@ -52,6 +52,17 @@ type responseMoneyAccount struct {
 	UpdatedAt           time.Time `json:"updatedAt"`
 }
 
+type responseSubscription struct {
+	ID             int                  `json:"id"`
+	MoneyAccount   responseMoneyAccount `gorm:"embedded" json:"moneyAccount"`
+	MoneyAccountID int                  `json:"moneyAccountId"`
+	StartYear      int                  `json:"startYear"`
+	StartMonth     int                  `json:"startMonth"`
+	EndYear        int                  `json:"endYear"`
+	EndMonth       int                  `json:"endMonth"`
+	UpdatedAt      time.Time            `json:"updatedAt"`
+}
+
 type responseUserInfo struct {
 	MoneyAccountListIncome      []responseMoneyAccount `json:"moneyAccountListIncome"`
 	MoneyAccountListExpenses    []responseMoneyAccount `json:"moneyAccountListExpenses"`
@@ -211,18 +222,29 @@ func (mh *moneyAccountHandler) GetSubscriptionsByUser() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		var res []responseMoneyAccount
+		var res []responseSubscription
 
 		for _, fs := range *foundSubscriptions {
-			res = append(res, responseMoneyAccount{
-				ID:                  fs.ID,
-				MoneyAccountLabelID: fs.MoneyAccountLabelID,
-				Amount:              fs.Amount,
-				Title:               fs.Title,
-				Contents:            fs.Contents,
-				Year:                fs.Year,
-				Month:               fs.Month,
-				UpdatedAt:           fs.UpdatedAt,
+			rma := responseMoneyAccount{
+				ID:                  fs.MoneyAccountID,
+				MoneyAccountLabelID: fs.MoneyAccount.MoneyAccountLabelID,
+				Amount:              fs.MoneyAccount.Amount,
+				Title:               fs.MoneyAccount.Title,
+				Contents:            fs.MoneyAccount.Contents,
+				Year:                fs.MoneyAccount.Year,
+				Month:               fs.MoneyAccount.Month,
+				UpdatedAt:           fs.MoneyAccount.UpdatedAt,
+			}
+
+			res = append(res, responseSubscription{
+				ID:             fs.ID,
+				MoneyAccount:   rma,
+				MoneyAccountID: fs.MoneyAccountID,
+				StartYear:      fs.StartYear,
+				StartMonth:     fs.StartMonth,
+				EndYear:        fs.EndYear,
+				EndMonth:       fs.EndMonth,
+				UpdatedAt:      fs.UpdatedAt,
 			})
 		}
 		return c.JSON(http.StatusOK, res)

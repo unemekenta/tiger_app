@@ -1,10 +1,18 @@
 <template lang="pug">
   router-link(:to="{name:'MyAssetItemDetail', params: {id: id}}")
     li.subscription-label
-      p
-        fa-icon(icon="check-circle")
-        | {{this.label}}
-      p ¥ {{$_commify(this.amount)}}
+      .subscription-label-contents
+        p.title
+          fa-icon(icon="check-circle")
+          | {{this.label}}
+        p.amount ¥ {{$_commify(this.amount)}}
+      .subscription-label-period
+        p.period(v-if="this.startYear && this.startMonth && this.endYear && this.endMonth")
+          | {{this.startYear}}/{{this.startMonth}} ~ {{this.endYear}}/{{this.endMonth}}
+        p.period(v-else-if="this.startYear && this.startMonth")
+          | {{this.startYear}}/{{this.startMonth}} ~
+        p.period(v-else-if="this.endYear && this.endMonth")
+          | ~ {{this.endYear}}/{{this.endMonth}}
 
 </template>
 
@@ -18,6 +26,10 @@ export default {
     label: String,
     amount: Number,
     id: Number,
+    startYear: Number,
+    startMonth: Number,
+    endYear: Number,
+    endMonth: Number,
   },
   methods: {
   },

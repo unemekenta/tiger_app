@@ -46,16 +46,18 @@
                 .main-myasset-contents-top-income-label
                   p 収入
                 .main-myasset-contents-top-income-amount
-                  p {{ $_commify(sumIncome) }}
+                  p
                     span.main-myasset-contents-top-income-yen
-                      |  円
+                      | ¥
+                    | {{ $_commify(sumIncome) }}
               .main-myasset-contents-top-expenses
                 .main-myasset-contents-top-expenses-label
                   p 支出
                 .main-myasset-contents-top-expenses-amount
-                  p {{ $_commify(sumExpenses) }}
+                  p
                     span.main-myasset-contents-top-expenses-yen
-                      |  円
+                      | ¥
+                    | {{ $_commify(sumExpenses) }}
               .main-myasset-contents-top-sum
                 .main-myasset-contents-top-sum-label
                   p 残金

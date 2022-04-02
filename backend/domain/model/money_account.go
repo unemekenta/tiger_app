@@ -19,6 +19,18 @@ type MoneyAccount struct {
 	UpdatedAt           time.Time
 }
 
+type Subscription struct {
+	ID             int          `gorm:"primaryKey" json:"id"`
+	MoneyAccount   MoneyAccount `gorm:"embedded"`
+	MoneyAccountID int          `json:"money_account_id"`
+	StartYear      int          `json:"start_year"`
+	StartMonth     int          `json:"start_month"`
+	EndYear        int          `json:"end_year"`
+	EndMonth       int          `json:"end_month"`
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
+}
+
 func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*MoneyAccount, error) {
 	if title == "" {
 		return nil, errors.New("titleを入力してください")

@@ -15,7 +15,7 @@ type MoneyAccountUsecase interface {
 	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	FindByID(id int) (*model.MoneyAccount, error)
 	FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error)
-	FindSubscriptionsByUser(id int) (*[]model.MoneyAccount, error)
+	FindSubscriptionsByUser(id int) (*[]model.Subscription, error)
 	Update(id int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	Delete(id int) error
 }
@@ -65,7 +65,7 @@ func (mu *moneyAccountUsecase) FindByUser(id int, year int, month int) (*[]model
 }
 
 // FindSubscriptionsByUser moneyAccountのうちSubscriptionをUserで取得するときのユースケース
-func (mu *moneyAccountUsecase) FindSubscriptionsByUser(id int) (*[]model.MoneyAccount, error) {
+func (mu *moneyAccountUsecase) FindSubscriptionsByUser(id int) (*[]model.Subscription, error) {
 	foundSubscriptions, err := mu.moneyAccountRepo.FindSubscriptionsByUser(id)
 	if err != nil {
 		return nil, err
