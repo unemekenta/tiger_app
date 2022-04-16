@@ -62,9 +62,10 @@
                 .main-myasset-contents-top-sum-label
                   p 残金
                 .main-myasset-contents-top-sum-amount
-                  p {{ $_commify(remainingMoney) }}
+                  p
                     span.main-myasset-contents-top-sum-yen
-                      |  円
+                      | ¥
+                    | {{ $_commify(remainingMoney) }}
 
             .main-myasset-contents-details
               h3 収支内訳
@@ -116,7 +117,7 @@
                 p +
 
             .main-myasset-contents-details
-              h3 サブスクリプション/固定費
+              h3 サブスク / 固定費
               subscription-item(:subscriptions="subscriptions")
   footer-nav
 
