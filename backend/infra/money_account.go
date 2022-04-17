@@ -2,8 +2,8 @@
 package infra
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
+	"github.com/unemekenta/tiger_app/backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
 
 	"gorm.io/gorm"
 )
@@ -27,6 +27,46 @@ func (mr *MoneyAccountRepository) Create(moneyAccount *model.MoneyAccount) (*mod
 	return moneyAccount, nil
 }
 
+// CreateSubscription subscriptionの保存
+func (mr *MoneyAccountRepository) CreateSubscription(subscriptionWithMoneyAccount *model.SubscriptionWithMoneyAccount) (*model.SubscriptionWithMoneyAccount, error) {
+
+	sm := &model.MoneyAccount{
+		UserID:              subscriptionWithMoneyAccount.MoneyAccount.UserID,
+		MoneyAccountLabelID: subscriptionWithMoneyAccount.MoneyAccount.MoneyAccountLabelID,
+		Amount:              subscriptionWithMoneyAccount.MoneyAccount.Amount,
+		Title:               subscriptionWithMoneyAccount.MoneyAccount.Title,
+		Contents:            subscriptionWithMoneyAccount.MoneyAccount.Contents,
+		Year:                subscriptionWithMoneyAccount.MoneyAccount.Year,
+		Month:               subscriptionWithMoneyAccount.MoneyAccount.Month,
+		SubscriptionsFlg:    subscriptionWithMoneyAccount.MoneyAccount.SubscriptionsFlg,
+	}
+
+	if err := mr.Conn.Create(&sm).Error; err != nil {
+		return nil, err
+	}
+
+	moneyAccountID := &sm.ID
+
+	ss := &model.Subscription{
+		MoneyAccountID: *moneyAccountID,
+		StartYear:      subscriptionWithMoneyAccount.Subscription.StartYear,
+		StartMonth:     subscriptionWithMoneyAccount.Subscription.StartMonth,
+		EndYear:        subscriptionWithMoneyAccount.Subscription.EndYear,
+		EndMonth:       subscriptionWithMoneyAccount.Subscription.EndMonth,
+	}
+
+	if err := mr.Conn.Debug().Create(&ss).Error; err != nil {
+		return nil, err
+	}
+
+	swm := &model.SubscriptionWithMoneyAccount{
+		MoneyAccount: *sm,
+		Subscription: *ss,
+	}
+
+	return swm, nil
+}
+
 // FindByID moneyAccountをIDで取得
 func (mr *MoneyAccountRepository) FindByID(id int) (*model.MoneyAccount, error) {
 	moneyAccount := &model.MoneyAccount{ID: id}
@@ -38,15 +78,40 @@ func (mr *MoneyAccountRepository) FindByID(id int) (*model.MoneyAccount, error) 
 	return moneyAccount, nil
 }
 
-// FindByUser moneyAccountををUserで取得
+// FindByUser moneyAccountをUserで取得
 func (mr *MoneyAccountRepository) FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error) {
 	moneyAccounts := &[]model.MoneyAccount{}
 
-	if err := mr.Conn.Order("id").Where("user_id = ?", id).Where("user_id = ?", id).Where("year = ?", year).Where("month = ?", month).Find(&moneyAccounts).Error; err != nil {
+	if err := mr.Conn.Debug().Order("id").
+		Joins("left join subscriptions on subscriptions.money_account_id = money_accounts.id").
+		Where("user_id = ?", id).
+		Where(mr.Conn.
+			Where("subscriptions_flg = ? AND year = ? AND month = ?", false, year, month).
+			Or("subscriptions_flg = ? AND(((start_year <= ? AND start_month <= ?) OR (start_year IN (0, NULL) AND start_month IN (0, NULL)) ) AND ( (? <= end_year AND ? <= end_month) OR (end_year IN (0, NULL) AND end_month IN (0, NULL))))", true, year, month, year, month),
+		).
+		Find(&moneyAccounts).Error; err != nil {
 		return nil, err
 	}
 
 	return moneyAccounts, nil
+}
+
+// FindSubscriptionsByUser moneyAccountのうちSubscriptionsをUserで取得
+func (mr *MoneyAccountRepository) FindSubscriptionWithMoneyAccountByUser(id int) (*[]model.SubscriptionWithMoneyAccount, error) {
+	subscriptions := &[]model.SubscriptionWithMoneyAccount{}
+
+	if err := mr.Conn.Debug().
+		Table("subscriptions").
+		Order("subscriptions.id").
+		Select("subscriptions.*, money_accounts.*").
+		Joins("left join money_accounts on subscriptions.money_account_id = money_accounts.id").
+		Where("money_accounts.user_id = ?", id).
+		Where("subscriptions_flg = ?", true).
+		Find(&subscriptions).Error; err != nil {
+		return nil, err
+	}
+
+	return subscriptions, nil
 }
 
 // Update moneyAccountの更新

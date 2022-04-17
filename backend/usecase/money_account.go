@@ -4,16 +4,19 @@
 package usecase
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
+	"github.com/unemekenta/tiger_app/backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
+
 	"time"
 )
 
 // MoneyAccountUsecase moneyAccount usecaseのinterface
 type MoneyAccountUsecase interface {
-	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
+	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.MoneyAccount, error)
+	CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error)
 	FindByID(id int) (*model.MoneyAccount, error)
 	FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error)
+	FindSubscriptionWithMoneyAccountByUser(id int) (*[]model.SubscriptionWithMoneyAccount, error)
 	Update(id int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	Delete(id int) error
 }
@@ -28,8 +31,8 @@ func NewMoneyAccountUsecase(moneyAccountRepo repository.MoneyAccountRepository) 
 }
 
 // Create moneyAccountを保存するときのユースケース
-func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error) {
-	moneyAccount, err := model.NewMoneyAccount(userID, moneyAccountLabelID, amount, title, contents, year, month, updatedAt)
+func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.MoneyAccount, error) {
+	moneyAccount, err := model.NewMoneyAccount(userID, moneyAccountLabelID, amount, title, contents, year, month, subscriptionsFlg, updatedAt)
 	if err != nil {
 		return nil, err
 	}
@@ -40,6 +43,21 @@ func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amoun
 	}
 
 	return createdMoneyAccount, nil
+}
+
+// CreateSubscription Subscriptionを保存するときのユースケース
+func (mu *moneyAccountUsecase) CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error) {
+	subscriptionWithMoneyAccount, err := model.NewSubscriptionWithMoneyAccount(startYear, startMonth, endYear, endMonth, userID, moneyAccountLabelID, amount, title, contents, year, month, subscriptionsFlg, updatedAt)
+	if err != nil {
+		return nil, err
+	}
+
+	createdSubscriptionWithMoneyAccount, err := mu.moneyAccountRepo.CreateSubscription(subscriptionWithMoneyAccount)
+	if err != nil {
+		return nil, err
+	}
+
+	return createdSubscriptionWithMoneyAccount, nil
 }
 
 // FindByID moneyAccountをIDで取得するときのユースケース
@@ -60,6 +78,16 @@ func (mu *moneyAccountUsecase) FindByUser(id int, year int, month int) (*[]model
 	}
 
 	return foundMoneyAccounts, nil
+}
+
+// FindSubscriptionWithMoneyAccountByUser moneyAccountのうちSubscriptionをUserで取得するときのユースケース
+func (mu *moneyAccountUsecase) FindSubscriptionWithMoneyAccountByUser(id int) (*[]model.SubscriptionWithMoneyAccount, error) {
+	foundSubscriptionWithMoneyAccount, err := mu.moneyAccountRepo.FindSubscriptionWithMoneyAccountByUser(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return foundSubscriptionWithMoneyAccount, nil
 }
 
 // Update moneyAccountを更新するときのユースケース

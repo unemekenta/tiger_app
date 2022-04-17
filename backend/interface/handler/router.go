@@ -35,7 +35,9 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	auth.GET("/user/:id", userHandler.Get())
 
 	auth.GET("/money_account/user/:id/:year/:month", moneyAccountHandler.GetByUser())
+	auth.GET("/money_account/subscription/user/:id", moneyAccountHandler.GetSubscriptionWithMoneyAccountByUser())
 	auth.POST("/money_account/user", moneyAccountHandler.Post())
+	auth.POST("/money_account/subscription/user/new", moneyAccountHandler.PostSubscription())
 	auth.GET("/money_account/user/detail/:id", moneyAccountHandler.Get())
 	auth.PUT("/money_account/user/:id", moneyAccountHandler.Put())
 	auth.DELETE("/money_account/user/:id", moneyAccountHandler.Delete())

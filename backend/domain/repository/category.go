@@ -2,7 +2,7 @@
 package repository
 
 import (
-	"backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/model"
 )
 
 // CategoryRepository category repositoryのinterface

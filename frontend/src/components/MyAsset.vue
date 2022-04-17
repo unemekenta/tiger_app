@@ -46,23 +46,26 @@
                 .main-myasset-contents-top-income-label
                   p 収入
                 .main-myasset-contents-top-income-amount
-                  p {{ $_commify(sumIncome) }}
+                  p
                     span.main-myasset-contents-top-income-yen
-                      |  円
+                      | ¥
+                    | {{ $_commify(sumIncome) }}
               .main-myasset-contents-top-expenses
                 .main-myasset-contents-top-expenses-label
                   p 支出
                 .main-myasset-contents-top-expenses-amount
-                  p {{ $_commify(sumExpenses) }}
+                  p
                     span.main-myasset-contents-top-expenses-yen
-                      |  円
+                      | ¥
+                    | {{ $_commify(sumExpenses) }}
               .main-myasset-contents-top-sum
                 .main-myasset-contents-top-sum-label
                   p 残金
                 .main-myasset-contents-top-sum-amount
-                  p {{ $_commify(remainingMoney) }}
+                  p
                     span.main-myasset-contents-top-sum-yen
-                      |  円
+                      | ¥
+                    | {{ $_commify(remainingMoney) }}
 
             .main-myasset-contents-details
               h3 収支内訳
@@ -77,6 +80,10 @@
             .main-myasset-contents-form
               form(v-if="formVisibleFlg")
                 .main-myasset-contents-form-component
+                  input(type="checkbox" name="subscriptionsFlg" v-model="formSubscriptionsFlg")
+                  label(for="subscriptionsFlg")
+                    p サブスク/固定費で登録する
+                .main-myasset-contents-form-component
                   label(for="year")
                     p 年
                   select(name="year" v-model="formYear")
@@ -86,6 +93,27 @@
                   label(for="month")
                     p 月
                   select(name="month" v-model="formMonth")
+                    option(v-for="m in 12" :value="m")
+                      | {{ m }}月
+                .main-myasset-contents-form-component(v-if="formSubscriptionsFlg")
+                  label(for="startYear")
+                    p 開始年
+                  select(name="startYear" v-model="formStartYear")
+                    option(v-for="y in 50" :value="y + 2020")
+                      | {{ y + 2020 }}年
+                  label(for="startMonth")
+                    p 開始月
+                  select(name="startMonth" v-model="formStartMonth")
+                    option(v-for="m in 12" :value="m")
+                      | {{ m }}月
+                  label(for="endYear")
+                    p 終了年
+                  select(name="endYear" v-model="formEndYear")
+                    option(v-for="y in 50" :value="y + 2020")
+                      | {{ y + 2020 }}年
+                  label(for="endMonth")
+                    p 終了月
+                  select(name="endMonth" v-model="formEndMonth")
                     option(v-for="m in 12" :value="m")
                       | {{ m }}月
                 .main-myasset-contents-form-component
@@ -112,6 +140,10 @@
                 p -
               button(v-else @click="changeFormVisibleFlg()")
                 p +
+
+            .main-myasset-contents-details
+              h3 サブスク / 固定費
+              subscription-item(:subscriptions="subscriptions")
   footer-nav
 
 </template>
@@ -125,6 +157,7 @@ import FooterNav from '../molecules/FooterNav.vue'
 import ChartPie from '../organisms/ChartPie.vue';
 import ChartHorizontalBar from '../organisms/ChartBar.vue';
 import MoneyList from '../molecules/MoneyList.vue'
+import SubscriptionItem from '../organisms/Subscription.vue'
 
 export default {
   name: 'MyAsset',
@@ -135,9 +168,11 @@ export default {
     ChartPie,
     ChartHorizontalBar,
     MoneyList,
+    SubscriptionItem,
   },
   data () {
     return {
+      subscriptions: [],
       userName: '',
       userID: 0,
       thisYear: 2022,
@@ -209,20 +244,39 @@ export default {
         { text: '収入', value: '1' },
         { text: '支出', value: '2' },
       ],
-      formYear : 0,
-      formMonth: 0,
+      formYear: null,
+      formMonth: null,
       formMoneyAccountLabelId: 0,
       formAmount: null,
       formTitle: "",
       formContents: "",
+      formSubscriptionsFlg: false,
+      formStartYear: 0,
+      formStartMonth: 0,
+      formEndYear: 0,
+      formEndMonth: 0,
     }
   },
   async created() {
-    this.getUser();
-    this.getDate();
-    await this.sumAmount(this.income, this.sumIncome);
+    await this.getDate();
+    await this.getUser();
+    this.getSubscriptions();
   },
   methods: {
+    async getSubscriptions () {
+      await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/subscription/user/' + this.userID,
+      {
+        headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+      })
+      .then(res => {
+        this.subscriptions = res.data;
+        return;
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      });
+    },
     onClickBefore() {
       if (this.targetMonth !== 1) {
         this.targetMonth = this.targetMonth -1;
@@ -328,21 +382,6 @@ export default {
       this.sumIncome = 0;
       this.sumExpenses = 0;
     },
-    // classifyMoneyAccount(data) {
-    //   switch (data.moneyAccountLabelId) {
-    //     case 1:
-    //       this.income.push(data);
-    //       this.sumIncome = this.sumIncome + data.amount
-    //       break;
-    //     case 2:
-    //       this.expenses.push(data);
-    //       this.sumExpenses = this.sumExpenses + data.amount
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // },
-
     async getUser () {
       if (window.$cookies.isKey('uuid')) {
         await axios
@@ -383,6 +422,7 @@ export default {
     changeFormVisibleFlg() {
       this.formVisibleFlg =! this.formVisibleFlg;
     },
+    // 登録
     async postMoneyAccount() {
       let params = new URLSearchParams()
       params.append('userId', this.userID)
@@ -395,19 +435,43 @@ export default {
       params.append('contents', this.formContents)
       params.append('year', this.formYear)
       params.append('month', this.formMonth)
-      await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user', params, {
-        headers: {'Authorization': 'Bearer ' + this.jwtUserData}
-      })
-      .then(() => {
-        alert( this.formTitle + 'を登録しました。');
-        this.getMoneyAccount(this.userID);
-        this.formVisibleFlg = false;
-        return;
-      })
-      .catch(error => {
-        alert(error);
-        return;
-      });
+
+      if (this.formSubscriptionsFlg) {
+        params.append('subscriptionsFlg', this.formSubscriptionsFlg)
+        params.append('startYear', this.formStartYear)
+        params.append('startMonth', this.formStartMonth)
+        params.append('endYear', this.formEndYear)
+        params.append('endMonth', this.formEndMonth)
+
+        await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/subscription/user/new', params, {
+          headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+        })
+        .then(() => {
+          alert( this.formTitle + 'をサブスク/固定費に登録しました。');
+          this.getMoneyAccount(this.userID);
+          this.getSubscriptions();
+          this.formVisibleFlg = false;
+          return;
+        })
+        .catch(error => {
+          alert(error);
+          return;
+        });
+      } else {
+        await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user', params, {
+          headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+        })
+        .then(() => {
+          alert( this.formTitle + 'を登録しました。');
+          this.getMoneyAccount(this.userID);
+          this.formVisibleFlg = false;
+          return;
+        })
+        .catch(error => {
+          alert(error);
+          return;
+        });
+      }
     },
   }
 }

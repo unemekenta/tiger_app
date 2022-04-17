@@ -1,11 +1,12 @@
 package main
 
 import (
-	"backend/config"
-	"backend/infra"
-	"backend/interface/handler"
-	"backend/usecase"
 	"os"
+
+	"github.com/unemekenta/tiger_app/backend/config"
+	"github.com/unemekenta/tiger_app/backend/infra"
+	"github.com/unemekenta/tiger_app/backend/interface/handler"
+	"github.com/unemekenta/tiger_app/backend/usecase"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

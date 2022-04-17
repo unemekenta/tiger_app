@@ -1,0 +1,35 @@
+.subscription-label {
+  width: calc(100% - 2rem);
+  margin: auto;
+  padding: 1rem;
+  background-color: $color-green;
+  &-contents {
+    display: flex;
+    justify-content: space-between;
+
+    >p {
+      color: $color-white;
+    }
+
+    >.title{
+      font-size: 1.8rem;
+      font-weight: bold;
+      > svg {
+        margin-right: 1rem;
+      }
+    }
+
+    >.amount {
+      font-weight: bold;
+      font-size: 1.8rem;
+    }
+
+  }
+  &-period {
+    text-align: right;
+    >p {
+      color: $color-white;
+      font-size: 1.2rem;
+    }
+  }
+}

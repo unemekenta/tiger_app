@@ -2,8 +2,8 @@
 package infra
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
+	"github.com/unemekenta/tiger_app/backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
 
 	"github.com/gomodule/redigo/redis"
 	"github.com/pkg/errors"
@@ -79,7 +79,7 @@ func (ur *UserRepository) CreateSession(uuid string, value string) error {
 	defer conn.Close()
 
 	// TODO セッション時間変更
-	_, err := conn.Do("SET", uuid, value, "NX", "EX", 36000)
+	_, err := conn.Do("SET", uuid, value, "NX", "EX", 604800)
 	if err != nil {
 		return errors.WithStack(err)
 	}

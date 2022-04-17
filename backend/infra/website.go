@@ -2,8 +2,9 @@
 package infra
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
+
+	"github.com/unemekenta/tiger_app/backend/domain/model"
 
 	"gorm.io/gorm"
 )

@@ -2,7 +2,7 @@
   router-link(:to="{name:'MyAssetItemDetail', params: {id: id}}")
     li.moneylist-shadow
       p {{this.label}}
-      p {{$_commify(this.amount)}} 円
+      p ¥ {{$_commify(this.amount)}}
 
 </template>
 

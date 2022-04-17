@@ -4,9 +4,10 @@
 package usecase
 
 import (
-	"backend/domain/model"
-	"backend/domain/repository"
 	"time"
+
+	"github.com/unemekenta/tiger_app/backend/domain/model"
+	"github.com/unemekenta/tiger_app/backend/domain/repository"
 )
 
 // CategoryUsecase category usecaseのinterface
