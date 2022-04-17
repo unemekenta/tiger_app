@@ -251,10 +251,10 @@ export default {
       formTitle: "",
       formContents: "",
       formSubscriptionsFlg: false,
-      formStartYear: null,
-      formStartMonth: null,
-      formEndYear: null,
-      formEndMonth: null,
+      formStartYear: 0,
+      formStartMonth: 0,
+      formEndYear: 0,
+      formEndMonth: 0,
     }
   },
   async created() {
