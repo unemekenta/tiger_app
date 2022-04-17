@@ -80,6 +80,10 @@
             .main-myasset-contents-form
               form(v-if="formVisibleFlg")
                 .main-myasset-contents-form-component
+                  input(type="checkbox" name="subscriptionsFlg" v-model="formSubscriptionsFlg")
+                  label(for="subscriptionsFlg")
+                    p サブスク/固定費で登録する
+                .main-myasset-contents-form-component
                   label(for="year")
                     p 年
                   select(name="year" v-model="formYear")
@@ -89,6 +93,27 @@
                   label(for="month")
                     p 月
                   select(name="month" v-model="formMonth")
+                    option(v-for="m in 12" :value="m")
+                      | {{ m }}月
+                .main-myasset-contents-form-component(v-if="formSubscriptionsFlg")
+                  label(for="startYear")
+                    p 開始年
+                  select(name="startYear" v-model="formStartYear")
+                    option(v-for="y in 50" :value="y + 2020")
+                      | {{ y + 2020 }}年
+                  label(for="startMonth")
+                    p 開始月
+                  select(name="startMonth" v-model="formStartMonth")
+                    option(v-for="m in 12" :value="m")
+                      | {{ m }}月
+                  label(for="endYear")
+                    p 終了年
+                  select(name="endYear" v-model="formEndYear")
+                    option(v-for="y in 50" :value="y + 2020")
+                      | {{ y + 2020 }}年
+                  label(for="endMonth")
+                    p 終了月
+                  select(name="endMonth" v-model="formEndMonth")
                     option(v-for="m in 12" :value="m")
                       | {{ m }}月
                 .main-myasset-contents-form-component
@@ -219,12 +244,17 @@ export default {
         { text: '収入', value: '1' },
         { text: '支出', value: '2' },
       ],
-      formYear : 0,
+      formYear: 0,
       formMonth: 0,
       formMoneyAccountLabelId: 0,
       formAmount: null,
       formTitle: "",
       formContents: "",
+      formSubscriptionsFlg: false,
+      formStartYear: 0,
+      formStartMonth: 0,
+      formEndYear: 0,
+      formEndMonth: 0,
     }
   },
   async created() {
@@ -392,6 +422,7 @@ export default {
     changeFormVisibleFlg() {
       this.formVisibleFlg =! this.formVisibleFlg;
     },
+    // 登録
     async postMoneyAccount() {
       let params = new URLSearchParams()
       params.append('userId', this.userID)
@@ -404,19 +435,43 @@ export default {
       params.append('contents', this.formContents)
       params.append('year', this.formYear)
       params.append('month', this.formMonth)
-      await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user', params, {
-        headers: {'Authorization': 'Bearer ' + this.jwtUserData}
-      })
-      .then(() => {
-        alert( this.formTitle + 'を登録しました。');
-        this.getMoneyAccount(this.userID);
-        this.formVisibleFlg = false;
-        return;
-      })
-      .catch(error => {
-        alert(error);
-        return;
-      });
+
+      if (this.formSubscriptionsFlg) {
+        params.append('subscriptionsFlg', this.formSubscriptionsFlg)
+        params.append('startYear', this.formStartYear)
+        params.append('startMonth', this.formStartMonth)
+        params.append('endYear', this.formEndYear)
+        params.append('endMonth', this.formEndMonth)
+
+        await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/subscription/user/new', params, {
+          headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+        })
+        .then(() => {
+          alert( this.formTitle + 'をサブスク/固定費に登録しました。');
+          this.getMoneyAccount(this.userID);
+          this.getSubscriptions();
+          this.formVisibleFlg = false;
+          return;
+        })
+        .catch(error => {
+          alert(error);
+          return;
+        });
+      } else {
+        await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/user', params, {
+          headers: {'Authorization': 'Bearer ' + this.jwtUserData}
+        })
+        .then(() => {
+          alert( this.formTitle + 'を登録しました。');
+          this.getMoneyAccount(this.userID);
+          this.formVisibleFlg = false;
+          return;
+        })
+        .catch(error => {
+          alert(error);
+          return;
+        });
+      }
     },
   }
 }

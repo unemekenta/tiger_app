@@ -7,13 +7,14 @@
         //- img.user-icon(src="../../src/assets/images/logo.png")
         .user-name
           b {{userName}}
-          |さんのページ
+          |さん
       .main
         menu01-item(:allCategories="allCategories").is-only-pc
         .main-mypage
           h2.main-mypage-title マイページ
           .main-mypage-contents
-           p 準備中..
+            p 準備中...
+          h3 登録中のサブスク
           subscription-item(:subscriptions="subscriptions")
             //- .main-mypage-contents-item
             //- .main-mypage-contents-item
