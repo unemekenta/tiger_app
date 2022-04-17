@@ -79,7 +79,7 @@ func (ur *UserRepository) CreateSession(uuid string, value string) error {
 	defer conn.Close()
 
 	// TODO セッション時間変更
-	_, err := conn.Do("SET", uuid, value, "NX", "EX", 36000)
+	_, err := conn.Do("SET", uuid, value, "NX", "EX", 604800)
 	if err != nil {
 		return errors.WithStack(err)
 	}
