@@ -55,7 +55,7 @@ func (mr *MoneyAccountRepository) CreateSubscription(subscriptionWithMoneyAccoun
 		EndMonth:       subscriptionWithMoneyAccount.Subscription.EndMonth,
 	}
 
-	if err := mr.Conn.Create(&ss).Error; err != nil {
+	if err := mr.Conn.Debug().Create(&ss).Error; err != nil {
 		return nil, err
 	}
 

@@ -5,7 +5,7 @@ ALTER TABLE money_accounts ADD subscriptions_flg BOOLEAN NOT NULL DEFAULT false;
 
 CREATE TABLE subscriptions (
     id SERIAL PRIMARY KEY,
-    money_account_id INTEGER NOT NULL REFERENCES money_accounts(id),
+    money_account_id INTEGER NOT NULL REFERENCES money_accounts(id) ON DELETE CASCADE,
     start_year INTEGER,
     start_month INTEGER,
     end_year INTEGER,
