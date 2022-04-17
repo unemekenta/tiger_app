@@ -38,6 +38,7 @@ func (mr *MoneyAccountRepository) CreateSubscription(subscriptionWithMoneyAccoun
 		Contents:            subscriptionWithMoneyAccount.MoneyAccount.Contents,
 		Year:                subscriptionWithMoneyAccount.MoneyAccount.Year,
 		Month:               subscriptionWithMoneyAccount.MoneyAccount.Month,
+		SubscriptionsFlg:    subscriptionWithMoneyAccount.MoneyAccount.SubscriptionsFlg,
 	}
 
 	if err := mr.Conn.Create(&sm).Error; err != nil {

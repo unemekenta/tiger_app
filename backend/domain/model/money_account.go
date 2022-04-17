@@ -15,6 +15,7 @@ type MoneyAccount struct {
 	Contents            string `json:"contents"`
 	Year                int    `json:"year"`
 	Month               int    `json:"month"`
+	SubscriptionsFlg    bool   `json:"subscriptions_flg"`
 	CreatedAt           time.Time
 	UpdatedAt           time.Time
 }
@@ -35,7 +36,7 @@ type SubscriptionWithMoneyAccount struct {
 	Subscription Subscription `gorm:"embedded"`
 }
 
-func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*MoneyAccount, error) {
+func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*MoneyAccount, error) {
 	if title == "" {
 		return nil, errors.New("titleを入力してください")
 	}
@@ -48,6 +49,7 @@ func NewMoneyAccount(userID int, moneyAccountLabelID int, amount int, title stri
 		Year:                year,
 		Month:               month,
 		Contents:            contents,
+		SubscriptionsFlg:    subscriptionsFlg,
 		UpdatedAt:           updatedAt,
 	}
 
@@ -71,7 +73,7 @@ func NewSubscription(startYear int, startMonth int, endYear int, endMonth int, u
 	return subscription, nil
 }
 
-func NewSubscriptionWithMoneyAccount(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*SubscriptionWithMoneyAccount, error) {
+func NewSubscriptionWithMoneyAccount(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*SubscriptionWithMoneyAccount, error) {
 	if title == "" {
 		return nil, errors.New("titleを入力してください")
 	}
@@ -84,6 +86,7 @@ func NewSubscriptionWithMoneyAccount(startYear int, startMonth int, endYear int,
 		Year:                year,
 		Month:               month,
 		Contents:            contents,
+		SubscriptionsFlg:    subscriptionsFlg,
 		UpdatedAt:           updatedAt,
 	}
 

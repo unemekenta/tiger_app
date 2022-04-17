@@ -12,8 +12,8 @@ import (
 
 // MoneyAccountUsecase moneyAccount usecaseのinterface
 type MoneyAccountUsecase interface {
-	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
-	CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error)
+	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.MoneyAccount, error)
+	CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error)
 	FindByID(id int) (*model.MoneyAccount, error)
 	FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error)
 	FindSubscriptionWithMoneyAccountByUser(id int) (*[]model.SubscriptionWithMoneyAccount, error)
@@ -31,8 +31,8 @@ func NewMoneyAccountUsecase(moneyAccountRepo repository.MoneyAccountRepository) 
 }
 
 // Create moneyAccountを保存するときのユースケース
-func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error) {
-	moneyAccount, err := model.NewMoneyAccount(userID, moneyAccountLabelID, amount, title, contents, year, month, updatedAt)
+func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.MoneyAccount, error) {
+	moneyAccount, err := model.NewMoneyAccount(userID, moneyAccountLabelID, amount, title, contents, year, month, subscriptionsFlg, updatedAt)
 	if err != nil {
 		return nil, err
 	}
@@ -46,8 +46,8 @@ func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amoun
 }
 
 // CreateSubscription Subscriptionを保存するときのユースケース
-func (mu *moneyAccountUsecase) CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error) {
-	subscriptionWithMoneyAccount, err := model.NewSubscriptionWithMoneyAccount(startYear, startMonth, endYear, endMonth, userID, moneyAccountLabelID, amount, title, contents, year, month, updatedAt)
+func (mu *moneyAccountUsecase) CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, subscriptionsFlg bool, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error) {
+	subscriptionWithMoneyAccount, err := model.NewSubscriptionWithMoneyAccount(startYear, startMonth, endYear, endMonth, userID, moneyAccountLabelID, amount, title, contents, year, month, subscriptionsFlg, updatedAt)
 	if err != nil {
 		return nil, err
 	}

@@ -39,6 +39,7 @@ type requestMoneyAccount struct {
 	Contents            string    `json:"contents"`
 	Year                int       `json:"year"`
 	Month               int       `json:"month"`
+	SubscriptionsFlg    bool      `json:"subscriptions_flg"`
 	UpdatedAt           time.Time `json:"updatedAt"`
 }
 
@@ -94,7 +95,7 @@ func (mh *moneyAccountHandler) Post() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		createdMoneyAccount, err := mh.moneyAccountUsecase.Create(req.UserID, req.MoneyAccountLabelID, req.Amount, req.Title, req.Contents, req.Year, req.Month, req.UpdatedAt)
+		createdMoneyAccount, err := mh.moneyAccountUsecase.Create(req.UserID, req.MoneyAccountLabelID, req.Amount, req.Title, req.Contents, req.Year, req.Month, req.SubscriptionsFlg, req.UpdatedAt)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
@@ -122,7 +123,7 @@ func (mh *moneyAccountHandler) PostSubscription() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		createdSubscriptionWithMoneyAccount, err := mh.moneyAccountUsecase.CreateSubscription(req.StartYear, req.StartMonth, req.EndYear, req.EndMonth, req.MoneyAccount.UserID, req.MoneyAccount.MoneyAccountLabelID, req.MoneyAccount.Amount, req.MoneyAccount.Title, req.MoneyAccount.Contents, req.MoneyAccount.Year, req.MoneyAccount.Month, req.UpdatedAt)
+		createdSubscriptionWithMoneyAccount, err := mh.moneyAccountUsecase.CreateSubscription(req.StartYear, req.StartMonth, req.EndYear, req.EndMonth, req.MoneyAccount.UserID, req.MoneyAccount.MoneyAccountLabelID, req.MoneyAccount.Amount, req.MoneyAccount.Title, req.MoneyAccount.Contents, req.MoneyAccount.Year, req.MoneyAccount.Month, req.MoneyAccount.SubscriptionsFlg, req.UpdatedAt)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
