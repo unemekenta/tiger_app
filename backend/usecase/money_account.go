@@ -13,9 +13,10 @@ import (
 // MoneyAccountUsecase moneyAccount usecaseのinterface
 type MoneyAccountUsecase interface {
 	Create(userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
+	CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error)
 	FindByID(id int) (*model.MoneyAccount, error)
 	FindByUser(id int, year int, month int) (*[]model.MoneyAccount, error)
-	FindSubscriptionsByUser(id int) (*[]model.Subscription, error)
+	FindSubscriptionWithMoneyAccountByUser(id int) (*[]model.SubscriptionWithMoneyAccount, error)
 	Update(id int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.MoneyAccount, error)
 	Delete(id int) error
 }
@@ -44,6 +45,21 @@ func (mu *moneyAccountUsecase) Create(userID int, moneyAccountLabelID int, amoun
 	return createdMoneyAccount, nil
 }
 
+// CreateSubscription Subscriptionを保存するときのユースケース
+func (mu *moneyAccountUsecase) CreateSubscription(startYear int, startMonth int, endYear int, endMonth int, userID int, moneyAccountLabelID int, amount int, title string, contents string, year int, month int, updatedAt time.Time) (*model.SubscriptionWithMoneyAccount, error) {
+	subscriptionWithMoneyAccount, err := model.NewSubscriptionWithMoneyAccount(startYear, startMonth, endYear, endMonth, userID, moneyAccountLabelID, amount, title, contents, year, month, updatedAt)
+	if err != nil {
+		return nil, err
+	}
+
+	createdSubscriptionWithMoneyAccount, err := mu.moneyAccountRepo.CreateSubscription(subscriptionWithMoneyAccount)
+	if err != nil {
+		return nil, err
+	}
+
+	return createdSubscriptionWithMoneyAccount, nil
+}
+
 // FindByID moneyAccountをIDで取得するときのユースケース
 func (mu *moneyAccountUsecase) FindByID(id int) (*model.MoneyAccount, error) {
 	foundMoneyAccount, err := mu.moneyAccountRepo.FindByID(id)
@@ -64,14 +80,14 @@ func (mu *moneyAccountUsecase) FindByUser(id int, year int, month int) (*[]model
 	return foundMoneyAccounts, nil
 }
 
-// FindSubscriptionsByUser moneyAccountのうちSubscriptionをUserで取得するときのユースケース
-func (mu *moneyAccountUsecase) FindSubscriptionsByUser(id int) (*[]model.Subscription, error) {
-	foundSubscriptions, err := mu.moneyAccountRepo.FindSubscriptionsByUser(id)
+// FindSubscriptionWithMoneyAccountByUser moneyAccountのうちSubscriptionをUserで取得するときのユースケース
+func (mu *moneyAccountUsecase) FindSubscriptionWithMoneyAccountByUser(id int) (*[]model.SubscriptionWithMoneyAccount, error) {
+	foundSubscriptionWithMoneyAccount, err := mu.moneyAccountRepo.FindSubscriptionWithMoneyAccountByUser(id)
 	if err != nil {
 		return nil, err
 	}
 
-	return foundSubscriptions, nil
+	return foundSubscriptionWithMoneyAccount, nil
 }
 
 // Update moneyAccountを更新するときのユースケース

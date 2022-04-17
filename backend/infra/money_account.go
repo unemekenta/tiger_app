@@ -27,6 +27,45 @@ func (mr *MoneyAccountRepository) Create(moneyAccount *model.MoneyAccount) (*mod
 	return moneyAccount, nil
 }
 
+// CreateSubscription subscriptionの保存
+func (mr *MoneyAccountRepository) CreateSubscription(subscriptionWithMoneyAccount *model.SubscriptionWithMoneyAccount) (*model.SubscriptionWithMoneyAccount, error) {
+
+	sm := &model.MoneyAccount{
+		UserID:              subscriptionWithMoneyAccount.MoneyAccount.UserID,
+		MoneyAccountLabelID: subscriptionWithMoneyAccount.MoneyAccount.MoneyAccountLabelID,
+		Amount:              subscriptionWithMoneyAccount.MoneyAccount.Amount,
+		Title:               subscriptionWithMoneyAccount.MoneyAccount.Title,
+		Contents:            subscriptionWithMoneyAccount.MoneyAccount.Contents,
+		Year:                subscriptionWithMoneyAccount.MoneyAccount.Year,
+		Month:               subscriptionWithMoneyAccount.MoneyAccount.Month,
+	}
+
+	if err := mr.Conn.Create(&sm).Error; err != nil {
+		return nil, err
+	}
+
+	moneyAccountID := &sm.ID
+
+	ss := &model.Subscription{
+		MoneyAccountID: *moneyAccountID,
+		StartYear:      subscriptionWithMoneyAccount.Subscription.StartYear,
+		StartMonth:     subscriptionWithMoneyAccount.Subscription.StartMonth,
+		EndYear:        subscriptionWithMoneyAccount.Subscription.EndYear,
+		EndMonth:       subscriptionWithMoneyAccount.Subscription.EndMonth,
+	}
+
+	if err := mr.Conn.Create(&ss).Error; err != nil {
+		return nil, err
+	}
+
+	swm := &model.SubscriptionWithMoneyAccount{
+		MoneyAccount: *sm,
+		Subscription: *ss,
+	}
+
+	return swm, nil
+}
+
 // FindByID moneyAccountをIDで取得
 func (mr *MoneyAccountRepository) FindByID(id int) (*model.MoneyAccount, error) {
 	moneyAccount := &model.MoneyAccount{ID: id}
@@ -57,8 +96,8 @@ func (mr *MoneyAccountRepository) FindByUser(id int, year int, month int) (*[]mo
 }
 
 // FindSubscriptionsByUser moneyAccountのうちSubscriptionsをUserで取得
-func (mr *MoneyAccountRepository) FindSubscriptionsByUser(id int) (*[]model.Subscription, error) {
-	subscriptions := &[]model.Subscription{}
+func (mr *MoneyAccountRepository) FindSubscriptionWithMoneyAccountByUser(id int) (*[]model.SubscriptionWithMoneyAccount, error) {
+	subscriptions := &[]model.SubscriptionWithMoneyAccount{}
 
 	if err := mr.Conn.Debug().
 		Table("subscriptions").

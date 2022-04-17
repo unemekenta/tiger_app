@@ -14,9 +14,10 @@ import (
 // MoneyAccountHandler moneyAccount handlerのinterface
 type MoneyAccountHandler interface {
 	Post() echo.HandlerFunc
+	PostSubscription() echo.HandlerFunc
 	Get() echo.HandlerFunc
 	GetByUser() echo.HandlerFunc
-	GetSubscriptionsByUser() echo.HandlerFunc
+	GetSubscriptionWithMoneyAccountByUser() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
@@ -25,7 +26,7 @@ type moneyAccountHandler struct {
 	moneyAccountUsecase usecase.MoneyAccountUsecase
 }
 
-// MoneyAccountHandler moneyAccount handlerのコンストラクタ
+// NewMoneyAccountHandler moneyAccount handlerのコンストラクタ
 func NewMoneyAccountHandler(moneyAccountUsecase usecase.MoneyAccountUsecase) MoneyAccountHandler {
 	return &moneyAccountHandler{moneyAccountUsecase: moneyAccountUsecase}
 }
@@ -39,6 +40,16 @@ type requestMoneyAccount struct {
 	Year                int       `json:"year"`
 	Month               int       `json:"month"`
 	UpdatedAt           time.Time `json:"updatedAt"`
+}
+
+type requestSubscription struct {
+	MoneyAccount   requestMoneyAccount `json:"money_account"`
+	MoneyAccountID int                 `json:"money_account_id"`
+	StartYear      int                 `json:"start_year"`
+	StartMonth     int                 `json:"start_month"`
+	EndYear        int                 `json:"end_year"`
+	EndMonth       int                 `json:"end_month"`
+	UpdatedAt      time.Time           `json:"updatedAt"`
 }
 
 type responseMoneyAccount struct {
@@ -97,6 +108,45 @@ func (mh *moneyAccountHandler) Post() echo.HandlerFunc {
 			Year:                createdMoneyAccount.Year,
 			Month:               createdMoneyAccount.Month,
 			UpdatedAt:           createdMoneyAccount.UpdatedAt,
+		}
+
+		return c.JSON(http.StatusCreated, res)
+	}
+}
+
+// PostSubscription Subscriptionを作成するときのハンドラー
+func (mh *moneyAccountHandler) PostSubscription() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		var req requestSubscription
+		if err := c.Bind(&req); err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		createdSubscriptionWithMoneyAccount, err := mh.moneyAccountUsecase.CreateSubscription(req.StartYear, req.StartMonth, req.EndYear, req.EndMonth, req.MoneyAccount.UserID, req.MoneyAccount.MoneyAccountLabelID, req.MoneyAccount.Amount, req.MoneyAccount.Title, req.MoneyAccount.Contents, req.MoneyAccount.Year, req.MoneyAccount.Month, req.UpdatedAt)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err.Error())
+		}
+
+		rma := responseMoneyAccount{
+			ID:                  createdSubscriptionWithMoneyAccount.MoneyAccount.ID,
+			MoneyAccountLabelID: createdSubscriptionWithMoneyAccount.MoneyAccount.MoneyAccountLabelID,
+			Amount:              createdSubscriptionWithMoneyAccount.MoneyAccount.Amount,
+			Title:               createdSubscriptionWithMoneyAccount.MoneyAccount.Title,
+			Contents:            createdSubscriptionWithMoneyAccount.MoneyAccount.Contents,
+			Year:                createdSubscriptionWithMoneyAccount.MoneyAccount.Year,
+			Month:               createdSubscriptionWithMoneyAccount.MoneyAccount.Month,
+			UpdatedAt:           createdSubscriptionWithMoneyAccount.MoneyAccount.UpdatedAt,
+		}
+
+		res := responseSubscription{
+			ID:             createdSubscriptionWithMoneyAccount.Subscription.ID,
+			MoneyAccount:   rma,
+			MoneyAccountID: createdSubscriptionWithMoneyAccount.Subscription.MoneyAccountID,
+			StartYear:      createdSubscriptionWithMoneyAccount.Subscription.StartYear,
+			StartMonth:     createdSubscriptionWithMoneyAccount.Subscription.StartMonth,
+			EndYear:        createdSubscriptionWithMoneyAccount.Subscription.EndYear,
+			EndMonth:       createdSubscriptionWithMoneyAccount.Subscription.EndMonth,
+			UpdatedAt:      createdSubscriptionWithMoneyAccount.Subscription.UpdatedAt,
 		}
 
 		return c.JSON(http.StatusCreated, res)
@@ -209,24 +259,24 @@ func (mh *moneyAccountHandler) GetByUser() echo.HandlerFunc {
 	}
 }
 
-// GetSubscriptionsByUser moneyAccountのうち、Subscriptionを取得するときのハンドラー
-func (mh *moneyAccountHandler) GetSubscriptionsByUser() echo.HandlerFunc {
+// GetSubscriptionWithMoneyAccountByUser moneyAccountのうち、Subscriptionを取得するときのハンドラー
+func (mh *moneyAccountHandler) GetSubscriptionWithMoneyAccountByUser() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id, err := strconv.Atoi((c.Param("id")))
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		foundSubscriptions, err := mh.moneyAccountUsecase.FindSubscriptionsByUser(id)
+		foundSubscriptionWithMoneyAccount, err := mh.moneyAccountUsecase.FindSubscriptionWithMoneyAccountByUser(id)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
 		var res []responseSubscription
 
-		for _, fs := range *foundSubscriptions {
+		for _, fs := range *foundSubscriptionWithMoneyAccount {
 			rma := responseMoneyAccount{
-				ID:                  fs.MoneyAccountID,
+				ID:                  fs.MoneyAccount.ID,
 				MoneyAccountLabelID: fs.MoneyAccount.MoneyAccountLabelID,
 				Amount:              fs.MoneyAccount.Amount,
 				Title:               fs.MoneyAccount.Title,
@@ -237,14 +287,14 @@ func (mh *moneyAccountHandler) GetSubscriptionsByUser() echo.HandlerFunc {
 			}
 
 			res = append(res, responseSubscription{
-				ID:             fs.ID,
+				ID:             fs.Subscription.ID,
 				MoneyAccount:   rma,
-				MoneyAccountID: fs.MoneyAccountID,
-				StartYear:      fs.StartYear,
-				StartMonth:     fs.StartMonth,
-				EndYear:        fs.EndYear,
-				EndMonth:       fs.EndMonth,
-				UpdatedAt:      fs.UpdatedAt,
+				MoneyAccountID: fs.Subscription.MoneyAccountID,
+				StartYear:      fs.Subscription.StartYear,
+				StartMonth:     fs.Subscription.StartMonth,
+				EndYear:        fs.Subscription.EndYear,
+				EndMonth:       fs.Subscription.EndMonth,
+				UpdatedAt:      fs.Subscription.UpdatedAt,
 			})
 		}
 		return c.JSON(http.StatusOK, res)
