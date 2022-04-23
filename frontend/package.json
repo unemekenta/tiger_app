@@ -31,6 +31,7 @@
     "vue-jwt-decode": "^0.1.0",
     "vue-paginate": "^3.6.0",
     "vue-router": "^3.2.0",
+    "vuejs-datepicker": "^1.6.2",
     "vuejs-paginate": "^2.1.0",
     "vuex": "^3.4.0"
   },

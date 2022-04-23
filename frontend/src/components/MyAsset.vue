@@ -79,63 +79,41 @@
 
             .main-myasset-contents-form
               form(v-if="formVisibleFlg")
-                .main-myasset-contents-form-component
-                  input(type="checkbox" name="subscriptionsFlg" v-model="formSubscriptionsFlg")
+                .main-myasset-contents-form-component-flex
                   label(for="subscriptionsFlg")
-                    p サブスク/固定費で登録する
+                    input(type="checkbox" id="subscriptionsFlg" name="subscriptionsFlg" v-model="formSubscriptionsFlg")
+                    | サブスク/固定費で登録する
                 .main-myasset-contents-form-component
-                  label(for="year")
-                    p 年
-                  select(name="year" v-model="formYear")
-                    option(v-for="y in 50" :value="y + 2020")
-                      | {{ y + 2020 }}年
-                .main-myasset-contents-form-component
-                  label(for="month")
-                    p 月
-                  select(name="month" v-model="formMonth")
-                    option(v-for="m in 12" :value="m")
-                      | {{ m }}月
+                  label(for="formDate")
+                    | 登録月
+                  date-input-form(@change-date="this.reflectDate" :name="formDateName")
                 .main-myasset-contents-form-component(v-if="formSubscriptionsFlg")
-                  label(for="startYear")
-                    p 開始年
-                  select(name="startYear" v-model="formStartYear")
-                    option(v-for="y in 50" :value="y + 2020")
-                      | {{ y + 2020 }}年
-                  label(for="startMonth")
-                    p 開始月
-                  select(name="startMonth" v-model="formStartMonth")
-                    option(v-for="m in 12" :value="m")
-                      | {{ m }}月
-                  label(for="endYear")
-                    p 終了年
-                  select(name="endYear" v-model="formEndYear")
-                    option(v-for="y in 50" :value="y + 2020")
-                      | {{ y + 2020 }}年
-                  label(for="endMonth")
-                    p 終了月
-                  select(name="endMonth" v-model="formEndMonth")
-                    option(v-for="m in 12" :value="m")
-                      | {{ m }}月
+                  label(for="formStartDate")
+                    | 開始月
+                  date-input-form(@change-date="this.reflectStartDate" :name="formStartDateName")
+                  label(for="formEndDate")
+                    | 終了月
+                  date-input-form(@change-date="this.reflectEndDate" :name="formEndDateName")
                 .main-myasset-contents-form-component
                   label(for="title")
-                    p 項目名
+                    | 項目名
                   input(name="title" type="text" v-model="formTitle" placeholder="食費")
                 .main-myasset-contents-form-component
                   label(for="label")
-                    p 増減
+                    | 増減
                   select(name="label" v-model="formMoneyAccountLabelId")
                     option(v-for="option in formMoneyAccountLabelOptions" :value="option.value")
                       | {{ option.text }}
                 .main-myasset-contents-form-component
                   label(for="amount")
-                    p 金額(円)
+                    | 金額(円)
                   input(name="amount" type="number" min="0" v-model="formAmount" placeholder="30000")
                 .main-myasset-contents-form-component
                   label(for="contents")
-                    p メモ
+                    | メモ
                   textarea(name="contents", rows="5", v-model="formContents")
                 button(@click.prevent="postMoneyAccount()")
-                  p 保存
+                  | 保存
               button(v-if="formVisibleFlg" @click="changeFormVisibleFlg()")
                 p -
               button(v-else @click="changeFormVisibleFlg()")
@@ -158,6 +136,7 @@ import ChartPie from '../organisms/ChartPie.vue';
 import ChartHorizontalBar from '../organisms/ChartBar.vue';
 import MoneyList from '../molecules/MoneyList.vue'
 import SubscriptionItem from '../organisms/Subscription.vue'
+import DateInputForm from '../molecules/DateInputForm.vue'
 
 export default {
   name: 'MyAsset',
@@ -169,6 +148,7 @@ export default {
     ChartHorizontalBar,
     MoneyList,
     SubscriptionItem,
+    DateInputForm,
   },
   data () {
     return {
@@ -244,17 +224,23 @@ export default {
         { text: '収入', value: '1' },
         { text: '支出', value: '2' },
       ],
-      formYear: null,
-      formMonth: null,
+      formDateName: 'formDate',
+      formDate: null,
+      // formYear: null,
+      // formMonth: null,
       formMoneyAccountLabelId: 0,
       formAmount: null,
       formTitle: "",
       formContents: "",
       formSubscriptionsFlg: false,
-      formStartYear: 0,
-      formStartMonth: 0,
-      formEndYear: 0,
-      formEndMonth: 0,
+      formStartDateName: 'formStartDate',
+      formEndDateName: 'formEndDate',
+      formStartDate: null,
+      formEndDate: null,
+      // formStartYear: 0,
+      // formStartMonth: 0,
+      // formEndYear: 0,
+      // formEndMonth: 0,
     }
   },
   async created() {
@@ -263,6 +249,18 @@ export default {
     this.getSubscriptions();
   },
   methods: {
+    reflectDate (value) {
+      let date = new Date(value);
+      this.formDate = date
+    },
+    reflectStartDate (value) {
+      let date = new Date(value);
+      this.formStartDate = date
+    },
+    reflectEndDate (value) {
+      let date = new Date(value);
+      this.formEndDate = date
+    },
     async getSubscriptions () {
       await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/subscription/user/' + this.userID,
       {
@@ -433,15 +431,15 @@ export default {
         this.formContents = "";
       }
       params.append('contents', this.formContents)
-      params.append('year', this.formYear)
-      params.append('month', this.formMonth)
+      params.append('year', this.formDate.getFullYear())
+      params.append('month', this.formDate.getMonth()+1)
 
       if (this.formSubscriptionsFlg) {
         params.append('subscriptionsFlg', this.formSubscriptionsFlg)
-        params.append('startYear', this.formStartYear)
-        params.append('startMonth', this.formStartMonth)
-        params.append('endYear', this.formEndYear)
-        params.append('endMonth', this.formEndMonth)
+        params.append('startYear', this.formStartDate.getFullYear())
+        params.append('startMonth', this.formStartDate.getMonth()+1)
+        params.append('endYear', this.formEndDate.getFullYear())
+        params.append('endMonth', this.formEndDate.getMonth()+1)
 
         await axios.post(process.env.VUE_APP_API_BASE_URL + '/api/auth/money_account/subscription/user/new', params, {
           headers: {'Authorization': 'Bearer ' + this.jwtUserData}
