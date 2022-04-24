@@ -162,32 +162,33 @@
           margin: auto;
           padding: 1rem 0;
         }
+        &-component-flex {
+          margin: auto;
+          padding: 1rem 0;
+          display: flex;
+        }
         >form {
           background-color: $color-bg;
           border: solid 0.1rem $color-white;
           box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+          padding: 0 2rem;
 
           label {
             display: block;
             text-align: left;
-            width: 70%;
-            margin: auto;
-            >p {
-              color: $color-brack;
-            }
+            width: 100%;
+            margin: 1rem 0;
+            color: $color-brack;
           }
 
-          input, select, textarea {
+          input[type=number], input[type=text], select, textarea {
             font-size: 1.6rem;
             margin: 0 auto;
-            width: 70%;
+            width: 100%;
             outline: none;
             border: none;
             border-radius: 0.1rem;
             background-color: $color-white;
-          }
-          input, select {
-            height: 2.7rem;
           }
 
           >button {
@@ -200,9 +201,7 @@
             transition: 0.3s;
             &:hover {
               background-color: $color-white;
-              >p {
-                color: $color-green;
-              }
+              color: $color-green;
             }
           }
         }
