@@ -11,6 +11,8 @@
       :calendar-button="this.calendarButton"
       :clear-button="this.clearButton"
       :language="this.language"
+      :wrapperClass="this.wrapperClass"
+      :inputClass ="this.inputClass"
     )
 </template>
 
@@ -43,6 +45,8 @@ export default {
       // calendarButtonIcon: 'fa-calendar',
       clearButton: true,
       calendarButton: false,
+      wrapperClass: 'date-calendar-wrapper',
+      inputClass: 'date-calendar-input',
     }
   },
   methods: {
@@ -54,3 +58,5 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss" src="../assets/css/molecules/dateInputForm.scss">
+</style>
