@@ -1,8 +1,5 @@
-# リポジトリ（Webアプリ）の名前
-tiger-app
-
 # 概要：Overview
-自作CMS
+お金に関する課題を解決するwebアプリ
 
 ## frontend
 ### Vue.js
@@ -35,5 +32,6 @@ Used to persistent data storage
 Used to store cash
 
 # アーキテクチャ
+フロントエンドはアトミックデザイン、バックエンドはドメイン駆動設計を参考にしている。
 ![5](https://user-images.githubusercontent.com/47938827/156865387-59c5abc5-9f63-4344-bc6b-4dcb289d3485.png)
 referred to  https://mintaku-blog.net/go-ddd/
