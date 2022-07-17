@@ -87,7 +87,7 @@ func (mr *MoneyAccountRepository) FindByUser(id int, year int, month int) (*[]mo
 		Where("user_id = ?", id).
 		Where(mr.Conn.
 			Where("subscriptions_flg = ? AND year = ? AND month = ?", false, year, month).
-			Or("subscriptions_flg = ? AND(((start_year <= ? AND start_month <= ?) OR (start_year IN (0, NULL) AND start_month IN (0, NULL)) ) AND ( (? <= end_year AND ? <= end_month) OR (end_year IN (0, NULL) AND end_month IN (0, NULL))))", true, year, month, year, month),
+			Or("subscriptions_flg = ? AND((((start_year <= ?) OR (start_year = ? AND start_month <= ?)) OR (start_year IN (0, NULL) AND start_month IN (0, NULL)) ) AND ( (? <= end_year AND ? <= end_month) OR (end_year IN (0, NULL) AND end_month IN (0, NULL))))", true, year, year, month, year, month),
 		).
 		Find(&moneyAccounts).Error; err != nil {
 		return nil, err
