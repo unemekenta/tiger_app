@@ -26,6 +26,19 @@ services:
       - redis
       - backend
 
+    frontend-user:
+      build: ./frontend-user
+      stdin_open: true
+      tty: true
+      volumes:
+        - type: bind
+          source: "."
+          target: "/go/src/tiger_app/frontend-user"
+      depends_on:
+        - postgres
+        - redis
+        - backend
+
   postgres:
     build: ./postgres
     volumes: # マウントの設定 ... ホスト側ディレクトリ:コンテナ側ディレクトリ
