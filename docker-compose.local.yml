@@ -14,6 +14,14 @@ services:
     environment:
       - MODE=local
 
+  frontend-user:
+    ports:
+      - ${FRONTEND_USER_PORT}:${FRONTEND_USER_PORT}
+    env_file:
+      - .env.local
+    environment:
+      - MODE=local
+
   postgres:
     ports:
       - ${PSQL_HOST_PORT}:${PSQL_PORT}
