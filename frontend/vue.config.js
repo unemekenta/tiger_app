@@ -15,7 +15,11 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        data: `@import "src/assets/css/common/mixin.scss";`
+        data: `@import "src/assets/css/common/mixin.scss";`,
+        implementation: require('sass'),
+        sassOptions: {
+          fiber: require('fibers'),
+        },
       }
     }
   }
