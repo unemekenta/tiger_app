@@ -1,0 +1,22 @@
+.allWrapper{
+  background-color: $color-bg;
+}
+
+.l-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 0;
+}
+
+.top {
+  line-height: 1.5rem;
+  background-color: $color-bg;
+  margin-top: 1rem;
+}
+
+.main {
+  display: flex;
+  padding: 0 1.0rem;
+  max-width: 120rem;
+  margin: 0 auto;
+}
