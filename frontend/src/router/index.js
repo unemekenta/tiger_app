@@ -9,6 +9,7 @@ import SigninItem from '@/components/Signin'
 import MyPage from '@/components/MyPage'
 import WebsiteDetail from '@/components/WebsiteDetail'
 import WebsiteListByCategory from '@/components/WebsiteListByCategory'
+import WebsiteNew from '@/components/WebsiteNew'
 import MyAsset from '@/components/MyAsset'
 import MyAssetItemDetail from '@/components/MyAssetItemDetail'
 
@@ -72,6 +73,14 @@ let router = new Router({
       name: 'WebsiteListByCategory',
       component: WebsiteListByCategory
       ,meta: { title: 'カテゴリー別一覧' }
+    },
+    {
+      path: '/website/new',
+      name: 'WebsiteNew',
+      component: WebsiteNew,
+      meta: { title: 'メディアを作成する',
+        requiresAuth: true
+      },
     },
     {
       path: '/my_asset',
