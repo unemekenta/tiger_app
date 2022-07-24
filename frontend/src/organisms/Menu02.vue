@@ -20,6 +20,11 @@
           p
             fa-icon(icon='coins')
             | あといくら？
+      .menu02-content-items-item
+        router-link( to="/website/new" )
+          p
+            fa-icon(icon='book')
+            | Book Log
 
 </template>
 

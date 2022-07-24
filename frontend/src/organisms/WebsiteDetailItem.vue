@@ -3,46 +3,41 @@
   h2.webdetail-title
     | 詳細情報
   .webdetail-contents
-    .wrapper
-      .webdetail-contents-icon
-        fa-icon(icon="building")
-        p.webdetail-contents-icon-name
-          | {{detailObject.companyName}}
-      p.webdetail-contents-txt
-        | {{detailObject.name}}
-      .webdetail-contents-btm
-        .webdetail-contents-btm-left
-          .webdetail-contents-btm-left-category
-            category-tag(:websiteID="detailObject.id")
-          p.webdetail-contents-btm-left-time
-            | {{createDate(detailObject.updatedAt)}}
-        .webdetail-contents-btm-right
-          cv-button(label="公式サイトへ" :url="detailObject.url")
-      .webdetail-contents-img(v-if="detailObject.image")
-          img(:src="detailObject.image")
-      .webdetail-contents-img(v-else)
-          img(src="../assets/images/no_image.jpg")
-      .webdetail-contents-quote
-        q(cite="item.url")
-          | 引用：{{detailObject.name}} 公式HP
+    .text-gray-600.body-font.overflow-hidden.bg-white.w-full
+      .container.px-5.py-23.mx-auto.w-full
+        .-my-8.divide-y-2.divide-gray-100
+          .py-8.flex
+            .mr-6.w-56
+              img.rounded-lg.shadow-xl(src="../assets/images/no_image.jpg")
+            .mb-6.text-left.w-full
+              h2.text-3xl.font-medium.text-gray-900.title-font.mb-2 {{detailObject.name}}
+              p.leading-relaxed {{detailObject.companyName}}
+              p.leading-relaxed
+                q(:cite="detailObject.url")
+                  | 引用：{{detailObject.name}} 公式HP
+              .flex.flex-wrap.gap-3
+                category-tag(:websiteID="detailObject.id")
+              p.leading-relaxed.text-right {{createDate(detailObject.updatedAt)}}
 
   .webdetail-info(v-if="detailObjectContent")
+    cv-button(label="公式サイトへ" :url="detailObject.url")
     h3 {{detailObjectContent.title}}
     p {{detailObjectContent.contents}}
     .webdetail-info-quotation
       p 参考・引用：<br>公式サイト {{detailObject.url}}
 
+
 </template>
 
 <script>
-import CvButton from '/src/atoms/CvButton.vue'
 import CategoryTag from '/src/atoms/CategoryTag.vue'
+import CvButton from '/src/atoms/CvButton.vue'
 
 export default {
   name: 'WebsiteDetailItem',
   components: {
-    CvButton,
     CategoryTag,
+    CvButton,
   },
   props: {
     detailObject: Object,

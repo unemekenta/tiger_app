@@ -1,4 +1,3 @@
-
 .weblist {
   width: 100%;
   padding: 0;
@@ -15,82 +14,5 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
-    &-inner {
-      padding: 1.5rem 2rem;
-      background-color: $color-white;
-      width: calc(50% - 5rem);
-      margin: 1rem 0;
-      @include tb {
-        width: 100%;
-      }
-      &:hover{
-        box-shadow: 0.3rem 0.3rem 0 $color-bg;
-        transform: translateX(-0.2rem) translateY(-0.2rem);
-        transition: 0.3s;
-      }
-  
-      &-img {
-        width: 100%;
-        >img {
-          max-width: 20rem;
-          width: 100%;
-          border: solid 0.1rem $color-bg;
-        }
-      }
-
-      &-quote {
-        font-size: 1.0rem;
-      }
-  
-      &-icon {
-        display: flex;
-        margin: 1rem 0;
-        @include tb {
-          font-size: 1.2rem;
-        }
-        svg {
-          width: 3.0rem;
-          margin: auto 0;
-        }
-  
-        &-name {
-          text-align: left;
-          margin: 0 1.0rem;
-          color: $color-brack;
-          font-size: 1.2rem;
-        }
-      }
-  
-      &-txt {
-        font-size: 18px;
-        font-weight: bold;
-        text-align: left;
-        margin: 10px 0;
-      }
-  
-      &-btm {
-        display: flex;
-        justify-content: space-between;
-  
-        &-left {
-          &-category {
-            display: flex;
-            justify-content: left;
-          }
-  
-          &-time {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-            color: $color-green2;
-            text-align: left;
-            @include tb {
-              font-size: 1rem;
-            }
-          }
-        }
-  
-      }
-    }
   }
 }

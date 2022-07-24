@@ -3,42 +3,33 @@
   h2.weblist-title
     | メディア一覧
   .weblist-contents
-    .weblist-contents-inner(v-for="(item, key) in this.slicedList" :key="key")
-      router-link( :to="{name:'WebsiteDetail', params: {id:`${item.id}`}}").wrapper
-        .weblist-contents-inner-img(v-if="item.image")
-          img(:src="item.image")
-        .weblist-contents-inner-img(v-else)
-          img(src="../assets/images/no_image.jpg")
-        .weblist-contents-inner-quote
-          q(cite="item.url")
-            | 引用：{{item.name}} 公式HP
-        .weblist-contents-inner-icon
-          fa-icon(icon="building")
-          p.weblist-contents-inner-icon-name
-            | {{item.companyName}}
-        p.weblist-contents-inner-txt
-          | {{item.name}}
-        .weblist-contents-inner-btm
-          .weblist-contents-inner-btm-left
-            .weblist-contents-inner-btm-left-category
-              category-tag(:websiteID="item.id")
-            p.weblist-contents-inner-btm-left-time
-              | {{createDate(item.updatedAt)}}
-          .weblist-contents-inner-btm-right
-            cv-button(label="公式サイトへ" :url="item.url")
+    section.text-gray-600.body-font.overflow-hidden.bg-white.w-full
+      .container.px-5.py-23.mx-auto.w-full(v-for="(item, key) in this.slicedList" :key="key")
+        router-link( :to="{name:'WebsiteDetail', params: {id:`${item.id}`}}").-my-8.divide-y-2.divide-gray-100
+          .py-8.flex
+            .mr-6.w-56
+              img.rounded-lg.shadow-xl(src="../assets/images/no_image.jpg")
+            .mb-6.text-left.w-full
+              h2.text-3xl.font-medium.text-gray-900.title-font.mb-2 {{item.name}}
+              p.leading-relaxed {{item.companyName}}
+              p.leading-relaxed
+                q.text-xs(:cite="item.url")
+                  | 引用：{{item.name}} 公式HP
+              .flex.flex-wrap.gap-3
+                category-tag(:websiteID="item.id")
+              p.leading-relaxed.text-right {{createDate(item.updatedAt)}}
+
   pager-item(:maxPage="maxPage" @changePage="this.changePageNum")
 
 </template>
 
 <script>
-import CvButton from '/src/atoms/CvButton.vue'
 import PagerItem from '/src/atoms/Pager.vue'
 import CategoryTag from '/src/atoms/CategoryTag.vue'
 
 export default {
   name: 'WebsiteListItem',
   components: {
-    CvButton,
     PagerItem,
     CategoryTag,
   },

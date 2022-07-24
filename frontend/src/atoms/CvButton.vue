@@ -1,7 +1,7 @@
 <template lang="pug">
-button.cvbutton(type="button" @click.prevent.self="jumpTo(url)")
+button.block.w-full.bg-green-600.my-3.text-gray-100.font-bold.border.border-gray-200.rounded-lg.py-3.px-3.leading-tight(type="button" @click.prevent.self="jumpTo(url)")
   | {{this.label}}
-  fa-icon(icon="angle-double-right")
+  fa-icon.ml-5(icon="angle-double-right")
 
 </template>
 
@@ -19,6 +19,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss" src="../assets/css/cvButton.scss">
-</style>

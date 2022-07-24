@@ -13,79 +13,10 @@
 
   &-contents {
     padding: 1.5rem 2rem;
-    border-bottom: solid 1px $color-bg;
-
-    &-icon {
-      display: flex;
-      svg {
-        width: 3.0rem;
-        margin: auto 0;
-        color: $color-green;
-      }
-
-      &-name {
-        text-align: left;
-        line-height: 3.0rem;
-        margin: 0 1.0rem;
-        color: $color-brack;
-        font-size: 1.2rem;
-      }
-    }
-
-    &-txt {
-      font-size: 1.8rem;
-      font-weight: bold;
-      text-align: left;
-      margin: 1rem 0;
-    }
-
-    &-btm {
-      display: flex;
-      justify-content: space-between;
-
-      &-left {
-        &-category {
-          display: flex;
-          justify-content: left;
-        }
-
-        &-time {
-          font-size: 1.2rem;
-          margin: 1rem 0;
-          color: $color-green2;
-          text-align: left;
-        }
-      }
-    }
-
-    &-img {
-      margin: 2rem 0;
-      >img {
-        max-width: 50rem;
-        width: 100%;
-        border: solid 0.1rem $color-bg;
-      }
-    }
-
-    &-quote {
-      font-size: 1.0rem;
-    }
   }
 
   &-info {
     text-align: left;
     padding: 1.5rem 2rem;
-    > h3 {
-      margin: 3rem 0;
-      font-weight: bold;
-    }
-    &-quotation {
-      display: inline-block;
-      margin: 4rem 0;
-      > p {
-        font-size: 1.4rem;
-        line-height: 1.8em;
-      }
-    }
   }
 }
