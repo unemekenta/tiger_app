@@ -17,14 +17,14 @@
                   | 引用：{{detailObject.name}} 公式HP
               .flex.flex-wrap.gap-3
                 category-tag(:websiteID="detailObject.id")
-              p.leading-relaxed.text-right {{createDate(detailObject.updatedAt)}}
+              p.leading-relaxed.text-right.text-xs {{createDate(detailObject.updatedAt)}}
 
-  .webdetail-info(v-if="detailObjectContent")
+  .webdetail-info.text-left.w-full(v-if="detailObjectContent")
     cv-button(label="公式サイトへ" :url="detailObject.url")
-    h3 {{detailObjectContent.title}}
-    p {{detailObjectContent.contents}}
-    .webdetail-info-quotation
-      p 参考・引用：<br>公式サイト {{detailObject.url}}
+    h3.text-3xl.font-medium.text-gray-900.title-font.mb-2 {{detailObjectContent.title}}
+    p.leading-relaxed.my-10 {{detailObjectContent.contents}}
+    p.leading-relaxed.my-10.text-xs
+      | 参考・引用：<br>公式サイト {{detailObject.url}}
 
 
 </template>

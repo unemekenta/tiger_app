@@ -1,9 +1,9 @@
 <template lang="pug">
   .sub-category
-    .sub-category-item(v-for="(allSubCatrgory, key) in this.allSubCatrgories" :key="key")
-      li(@click="reset(allSubCatrgory.id)")
+    ul.sub-category-item(v-for="(allSubCatrgory, key) in this.allSubCatrgories" :key="key")
+      li.flex.items-center.p-2.text-base.font-normal.text-gray-900.rounded-lg.cursor-pointer(@click="reset(allSubCatrgory.id)" class="hover:bg-gray-100")
         | {{allSubCatrgory.name}}
-      fa-icon(icon="chevron-right")
+
 </template>
 
 <script>
@@ -40,6 +40,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss" src="../assets/css/subCategory.scss">
-</style>

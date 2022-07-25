@@ -17,7 +17,7 @@
                   | 引用：{{item.name}} 公式HP
               .flex.flex-wrap.gap-3
                 category-tag(:websiteID="item.id")
-              p.leading-relaxed.text-right {{createDate(item.updatedAt)}}
+              p.leading-relaxed.text-right.text-xs {{createDate(item.updatedAt)}}
 
   pager-item(:maxPage="maxPage" @changePage="this.changePageNum")
 

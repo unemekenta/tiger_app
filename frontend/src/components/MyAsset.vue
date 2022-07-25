@@ -70,11 +70,11 @@
             .main-myasset-contents-details
               h3 収支内訳
               .main-myasset-contents-details-item
-                .main-myasset-contents-details-item-inner
-                  h4 収入
+                .main-myasset-contents-details-item-inner.my-4.w-full
+                  h4.my-2 収入
                   money-list(:arr="income")
-                .main-myasset-contents-details-item-inner
-                  h4 支出
+                .main-myasset-contents-details-item-inner.my-4.w-full
+                  h4.my-2 支出
                   money-list(:arr="expenses")
 
             .main-myasset-contents-form

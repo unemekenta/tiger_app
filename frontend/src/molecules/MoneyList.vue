@@ -1,7 +1,8 @@
 <template lang="pug">
   div
-    ul(v-for="i in arr")
-      money-list-item-shadow(:id="i.id" :label="i.title" :amount="i.amount")
+    ul.divide-y.divide-gray-200
+      li.text-left.block(v-for="i in arr")
+        money-list-item-shadow(:id="i.id" :label="i.title" :amount="i.amount")
 
 </template>
 
