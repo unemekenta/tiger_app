@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "development-build": "vue-cli-service build --mode development",
-    "development-serve": "vue-cli-service serve --mode development",
-    "local-build": "vue-cli-service build --mode local",
-    "local-serve": "vue-cli-service serve --mode local",
-    "prod-build": "vue-cli-service build --mode production",
-    "prod-serve": "vue-cli-service serve --mode production"
+    "development-build": "vue-cli-service build --mode development --max_old_space_size=2560",
+    "development-serve": "vue-cli-service serve --mode development --max_old_space_size=2560",
+    "local-build": "vue-cli-service build --mode local --max_old_space_size=2560",
+    "local-serve": "vue-cli-service serve --mode local --max_old_space_size=2560",
+    "prod-build": "vue-cli-service build --mode production --max_old_space_size=2560",
+    "prod-serve": "vue-cli-service serve --mode production --max_old_space_size=2560"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
