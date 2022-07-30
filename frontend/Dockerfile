@@ -8,6 +8,6 @@ RUN apk --update add --no-cache && \
 
 COPY . .
 
-RUN npm run ${MODE}-build
+CMD npm run ${MODE}-build
 
 # CMD yarn ${MODE}-serve
