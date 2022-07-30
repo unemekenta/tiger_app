@@ -10,4 +10,4 @@ COPY . .
 
 RUN npm run ${MODE}-build
 
-CMD yarn ${MODE}-serve
+# CMD yarn ${MODE}-serve
