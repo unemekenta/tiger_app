@@ -1,5 +1,5 @@
 <template lang="pug">
-  li.category-tag(v-if="category")
+  li.flex.justify-center.m-2.px-6.py-2.items-center.bg-green-400.text-white.text-sm.font-semibold.text-center.border.rounded-md.transition.duration-100
     | {{category}}
 
 </template>
@@ -41,6 +41,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss" src="../assets/css/categoryTag.scss">
-</style>

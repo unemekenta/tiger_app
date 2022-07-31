@@ -2,21 +2,12 @@
   background-color: $color-white;
   width: 38rem;
   margin-right: 2rem;
-  text-align: left;
 
   &-content {
     &-head {
       padding: 0.5rem 1rem;
       border-bottom: solid 0.1rem $color-bg;
       font-weight: bold;
-    }
-
-    &-item {
-      margin: 1.0rem 0;
-      padding: 0.5rem 1rem;
-      >li {
-        font-weight: bold;
-      }
     }
   }
 }

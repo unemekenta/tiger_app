@@ -2,7 +2,7 @@
 .allWrapper
   .l-container#container
     .top-fv
-      img(src="../assets/images/top-fv.png")
+      img(src="@/assets/images/top-fv.png")
       .top-fv-txt
         h1 Web Media Database
         .top-fv-button

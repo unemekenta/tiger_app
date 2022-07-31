@@ -70,11 +70,11 @@
             .main-myasset-contents-details
               h3 収支内訳
               .main-myasset-contents-details-item
-                .main-myasset-contents-details-item-inner
-                  h4 収入
+                .main-myasset-contents-details-item-inner.my-4.w-full
+                  h4.my-2 収入
                   money-list(:arr="income")
-                .main-myasset-contents-details-item-inner
-                  h4 支出
+                .main-myasset-contents-details-item-inner.my-4.w-full
+                  h4.my-2 支出
                   money-list(:arr="expenses")
 
             .main-myasset-contents-form
@@ -127,16 +127,16 @@
 </template>
 
 <script>
-import { priceMixin } from '../mixin/price'
-import axios from 'axios'
-import VueJwtDecode from 'vue-jwt-decode'
-import HeaderNav from '../molecules/HeaderNav.vue'
-import FooterNav from '../molecules/FooterNav.vue'
+import { priceMixin } from '../mixin/price';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import HeaderNav from '../molecules/HeaderNav.vue';
+import FooterNav from '../molecules/FooterNav.vue';
 import ChartPie from '../organisms/ChartPie.vue';
 import ChartHorizontalBar from '../organisms/ChartBar.vue';
 import MoneyList from '../molecules/MoneyList.vue'
-import SubscriptionItem from '../organisms/Subscription.vue'
-import DateInputForm from '../molecules/DateInputForm.vue'
+import SubscriptionItem from '../organisms/Subscription.vue';
+import DateInputForm from '../molecules/DateInputForm.vue';
 
 export default {
   name: 'MyAsset',
@@ -398,7 +398,8 @@ export default {
             return error;
           });
 
-        let user_id = VueJwtDecode.decode(this.jwtUserData).id;
+        let decodedHeader = jwtDecode(this.jwtUserData);
+        let user_id = decodedHeader.id;
         await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/user/'+ user_id,
         {
           headers: {'Authorization': 'Bearer ' + this.jwtUserData}

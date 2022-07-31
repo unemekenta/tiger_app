@@ -41,4 +41,7 @@ func InitRouting(e *echo.Echo, termHandler TermHandler, categoryHandler Category
 	auth.GET("/money_account/user/detail/:id", moneyAccountHandler.Get())
 	auth.PUT("/money_account/user/:id", moneyAccountHandler.Put())
 	auth.DELETE("/money_account/user/:id", moneyAccountHandler.Delete())
+
+	b := auth.Group("/book_log")
+	b.POST("/new", websiteHandler.Post())
 }

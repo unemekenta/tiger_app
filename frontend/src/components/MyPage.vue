@@ -4,7 +4,7 @@
   .l-container#container
     .top
       .user
-        //- img.user-icon(src="../../src/assets/images/logo.png")
+        //- img.user-icon(src="@/assets/images/logo.png")
         .user-name
           b {{userName}}
           |さん
@@ -28,13 +28,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-import VueJwtDecode from 'vue-jwt-decode'
-import Menu01Item from '/src/organisms/Menu01.vue'
-import Menu02Item from '/src/organisms/Menu02.vue'
-import SubscriptionItem from '/src/organisms/Subscription.vue'
-import HeaderNav from '/src/molecules/HeaderNav.vue'
-import FooterNav from '/src/molecules/FooterNav.vue'
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import Menu01Item from '/src/organisms/Menu01.vue';
+import Menu02Item from '/src/organisms/Menu02.vue';
+import SubscriptionItem from '/src/organisms/Subscription.vue';
+import HeaderNav from '/src/molecules/HeaderNav.vue';
+import FooterNav from '/src/molecules/FooterNav.vue';
 
 export default {
   name: 'MyPage',
@@ -89,7 +89,8 @@ export default {
             return;
           });
 
-        this.userID = VueJwtDecode.decode(this.jwtUserData).id;
+        let decodedHeader = jwtDecode(this.jwtUserData);
+        this.userID = decodedHeader.id;
         await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/user/'+ this.userID,
         {
           headers: {'Authorization': 'Bearer ' + this.jwtUserData}

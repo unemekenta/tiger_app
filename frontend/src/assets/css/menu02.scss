@@ -15,37 +15,6 @@
       display: flex;
       flex-direction: column;
       color: $color-white;
-      &-item {
-        background-color: $color-green;
-        padding: 0.8rem 1rem;
-        border: solid 0.1rem $color-bg;
-        font-weight: bold;
-        margin: 1rem 0.5rem;
-        color: $color-white;
-
-        &:hover {
-          opacity: 0.3;
-          cursor: pointer;
-          transition: 0.3s;
-        }
-
-        >p {
-          >svg {
-            margin: 0 1rem 0 0;
-          }
-        }
-
-        > a {
-          color: $color-white;
-          text-decoration: none;
-
-          >p {
-            >svg {
-              margin: 0 1rem 0 0;
-            }
-          }
-        }
-      }
     }
   }
 }

@@ -3,3 +3,6 @@ dev:
 
 local:
 	yarn local-serve
+
+lint:
+	npm run lint

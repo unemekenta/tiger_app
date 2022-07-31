@@ -26,4 +26,5 @@ export default {
 <style lang="scss">
 @import "/assets/css/common/variable.scss";
 @import "/assets/css/common/reset.scss";
+@import '/assets/css/common/tailwind.scss'
 </style>

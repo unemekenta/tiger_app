@@ -10,6 +10,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 
+declare const window: Window
+
 Vue.use(VueCookies)
 
 Vue.config.productionTip = false
@@ -25,7 +27,8 @@ new Vue({
 
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  var data =''
+  const data =''
+  let jwtData =''
   if (requiresAuth) {
     // todo サインインの有無判断
     if (window.$cookies.isKey('uuid')) {
@@ -36,11 +39,12 @@ router.beforeEach(async (to, from, next) => {
             uuid: window.$cookies.get('uuid')
           },
         )
-        .then(() => {
+        .then((res) => {
+          jwtData = res.data
           next();
         })
-        .catch((error) => {
-          alert('ログインしてください', error)
+        .catch(() => {
+          alert('ログインしてください')
           next({
             path: '/signin'
           });
@@ -52,14 +56,14 @@ router.beforeEach(async (to, from, next) => {
           data,
           {
             headers: {
-              'Authorization': 'Bearer ' + this.jwtData,
+              'Authorization': 'Bearer ' + jwtData,
             },
           })
         .then(() => {
           next();
         })
-        .catch(error => {
-          alert('権限がありません。', error);
+        .catch(() => {
+          alert('権限がありません。');
           next({
             path: ''
           });

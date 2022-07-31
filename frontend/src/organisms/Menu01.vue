@@ -1,12 +1,14 @@
 <template lang="pug">
   .menu01
-    .menu01-content
+    .menu01-content.text-left
       .menu01-content-head
         | カテゴリ
-      .menu01-content-item(v-for="(allCatrgory, key) in this.allCategories" :key="key")
-        li
-          | {{allCatrgory.name}}
-        sub-category(:ancestorID = "allCatrgory.id")
+      aside.menu01-content-item.w-full(aria-label="Sidebar")
+        .px-3.py-4.overflow-y-auto.rounded.bg-white(v-for="(allCatrgory, key) in this.allCategories" :key="key")
+          ul.space-y-2
+            li.font-bold
+              | {{allCatrgory.name}}
+            sub-category(:ancestorID = "allCatrgory.id")
 
 </template>
 

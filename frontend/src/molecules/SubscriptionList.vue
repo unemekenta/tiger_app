@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    ul(v-for="i in arr")
+    ul(v-for="i in arr").my-4
       subscription-label(:id="i.moneyAccount.id" :label="i.moneyAccount.title" :amount="i.moneyAccount.amount" :startYear="i.startYear" :startMonth="i.startMonth" :endYear="i.endYear" :endMonth="i.endMonth")
 
 </template>
