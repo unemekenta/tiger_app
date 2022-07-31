@@ -36,7 +36,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import axios from 'axios';
-import VueJwtDecode from 'vue-jwt-decode';
+import jwtDecode from 'jwt-decode';
 // import Menu01Item from '/src/organisms/Menu01.vue'
 // import Menu02Item from '/src/organisms/Menu02.vue'
 // import WebsiteListItem from '/src/organisms/WebsiteListItem.vue'
@@ -55,6 +55,10 @@ export type DataType = {
     companyName: string,
     image: string
   };
+}
+
+export type decodedJwtData = {
+  id: number;
 }
 
 export default Vue.extend({
@@ -98,7 +102,8 @@ export default Vue.extend({
             return error;
           });
 
-        let user_id = VueJwtDecode.decode(this.jwtUserData).id;
+        let decodedHeader: decodedJwtData = jwtDecode(this.jwtUserData);
+        let user_id = decodedHeader.id;
         await axios.get(process.env.VUE_APP_API_BASE_URL + '/api/auth/user/'+ user_id,
         {
           headers: {'Authorization': 'Bearer ' + this.jwtUserData}

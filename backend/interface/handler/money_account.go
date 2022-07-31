@@ -242,7 +242,10 @@ func (mh *moneyAccountHandler) GetByUser() echo.HandlerFunc {
 			}
 		}
 		remainingMoney := maiSum - maeSum
-		remainingMoneyPerDay := remainingMoney / remainingDateOfThisMonth
+		remainingMoneyPerDay := remainingMoney
+		if remainingDateOfThisMonth > 0 {
+			remainingMoneyPerDay = remainingMoney / remainingDateOfThisMonth
+		}
 
 		res := responseUserInfo{
 			MoneyAccountListIncome:      mai,

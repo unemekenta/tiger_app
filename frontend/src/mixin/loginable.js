@@ -7,12 +7,12 @@ export const loginMixin = {
   data () {
     return {
       signedIn: false,
-      jwtData: "",
+      jwtData: '',
     }
   },
   methods: {
     async $_loginMixin_loginCheck() {
-      let data = "";
+      let data = '';
       if (window.$cookies.isKey('uuid')) {
         await axios
           .post(
@@ -26,6 +26,7 @@ export const loginMixin = {
           })
           .catch(() => {
             // チェックなので未ログインでも問題はないのでエラーハンドリングなし
+            this.jwtData = '';
             return;
           });
 

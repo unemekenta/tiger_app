@@ -1,7 +1,7 @@
 <template lang="pug">
   ul.card-box
     li(v-for="item in this.itemList")
-      img(src="../assets/images/top-bg.png")
+      img(src="@/assets/images/top-bg.png")
       .card-box-txt
         p title
         p comming soon

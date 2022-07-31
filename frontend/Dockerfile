@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:16-alpine
 
 WORKDIR /go/src/tiger_app/frontend
 
@@ -8,6 +8,6 @@ RUN apk --update add --no-cache && \
 
 COPY . .
 
-CMD npm run ${MODE}-build
+RUN npm run ${MODE}-build
 
-# CMD yarn ${MODE}-serve
+CMD yarn ${MODE}-serve

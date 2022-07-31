@@ -8,7 +8,7 @@
         .-my-8.divide-y-2.divide-gray-100
           .py-8.flex
             .mr-6.w-56
-              img.rounded-lg.shadow-xl(src="../assets/images/no_image.jpg")
+              img.rounded-lg.shadow-xl(src="@/assets/images/no_image.jpg")
             .mb-6.text-left.w-full
               h2.text-3xl.font-medium.text-gray-900.title-font.mb-2 {{detailObject.name}}
               p.leading-relaxed {{detailObject.companyName}}

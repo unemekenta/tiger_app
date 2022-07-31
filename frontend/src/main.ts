@@ -28,6 +28,7 @@ new Vue({
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const data =''
+  let jwtData =''
   if (requiresAuth) {
     // todo サインインの有無判断
     if (window.$cookies.isKey('uuid')) {
@@ -38,7 +39,8 @@ router.beforeEach(async (to, from, next) => {
             uuid: window.$cookies.get('uuid')
           },
         )
-        .then(() => {
+        .then((res) => {
+          jwtData = res.data
           next();
         })
         .catch(() => {
@@ -54,7 +56,7 @@ router.beforeEach(async (to, from, next) => {
           data,
           {
             headers: {
-              'Authorization': 'Bearer ' + this.jwtData,
+              'Authorization': 'Bearer ' + jwtData,
             },
           })
         .then(() => {

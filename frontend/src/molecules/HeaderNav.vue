@@ -3,7 +3,7 @@
   .header-nav-top
     h1
       a(href="/")
-        img(src="../../src/assets/images/logo.png")
+        img(src="@/assets/images/logo.png")
     .header-nav-pc.is-only-pc
       .header-nav-item
         router-link(to="/")

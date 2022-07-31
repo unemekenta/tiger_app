@@ -4,7 +4,7 @@
   .l-container#container
     .top
       .image
-        img(src="../assets/images/list-top-fv.png")
+        img(src="@/assets/images/list-top-fv.png")
       .header
         p
           fa-icon(icon="desktop")

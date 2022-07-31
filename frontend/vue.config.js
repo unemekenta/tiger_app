@@ -12,14 +12,19 @@ module.exports = {
     disableHostCheck: true
   },
 
+  // 型チェックの際のメモリ利用寮の調整
+  chainWebpack: (config) => {
+    config.plugin("fork-ts-checker").tap((args) => {
+      args[0].memoryLimit = 520;
+      return args;
+    });
+  },
+
   css: {
     loaderOptions: {
       sass: {
         data: `@import "src/assets/css/common/mixin.scss";`,
         implementation: require('sass'),
-        sassOptions: {
-          fiber: require('fibers'),
-        },
       }
     }
   }
