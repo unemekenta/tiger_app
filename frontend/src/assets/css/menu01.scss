@@ -1,11 +1,11 @@
 .menu01 {
-  background-color: $color-white;
   width: 38rem;
+  height: 100%;
   margin-right: 2rem;
 
   &-content {
     &-head {
-      padding: 0.5rem 1rem;
+      padding: 0 0.5rem 1rem;
       border-bottom: solid 0.1rem $color-bg;
       font-weight: bold;
     }

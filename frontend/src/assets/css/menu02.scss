@@ -1,12 +1,11 @@
 .menu02 {
   width: 30rem;
   margin-left: 2rem;
-  background-color: $color-white;
   text-align: left;
 
   &-content {
     &-head {
-      padding: 0.5rem 1rem;
+      padding: 0 0.5rem 1rem;
       border-bottom: solid 1px $color-bg;
       font-weight: bold;
     }
