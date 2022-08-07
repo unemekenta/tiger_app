@@ -1,30 +1,4 @@
 ul.pagination {
-  font-size: 1.6rem;
-  background-color: $color-white;
-  @include tb {
-    font-size: 1.4rem;
-  }
-  > li {
-    background-color: $color-green;
-    border-radius: 0.3rem;
-    @include tb {
-      margin: 0.5rem;
-    }
-    > a {
-      color: $color-white;
-      font-weight: bold;
-      display: block;
-      width: 3rem;
-      height: 3rem;
-      line-height: 3rem;
-      @include tb {
-        width: 2.5rem;
-        height: 2.5rem;
-        line-height: 2.5rem;
-      }
-    }
-  }
-
   > .active {
     background-color: $color-white;
     border: $color-green solid 0.1rem;
